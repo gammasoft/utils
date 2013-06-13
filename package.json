@@ -1,0 +1,37 @@
+{
+  "name": "gammautils",
+  "version": "0.0.0",
+  "description": "Lots of utilities for node.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "nodeunit nodeunit ./tests/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gammasoft/utils"
+  },
+  "keywords": [
+    "util",
+    "utils",
+    "utilities",
+    "swiss",
+    "army",
+    "knife",
+    "string",
+    "array",
+    "number",
+    "format",
+    "date"
+  ],
+  "author": "Renato Gama <renato@gammasoft.com.br>",
+  "license": "BSD",
+  "dependencies": {
+    "async": "~0.2.9",
+    "moment": "~2.0.0"
+  },
+  "devDependencies": {
+    "nodeunit": "~0.8.0"
+  }
+}
