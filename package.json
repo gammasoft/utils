@@ -23,7 +23,9 @@
     "array",
     "number",
     "format",
-    "date"
+    "date",
+    "crypto",
+    "cryptography"
   ],
   "author": "Renato Gama <renato@gammasoft.com.br>",
   "license": "BSD",

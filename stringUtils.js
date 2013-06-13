@@ -12,3 +12,14 @@ module.exports.getRandomString = function(length, chars) {
 
 	return result;
 };
+
+module.exports.shortenName = function(name, level){
+	if(typeof level === "undefined") level = 0;
+	
+    var array = name.split(" ");
+    return array.map(function(part, i){
+        if(i === 0 || i === array.length - 1 || (part.length <= 3 && level === 0)) return part;
+        else if(level === 0) return part.substring(0, 1).toUpperCase() + ".";
+        else return "";
+    }).join(" ").replace(/\s{2,}/g, " ");
+};
