@@ -6,7 +6,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "nodeunit ./tests/*"
+    "test": "clear; nodeunit ./tests/*"
   },
   "repository": {
     "type": "git",

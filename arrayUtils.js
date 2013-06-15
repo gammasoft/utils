@@ -10,3 +10,21 @@ module.exports.series = function(from, to){
 	
 	return from > to ? result.reverse() : result;
 };
+
+module.exports.pretty = function(array, lastSeparator){
+	if(objectUtils.isUndefined(lastSeparator)) lastSeparator = "e";
+	
+	return array.toString().replace(/,/g, ", ").replace(/,\s([^,]+)$/, " " + lastSeparator + " $1");
+};
+
+
+module.exports.clean = function(array, deleteValue) {
+	for (var i = 0; i < array.length; i++) {
+		if (array[i] == deleteValue) {         
+			array.splice(i, 1);
+			i--;
+		}
+	}
+	
+	return array;
+};

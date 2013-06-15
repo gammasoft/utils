@@ -42,5 +42,33 @@ module.exports = {
 		test.equal("Armand-Jean Plessis", stringUtils.shortenName("Armand-Jean Du Plessis", 1));
 		
 		test.done();
+	},
+	
+	"splitWords: Check no whitespace characters are included": function(test){
+		test.deepEqual(["This", "is", "the", "expected", "result"], stringUtils.splitWords(" This   is the    expected        result    "));
+		
+		test.done();
+	},
+	
+	"getLink: Generates a proper link": function(test){
+		test.equal('<a href="/test.html">test</a>', stringUtils.getLink("test", {href: "/test.html"}));
+		
+		test.equal('<a title="The Title" href="/test.html">test</a>', stringUtils.getLink("test", {
+			href: "/test.html",
+			title: "The Title"
+		}));
+		
+		test.equal('<a target="_blank" href="/test.html">test</a>', stringUtils.getLink("test", {
+			href: "/test.html",
+			target: "_blank"
+		}));
+		
+		test.equal('<a title="The Title" target="_blank" href="/test.html">test</a>', stringUtils.getLink("test", {
+			href: "/test.html",
+			title: "The Title",
+			target: "_blank"
+		}));
+		
+		test.done();
 	}
 };

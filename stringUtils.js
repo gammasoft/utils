@@ -1,5 +1,17 @@
 var numberUtils = require("./numberUtils");
 
+module.exports.getLink = function(text, options){
+	var link = text.link(options.href);
+	
+	if(options.title)
+		link = link.replace("href=", 'title="' + options.title + '" href=');
+	
+	if(options.target)
+		link = link.replace("href=", 'target="' + options.target + '" href=');
+	
+	return link;
+};
+
 module.exports.getRandomString = function(length, chars) {
 	if(typeof chars === "undefined")
 		chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%ˆ&*()-=+';
@@ -22,4 +34,10 @@ module.exports.shortenName = function(name, level){
         else if(level === 0) return part.substring(0, 1).toUpperCase() + ".";
         else return "";
     }).join(" ").replace(/\s{2,}/g, " ");
+};
+
+module.exports.splitWords = function(text){
+	return text.split(" ").filter(function(word){
+		return word.length > 0;
+	});
 };
