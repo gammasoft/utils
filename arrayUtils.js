@@ -28,3 +28,9 @@ module.exports.clean = function(array, deleteValue) {
 	
 	return array;
 };
+
+module.exports.intersection = function(a, b){
+    return b.filter(function(element){
+        return a.indexOf(element) !== -1;
+    });
+};

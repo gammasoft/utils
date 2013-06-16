@@ -34,5 +34,21 @@ module.exports = {
 		test.deepEqual(["this", 2, "is", "it"], arrayUtils.clean([false, "this", 2, "is", false, "it"], false));
 		
 		test.done();
+	},
+
+	"intersection: Check that results are correct": function(test){
+		var a = [1, 2, 3, 4];
+		var b = [2, 3, 4, 5];
+		
+		test.deepEqual(arrayUtils.intersection(b, a), [2, 3, 4]);
+		test.done();
+	},
+	
+	"intersection: Check that results are the same no matter the order of the parameters": function(test){
+		var a = [1, 2, 3, 4];
+		var b = [2, 3, 4, 5];
+		
+		test.deepEqual(arrayUtils.intersection(a, b), arrayUtils.intersection(b, a));
+		test.done();
 	}
 };
