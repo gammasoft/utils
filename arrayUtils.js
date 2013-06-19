@@ -34,3 +34,12 @@ module.exports.intersection = function(a, b){
         return a.indexOf(element) !== -1;
     });
 };
+
+module.exports.toDictionary = function(array, key){
+	var result = {};
+	array.forEach(function(element){
+		result[element[key]] = element;
+	});
+	
+	return result;
+};

@@ -50,5 +50,19 @@ module.exports = {
 		
 		test.deepEqual(arrayUtils.intersection(a, b), arrayUtils.intersection(b, a));
 		test.done();
+	},
+	
+	"toDictionary: Check that it works": function(test){
+		var array = [{id: 1, name: "foo"}, {id: 2, name: "bar"}];
+		test.deepEqual(arrayUtils.toDictionary(array, "id"), {"1": {id: 1, name: "foo"}, "2": {id: 2, name: "bar"}});
+		
+		test.done();
+	},
+	
+	"toDictionary: Check that object gets overwritten if there is another array element with same value for the given key": function(test){
+		var array = [{id: 1, name: "foo"}, {id: 2, name: "bar"}, {id: 2, name: "fuark"}];
+		test.deepEqual(arrayUtils.toDictionary(array, "id"), {"1": {id: 1, name: "foo"}, "2": {id: 2, name: "fuark"}});
+		
+		test.done();
 	}
 };
