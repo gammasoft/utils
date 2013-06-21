@@ -58,5 +58,23 @@ module.exports = {
 		test.equal(objectUtils.isNumber("12345.2345.656"), false);
 		
 		test.done();
-	}
+	},
+	
+	"argsToArray: Parses arguments to array correctly": function(test){
+		function fn(){
+			test.deepEqual(["param1", "param2", 3, true], objectUtils.argsToArray(arguments));
+			test.done();
+		}
+		
+		fn("param1", "param2", 3, true);
+	},
+	
+	"argsToArray: Parses arguments to array returning elements only from the given index": function(test){
+		function fn(){
+			test.deepEqual([3, true], objectUtils.argsToArray(arguments, 2));
+			test.done();
+		}
+		
+		fn("param1", "param2", 3, true);
+	},
 };

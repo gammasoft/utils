@@ -1,6 +1,7 @@
 var util = require("util");
 
-module.exports.isUndefined = function(object){
+module.exports.isUndefined = isUndefined; 
+function isUndefined(object){
 	return typeof object === typeof undefined;
 };
 
@@ -19,4 +20,10 @@ module.exports.isEmpty = function(object){
 
 module.exports.isNumber = function(object) {
 	return !isNaN(parseFloat(object)) && isFinite(object);
+};
+
+module.exports.argsToArray = function(args, startingFrom){
+	if(isUndefined(startingFrom)) startingFrom = 0;
+	
+	return Array.prototype.slice.call(args, startingFrom);
 };
