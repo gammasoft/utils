@@ -1,5 +1,9 @@
 var objectUtils = require("./objectUtils");
 
+module.exports.insertAt = function(array, index, element){
+	array.splice(index, 0, element);
+};
+
 module.exports.series = function(from, to){
 	var params = [from, to];
 	if(from > to) params = [to, from];

@@ -1,6 +1,14 @@
 var arrayUtils = require("../arrayUtils");
 
 module.exports = {
+	"insertAt: Correctly inserts value at desired position": function(test){
+		var array = ["foo", "bar"];
+		arrayUtils.insertAt(array, 1, "bang");
+		
+		test.deepEqual(array, ["foo", "bang", "bar"]);
+		test.done();
+	},
+		
 	"series: Check that array is created in correct ascending order": function(test){
 		test.deepEqual(arrayUtils.series(0, 10), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 		test.deepEqual(arrayUtils.series(-2, 2), [-2, -1, 0, 1, 2]);
