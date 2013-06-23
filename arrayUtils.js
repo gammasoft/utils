@@ -47,3 +47,24 @@ module.exports.toDictionary = function(array, key){
 	
 	return result;
 };
+
+module.exports.chop = function(array, quantity){
+	var result = [];
+	
+	var subArray = [];
+	var count = 0;
+	array.forEach(function(element){
+		if(count === quantity){
+			result.push(subArray);
+			subArray = [];
+			count = 0;
+		}
+		
+		subArray.push(element);
+		count++;
+	});
+	
+	if(subArray.length > 0) result.push(subArray);
+	
+	return result;
+};

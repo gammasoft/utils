@@ -72,5 +72,14 @@ module.exports = {
 		test.deepEqual(arrayUtils.toDictionary(array, "id"), {"1": {id: 1, name: "foo"}, "2": {id: 2, name: "fuark"}});
 		
 		test.done();
+	},
+	
+	"chop: Check that result includes elements when `array.length % quantity !== 0`": function(test){
+		var array = [1, 2, 3, 4, 5];
+		test.deepEqual([[1, 2, 3, 4], [5]], arrayUtils.chop(array, 4));
+		test.deepEqual([[1, 2, 3], [4, 5]], arrayUtils.chop(array, 3));
+		test.deepEqual([[1, 2], [3, 4], [5]], arrayUtils.chop(array, 2));
+		test.deepEqual([[1], [2], [3], [4], [5]], arrayUtils.chop(array, 1));
+		test.done();
 	}
 };
