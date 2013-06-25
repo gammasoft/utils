@@ -14,5 +14,24 @@ module.exports = {
 		
 		test.ok(random === 0 || random === 1);
 		test.done();
+	},
+	
+	"isBetween: Check that verification is inclusive by default": function(test){
+		test.ok(numberUtils.isBetween(1, 1, 2));
+		test.ok(numberUtils.isBetween(2.234, 1, 2.234));
+		test.done();
+	},
+	
+	"isBetween: Check when inclusive is false": function(test){
+		test.equal(numberUtils.isBetween(1, 1, 2, false), false);
+		test.equal(numberUtils.isBetween(2.234, 1, 2.234, false), false);
+		test.done();
+	},
+	
+	"isBetween: Check that it works as expected": function(test){
+		test.ok(numberUtils.isBetween(0, -5, 5));
+		test.ok(numberUtils.isBetween(100, 0, 200));
+		test.ok(numberUtils.isBetween(500, 250, 1000));
+		test.done();
 	}
 };
