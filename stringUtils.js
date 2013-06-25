@@ -1,4 +1,6 @@
-var numberUtils = require("./numberUtils");
+var 
+	numberUtils = require("./numberUtils"),
+	net = require("net");
 
 module.exports.getLink = function(text, options){
 	var link = text.link(options.href);
@@ -23,6 +25,11 @@ module.exports.getRandomString = function(length, chars) {
 	}
 
 	return result;
+};
+
+module.exports.isIp = function(value){
+	var isIp = net.isIP(value);
+	return isIp || false;
 };
 
 module.exports.shortenName = function(name, level){
