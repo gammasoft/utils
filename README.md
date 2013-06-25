@@ -17,14 +17,14 @@ Every sort of utilities for Node.js
 - **cryptoUtils**  
   Functions: *md5, cipher, decipher*
 
-- mathUtils  
+- **mathUtils**  
   Functions: *mod, convolve (alias: multiplyPolynomials), solve* 
 
-- numberUtils  
+- **numberUtils**  
   Functions: *getRandomInteger*
 
-- objectUtils  
+- **objectUtils**  
   Functions: *isUndefined, isArray, isEmpty, isNumber, argsToArray*
 
-- stringUtils  
+- **stringUtils**  
   Functions: *getLink, getRandomString, isIp, shortenName, splitWords*
