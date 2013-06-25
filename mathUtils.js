@@ -1,6 +1,15 @@
 var objectUtils = require("./objectUtils");
 var arrayUtils = require("./arrayUtils");
 
+module.exports.solve = function(input, vars){
+	//credits: https://gist.github.com/guille/1590954
+	try {
+		return eval('with(Math){with(vars || {}){' + input + '}}');
+	} catch (e) {
+		return NaN;
+	}
+};
+
 module.exports.mod = function(value, factors, divider){
 	if(objectUtils.isUndefined(divider)) divider = 11;
 	if(objectUtils.isUndefined(factors)) factors = arrayUtils.series(2, 9);
