@@ -7,12 +7,24 @@ Every sort of utilities for Node.js
 
     npm install gammautils
     
-## stringUtils
+### What is in the box?
+- **arrayUtils**  
+  Functions: *insertAt, series, pretty, clean, intersection, toDictionary, chop*
 
-- **getRandomString(length[, chars])**   
-  Generates a random string of the given `length (number)`, using only the characters of the string `chars (string)`.
+- **consoleUtils**  
+  Functions: *clearScreen*
 
-## numberUtils
+- **cryptoUtils**  
+  Functions: *md5, cipher, decipher*
 
-- **getRandomInt([min][, max])**  
-  Generates a random integer within the inclusive range of `min (number)` and `max (number)`.
+- mathUtils  
+  Functions: *mod, convolve (alias: multiplyPolynomials), solve* 
+
+- numberUtils  
+  Functions: *getRandomInteger*
+
+- objectUtils  
+  Functions: *isUndefined, isArray, isEmpty, isNumber, argsToArray*
+
+- stringUtils  
+  Functions: *getLink, getRandomString, isIp, shortenName, splitWords*
