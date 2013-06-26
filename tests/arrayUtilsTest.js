@@ -1,6 +1,49 @@
 var arrayUtils = require("../arrayUtils");
 
 module.exports = {
+	"sum: Sums correctly when elements are objects": function(test){
+		var array = [{ price: 12.50 }, { price: 0.50 }, { price: 7}];
+		test.equal(20, arrayUtils.sum(array, "price"));
+		test.done();
+	},
+		
+	"sum: Sums correctly when elements are number strings into objects": function(test){
+		var array = [{ price: "12.50" }, { price: "0.50" }, { price: "7" }];
+		test.equal(20, arrayUtils.sum(array, "price"));
+		test.done();
+	},
+	
+	"sum: Sums correctly when elements are numbers": function(test){
+		var array = [1, 2, 3, 4];
+		test.equal(10, arrayUtils.sum(array));
+		test.done();
+	},
+	
+	"sum: Sums correctly when elements are string numbers": function(test){
+		var array = ["1", "2", "3", "4"];
+		test.equal(10, arrayUtils.sum(array));
+		test.done();
+	},
+	
+	"sum: Join strings if content of at least one element is a not a number string": function(test){
+		var array = ["G", "a", "m", "m", "a", "s", "o", "f", "t"];
+		test.equal("Gammasoft", arrayUtils.sum(array));
+		
+		var array = [1, "2", "Gammasoft", 3, 4, "5"];
+		test.equal("3Gammasoft345", arrayUtils.sum(array));
+		
+		test.done();
+	},
+	
+	"sum: Throws exception if property parameter is not present in at least on array element": function(test){
+		var array = [{price: 1}, {}];
+		test.throws(function(){
+			arrayUtils.sum(array);
+		});
+		
+		test.done();
+	},
+	
 	"insertAt: Correctly inserts value at desired position": function(test){
 		var array = ["foo", "bar"];
 		arrayUtils.insertAt(array, 1, "bang");

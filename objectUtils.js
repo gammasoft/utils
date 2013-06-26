@@ -18,6 +18,14 @@ module.exports.isEmpty = function(object){
     return true;
 };
 
+module.exports.isBoolean = function(object) {
+	return typeof object === "boolean";
+};
+
+module.exports.isString = function(object) {
+	return typeof object === "string";
+};
+
 module.exports.isNumber = function(object) {
 	return !isNaN(parseFloat(object)) && isFinite(object);
 };

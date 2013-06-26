@@ -17,7 +17,23 @@ module.exports = {
 		test.done();
 	},
 	
-	"isEmpty: Check that if detects empty objects": function(test){
+	"isBoolean: Check that detects booleans": function(test){
+		test.ok(objectUtils.isBoolean(true));
+		test.equal(objectUtils.isBoolean(1), false);
+		test.equal(objectUtils.isBoolean(0), false);
+
+		test.done();
+	},
+	
+	"isString: Check that detects strings": function(test){
+		test.ok(objectUtils.isString("Gammasoft"));
+		test.equal(objectUtils.isString(1), false);
+		test.equal(objectUtils.isString(/as/g), false);
+
+		test.done();		
+	},
+	
+	"isEmpty: Check that detects empty objects": function(test){
 		test.ok(objectUtils.isEmpty({}));
 		test.ok(objectUtils.isEmpty(new function(){ }));
 		test.ok(objectUtils.isEmpty(new Object()));

@@ -1,5 +1,18 @@
 var objectUtils = require("./objectUtils");
 
+module.exports.sum = function(array, property){
+	function getValue(a){
+		if(objectUtils.isNumber(a)) return parseFloat(a, 10);
+		else if(objectUtils.isString(a)) return a;
+		else if(property in a) return parseFloat(a[property], 10);
+		else throw new Error("Property '" + property + "' was not found on array's element");
+	}
+	
+	return array.reduce(function(a, b){
+		return getValue(a) + getValue(b);	
+	});
+};
+
 module.exports.insertAt = function(array, index, element){
 	array.splice(index, 0, element);
 };
