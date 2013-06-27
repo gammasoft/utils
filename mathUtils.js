@@ -1,6 +1,10 @@
 var objectUtils = require("./objectUtils");
 var arrayUtils = require("./arrayUtils");
 
+module.exports.euclideanDistance = function(a, b){
+	return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+};
+
 module.exports.solve = function(input, vars){
 	//credits: https://gist.github.com/guille/1590954
 	try {

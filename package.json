@@ -30,10 +30,6 @@
   ],
   "author": "Renato Gama <renato@gammasoft.com.br>",
   "license": "BSD",
-  "dependencies": {
-    "async": "~0.2.9",
-    "moment": "~2.0.0"
-  },
   "devDependencies": {
     "nodeunit": "~0.8.0"
   }
