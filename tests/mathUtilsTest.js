@@ -1,8 +1,17 @@
 var mathUtils = require("../mathUtils");
 
 module.exports = {
-	"euclideanDistance: ": function(test){
+	"euclideanDistance: Check that calculation can be done with 'n' domensions and that they yield right result": function(test){
 		test.equal(mathUtils.euclideanDistance({x: 5, y: 4}, {x: 4, y: 1}), 3.1622776601683795);
+		test.equal(mathUtils.euclideanDistance({"x axis": 2, "y axis": 5}, {"x axis": 3, "y axis": 4}), 1.4142135623730951);
+		test.equal(mathUtils.euclideanDistance({i: 2, j: 4, w: 5}, {i: 3, j: 3, w: 3}), 2.449489742783178);
+		test.equal(mathUtils.euclideanDistance({a: 10}, {a: 8}), 2);
+		test.equal(mathUtils.euclideanDistance({a: 8}, {a: 10}), 2);
+		test.equal(mathUtils.euclideanDistance({a: 8, b: 10}, {a: 10}), 2);
+		test.equal(mathUtils.euclideanDistance({a: 8}, {a: 10, b: 10}), 2);
+		test.equal(mathUtils.euclideanDistance({}, {}), 0);
+		test.equal(mathUtils.euclideanDistance(null, null), 0);
+		test.equal(mathUtils.euclideanDistance({a: 8}, null), 0);
 		
 		test.done();
 	},	

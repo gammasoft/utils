@@ -2,11 +2,17 @@ var objectUtils = require("./objectUtils");
 var arrayUtils = require("./arrayUtils");
 
 module.exports.euclideanDistance = function(a, b){
-	return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+	var sum = 0;
+	
+	for(property in a)
+		if(a.hasOwnProperty(property) && b && b.hasOwnProperty(property))
+			sum += Math.pow(a[property] - b[property], 2);
+	
+	return Math.sqrt(sum);
 };
 
+//credits: https://gist.github.com/guille/1590954
 module.exports.solve = function(input, vars){
-	//credits: https://gist.github.com/guille/1590954
 	try {
 		return eval('with(Math){with(vars || {}){' + input + '}}');
 	} catch (e) {
