@@ -13,6 +13,15 @@ module.exports.sum = function(array, property){
 	});
 };
 
+module.exports.removeLast = function(array){
+	removeAt(array, array.length - 1);
+};
+
+module.exports.removeAt = removeAt;
+function removeAt(array, index){
+	array.splice(index, 1);
+};
+
 module.exports.insertAt = function(array, index, element){
 	array.splice(index, 0, element);
 };
@@ -33,7 +42,6 @@ module.exports.pretty = function(array, lastSeparator){
 	
 	return array.toString().replace(/,/g, ", ").replace(/,\s([^,]+)$/, " " + lastSeparator + " $1");
 };
-
 
 module.exports.clean = function(array, deleteValue) {
 	for (var i = 0; i < array.length; i++) {

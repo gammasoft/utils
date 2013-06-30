@@ -44,6 +44,50 @@ module.exports = {
 		test.done();
 	},
 	
+	"removeAt: Correctly removes value from array at given index": function(test){
+		var array = ["foo", "bar"];
+		arrayUtils.removeAt(array, 1);
+		
+		test.deepEqual(array, ["foo"]);
+		test.done();
+	},
+	
+	"removeAt: Correctly removes value from array at given index 2": function(test){
+		var array = ["foo", "bar"];
+		arrayUtils.removeAt(array, 0);
+		
+		test.deepEqual(array, ["bar"]);
+		test.done();
+	},
+	
+	"removeAt: Does not throw if index is out of bounds": function(test){
+		var array = ["foo", "bar"];
+		
+		test.doesNotThrow(function(){
+			arrayUtils.removeAt(array, 5);
+			test.deepEqual(array, ["foo", "bar"]);
+		});
+		
+		test.done();
+	},
+	
+	"removeLast: Does not throw if array is empty": function(test){
+		test.doesNotThrow(function(){
+			arrayUtils.removeLast([]);
+		});
+		
+		test.done();
+	},
+	
+	"removeLast: Correctly remove at the last index": function(test){
+		var array = ["foo", "bar"];
+		arrayUtils.removeLast(array);
+		
+		test.deepEqual(array, ["foo"]);
+		
+		test.done();
+	},
+	
 	"insertAt: Correctly inserts value at desired position": function(test){
 		var array = ["foo", "bar"];
 		arrayUtils.insertAt(array, 1, "bang");
