@@ -5,6 +5,10 @@ function isUndefined(object){
 	return typeof object === typeof undefined;
 };
 
+module.exports.isObject = function(object){
+	return typeof object === "object";
+};
+
 module.exports.isArray = function(object){
 	return util.isArray(object); 
 };

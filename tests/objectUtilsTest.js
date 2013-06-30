@@ -1,6 +1,16 @@
 var objectUtils = require("../objectUtils");
 
 module.exports = {
+	"isObject: Check that it detects regular objects and arrays": function(test){
+		test.ok(objectUtils.isObject({}));
+		test.ok(objectUtils.isObject(new function(){}));
+		
+		test.ok(objectUtils.isObject([]));
+		test.ok(objectUtils.isObject(new Array()));
+		
+		test.done();
+	},
+		
 	"isUndefined: Check if isUndefined works as expected": function(test){
 		test.ok(objectUtils.isUndefined(undefined));
 		test.ok(objectUtils.isUndefined(void 0));
