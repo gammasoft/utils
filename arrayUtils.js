@@ -1,6 +1,17 @@
 var objectUtils = require("./objectUtils");
 
-module.exports.sum = function(array, property){
+module.exports.multiply = function(array, property){
+	return sum(array, property, function(a, b){
+		return a * b;
+	});
+};
+
+module.exports.sum = sum;
+function sum(array, property, fn){
+	if(objectUtils.isUndefined(fn)) fn = function(a, b){
+		return getValue(a) + getValue(b);	
+	}; 
+	
 	function getValue(a){
 		if(objectUtils.isNumber(a)) return parseFloat(a, 10);
 		else if(objectUtils.isString(a)) return a;
@@ -8,9 +19,7 @@ module.exports.sum = function(array, property){
 		else throw new Error("Property '" + property + "' was not found on array's element");
 	}
 	
-	return array.reduce(function(a, b){
-		return getValue(a) + getValue(b);	
-	});
+	return array.reduce(fn);
 };
 
 module.exports.removeLast = function(array){

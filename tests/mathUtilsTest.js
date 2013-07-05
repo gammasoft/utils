@@ -1,6 +1,14 @@
 var mathUtils = require("../mathUtils");
 
 module.exports = {
+	"median: Check that median is correctly calculated": function(test){
+		test.equal(mathUtils.median([5, 10]), 7.5);
+		test.equal(mathUtils.median([5, 5]), 5);
+		test.equal(mathUtils.median([10, 20, 30]), 20);
+		
+		test.done();
+	},	
+	
 	"euclideanDistance: Check that calculation can be done with 'n' domensions and that they yield right result": function(test){
 		test.equal(mathUtils.euclideanDistance({x: 5, y: 4}, {x: 4, y: 1}), 3.1622776601683795);
 		test.equal(mathUtils.euclideanDistance({"x axis": 2, "y axis": 5}, {"x axis": 3, "y axis": 4}), 1.4142135623730951);

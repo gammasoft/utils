@@ -2,6 +2,15 @@ var
 	numberUtils = require("./numberUtils"),
 	net = require("net");
 
+module.exports.onlyLettersAndNumbers = function(string, size){
+	if(typeof size === "undefined") size = "+";
+	
+	if(["+", "*"].indexOf(size) === -1)
+		size = "{" + size + "}";
+	
+	return new RegExp("^[0-9a-zA-Z]" + size + "$").test(string);
+};
+
 module.exports.getLink = function(text, options){
 	var link = text.link(options.href);
 	

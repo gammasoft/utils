@@ -1,6 +1,35 @@
 var stringUtils = require("../stringUtils");
 
 module.exports = {
+		
+	"onlyLettersAndNumbers: Check that only contains letters and numbers": function(test){
+		test.ok(stringUtils.onlyLettersAndNumbers("AaBbCc1872817873aodsiufh"));
+		test.ok(stringUtils.onlyLettersAndNumbers("AOIUHAoiuhi3429876492iuyegfwuadiu"));
+		
+		test.equal(stringUtils.onlyLettersAndNumbers("abcdefgh_32234"), false);
+		test.equal(stringUtils.onlyLettersAndNumbers("!@#$%ˆ&*()"), false);
+		test.equal(stringUtils.onlyLettersAndNumbers("{}|{}|\":A\": çdc"), false);
+		
+		test.done();
+	},
+	
+	"onlyLettersAndNumbers: Check that only contains letters and numbers of a given size": function(test){
+		test.ok(stringUtils.onlyLettersAndNumbers("abc123", "6"));
+		test.ok(stringUtils.onlyLettersAndNumbers("abc123", 6));
+		test.ok(stringUtils.onlyLettersAndNumbers("abcedfghi", "9"));
+		test.ok(stringUtils.onlyLettersAndNumbers("abcedfghi", 9));
+		test.ok(stringUtils.onlyLettersAndNumbers("", "*"));
+		test.ok(stringUtils.onlyLettersAndNumbers("1", "+"));
+		test.ok(stringUtils.onlyLettersAndNumbers("a", "+"));
+		test.ok(stringUtils.onlyLettersAndNumbers("1324wef234efwga", "+"));
+		
+		test.equal(stringUtils.onlyLettersAndNumbers("", "+"), false);
+		test.equal(stringUtils.onlyLettersAndNumbers("123asd", "1"), false);
+		test.equal(stringUtils.onlyLettersAndNumbers("{}|{}|\":A\": çdc", "5"), false);
+		
+		test.done();
+	},
+		
 	"getRandomString: Check length of string": function(test){
 		test.ok(stringUtils.getRandomString(10).length === 10);
 		test.ok(stringUtils.getRandomString(5).length === 5);

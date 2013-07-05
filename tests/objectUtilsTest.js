@@ -1,6 +1,46 @@
 var objectUtils = require("../objectUtils");
 
 module.exports = {
+	"values: Checks that works properly": function(test){
+		var values = objectUtils.values({a: "1", b: "2", c:"3"});
+		test.deepEqual(values, ["1", "2", "3"]);
+		test.done();
+	},	
+		
+	"keys: Detects every key in a given object": function(test){
+		var keys = objectUtils.keys({a: "", b: "", c:""});
+		test.deepEqual(keys, ["a", "b", "c"]);
+		test.done();
+	},
+	
+	"keys: Throws if type is not object": function(test){
+		test.throws(function(){
+			objectUtils.keys("");
+		});
+		
+		test.throws(function(){
+			objectUtils.keys(true);
+		});
+		
+		test.throws(function(){
+			objectUtils.keys(123);
+		});
+		
+		test.throws(function(){
+			objectUtils.keys([]);
+		});
+		
+		test.doesNotThrow(function(){
+			objectUtils.keys(new Date());
+		});
+		
+		test.doesNotThrow(function(){
+			objectUtils.keys({});
+		});
+		
+		test.done();
+	},
+		
 	"isObject: Check that it detects regular objects and arrays": function(test){
 		test.ok(objectUtils.isObject({}));
 		test.ok(objectUtils.isObject(new function(){}));

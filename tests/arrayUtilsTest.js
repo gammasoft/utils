@@ -1,6 +1,18 @@
 var arrayUtils = require("../arrayUtils");
 
 module.exports = {
+	"multiply: Multiply correct when elements are numbers": function(test){
+		var array = [1, 2, 3];
+		test.equal(6, arrayUtils.multiply(array));
+		test.done();
+	},
+	
+	"multiply: Multiply correct when elements are string numbers": function(test){
+		var array = ["1", "2", "3"];
+		test.equal(6, arrayUtils.multiply(array));
+		test.done();
+	},
+		
 	"sum: Sums correctly when elements are objects": function(test){
 		var array = [{ price: 12.50 }, { price: 0.50 }, { price: 7}];
 		test.equal(20, arrayUtils.sum(array, "price"));

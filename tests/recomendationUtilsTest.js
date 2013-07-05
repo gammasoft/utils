@@ -57,18 +57,25 @@ var critics = {
 	}
 };
 
+var objectUtils = require("../objectUtils");
 var recomendationUtils = require("../recomendationUtils");
 
 module.exports = {
-	"similarity: Checks that similarity is properly calculated using euclideanDistance": function(test){
-		var similarity = recomendationUtils.similarity(critics["Lisa Rose"], critics["Gene Seymor"]);
+	"similarityByPearsonCoefficient: ": function(test){
+		test.equal(recomendationUtils.similarityByPearsonCoefficient(critics["Lisa Rose"], critics["Gene Seymor"]), 0.39605901719066977);
+		test.equal(recomendationUtils.similarityByPearsonCoefficient(critics["Lisa Rose"], critics["Lisa Rose"]), 1);
+		test.done();
+	},
+		
+	"similarityByEuclideanDistance: Checks that similarity is properly calculated using euclideanDistance": function(test){
+		var similarity = recomendationUtils.similarityByEuclideanDistance(critics["Lisa Rose"], critics["Gene Seymor"]);
 		test.equal(similarity, 0.29429805508554946);
 		
 		test.done();
 	},
 	
-	"similarity: Checks that returns 1 for same objects": function(test){
-		var similarity = recomendationUtils.similarity(critics["Lisa Rose"], critics["Lisa Rose"]);
+	"similarityByEuclideanDistance: Checks that returns 1 for exatcly same ratings": function(test){
+		var similarity = recomendationUtils.similarityByEuclideanDistance(critics["Lisa Rose"], critics["Lisa Rose"]);
 		test.equal(similarity, 1);
 		
 		test.done();

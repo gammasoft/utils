@@ -1,6 +1,41 @@
 var objectUtils = require("./objectUtils");
 var arrayUtils = require("./arrayUtils");
 
+module.exports.median = function(array){
+	return array.reduce(function(a, b){
+		return a + b;
+	}) / array.length;
+};
+
+module.exports.pearsonCoefficient = function(a, b){
+	var sumA = 0;
+	var sumB = 0;
+	var sumASquared = 0;
+	var sumBSquared = 0;
+	var sumAB = 0;
+	var intersection = 0;
+	
+	for(property in a)
+		if(a.hasOwnProperty(property) && b && b.hasOwnProperty(property)){
+			sumA += a[property];
+			sumB += b[property];
+			
+			sumASquared += Math.pow(a[property], 2);
+			sumBSquared += Math.pow(b[property], 2);
+			
+			sumAB += a[property] * b[property];
+			intersection++;
+		}
+	
+	if(intersection === 0) return 0;
+	
+	var num = sumAB - (sumA * sumB / intersection);
+	var den = Math.sqrt((sumASquared - Math.pow(sumA, 2) / intersection) *
+			            (sumBSquared - Math.pow(sumB, 2) / intersection));
+	 
+	return den === 0 ? 0 : num / den; 
+};
+
 module.exports.euclideanDistance = function(a, b){
 	var sum = 0;
 	
