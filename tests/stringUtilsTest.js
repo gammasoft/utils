@@ -1,7 +1,32 @@
 var stringUtils = require("../stringUtils");
 
 module.exports = {
+	"parseSequence: Correctly parses a sequence (segment length can be number string)": function(test){
+		var sd = {
+			"Valor Fixo": 3,	
+			"Codigo da Uf": 2,
+			"AAMM da Emissao": "4",
+			"CNPJ do Emitente": 14,
+			"Modelo": 2,
+			"Serie": "3", 
+			"Numero da NFe": 9,
+			"Codigo Numerico": "9",
+			"DV": 1
+		};
 		
+		stringUtils.parseSequence("NFe52110200132781000178550010000005480000005481", sd);
+		
+		test.equal(sd["Valor Fixo"], "NFe");
+		test.equal(sd["Codigo da Uf"], "52");
+		test.equal(sd["AAMM da Emissao"], "1102");
+		test.equal(sd["CNPJ do Emitente"], "00132781000178");
+		test.equal(sd["Modelo"], "55");
+		test.equal(sd["Serie"], "001");
+		test.equal(sd["Numero da NFe"], "000000548");
+		test.equal(sd["Codigo Numerico"], "000000548");
+		test.equal(sd["DV"], "1");
+		test.done();
+	},
 	"onlyLettersAndNumbers: Check that only contains letters and numbers": function(test){
 		test.ok(stringUtils.onlyLettersAndNumbers("AaBbCc1872817873aodsiufh"));
 		test.ok(stringUtils.onlyLettersAndNumbers("AOIUHAoiuhi3429876492iuyegfwuadiu"));

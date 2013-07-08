@@ -2,6 +2,19 @@ var
 	numberUtils = require("./numberUtils"),
 	net = require("net");
 
+module.exports.parseSequence = function(string, sequenceDescriptor){
+	var start = 0;
+	for(property in sequenceDescriptor){
+		if(sequenceDescriptor.hasOwnProperty(property)){
+			var length = parseInt(sequenceDescriptor[property], 10);
+			sequenceDescriptor[property] = string.substr(start, length);
+			start += length;
+		}
+	}
+	
+	return sequenceDescriptor;
+};
+
 module.exports.onlyLettersAndNumbers = function(string, size){
 	if(typeof size === "undefined") size = "+";
 	
