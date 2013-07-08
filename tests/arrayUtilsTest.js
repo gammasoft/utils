@@ -1,6 +1,49 @@
 var arrayUtils = require("../arrayUtils");
 
 module.exports = {
+	"movingAverage: Testing with length 1 should return same array": function(test){
+		var array = [1, 2, 3, 4];
+		
+		test.deepEqual([1, 2, 3, 4], arrayUtils.movingAverage(array, 1));
+		test.done();
+	},	
+	
+	"movingAverage: Testing with length 2": function(test){
+		var array = [1, 2, 3, 4];
+		
+		test.deepEqual([1.5, 2.5, 3.5], arrayUtils.movingAverage(array, 2));
+		test.done();
+	},	
+	
+	"movingAverage: Testing with length 3": function(test){
+		var array = [1, 2, 3, 4];
+		
+		test.deepEqual([2, 3], arrayUtils.movingAverage(array, 3));
+		test.done();
+	},	
+	
+	"movingAverage: Testing with length 4": function(test){
+		var array = [1, 2, 3, 4];
+		
+		test.deepEqual([2.5], arrayUtils.movingAverage(array, 4));
+		test.done();
+	},	
+	
+	"movingAverage: Testing with bigger length than array's length will return empty array": function(test){
+		var array = [1, 2, 3, 4];
+		
+		test.deepEqual([], arrayUtils.movingAverage(array, 5));
+		test.done();
+	},	
+		
+	"movingAverage: Will work with numeric string arrays": function(test){
+		var array = ["1", "2", "3", "4"];
+		
+		test.deepEqual([2, 3], arrayUtils.movingAverage(array, 3));
+		test.deepEqual([2.5], arrayUtils.movingAverage(array, 4));
+		test.done();
+	},	
+	
 	"multiply: Multiply correct when elements are numbers": function(test){
 		var array = [1, 2, 3];
 		test.equal(6, arrayUtils.multiply(array));

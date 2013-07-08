@@ -1,5 +1,24 @@
 var objectUtils = require("./objectUtils");
 
+module.exports.movingAverage = function(array, length){
+	var result = [];
+	
+	if(array.length < length)
+		return result;
+	
+	var accumulator = 0;
+	for(var i = length - 1; i < array.length; i++){
+		for(var j = 0; j < length; j++){
+			accumulator += parseFloat(array[i - j], 10);
+		}
+		
+		result.push(accumulator/length);
+		accumulator = 0;
+	}
+	
+	return result;
+};
+
 module.exports.multiply = function(array, property){
 	return sum(array, property, function(a, b){
 		return a * b;
