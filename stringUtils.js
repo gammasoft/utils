@@ -2,6 +2,32 @@ var
 	numberUtils = require("./numberUtils"),
 	net = require("net");
 
+module.exports.nextSizeType = nextSizeType; 
+function nextSizeType(type){
+	if(type === "b")
+		return "Kb";
+	else if(type === "Kb")
+		return "Mb";
+	else if(type === "Mb")
+		return "Gb";
+	else if(type === "Gb")
+		return "Tb";
+	else if(type === "Tb" || type === "Pb")
+		return "Pb";
+	else 
+		return null;
+}
+
+module.exports.formatFileSize = formatFileSize;
+function formatFileSize(size, type, precision){
+	if(typeof precision === "undefined") precision = 2;
+	
+	if(size < 1024 || type === "Pb")
+		return size.toFixed(precision) + type;
+	else
+		return formatFileSize(size/1024, nextSizeType(type), precision);
+};
+
 module.exports.parseSequence = function(string, sequenceDescriptor){
 	var start = 0;
 	for(property in sequenceDescriptor){

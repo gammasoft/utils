@@ -1,6 +1,38 @@
 var stringUtils = require("../stringUtils");
 
 module.exports = {
+	"nextSizeType: Returns expected results": function(test){
+		test.equal(stringUtils.nextSizeType("b"), "Kb");
+		test.equal(stringUtils.nextSizeType("Kb"), "Mb");
+		test.equal(stringUtils.nextSizeType("Mb"), "Gb");
+		test.equal(stringUtils.nextSizeType("Gb"), "Tb");
+		test.equal(stringUtils.nextSizeType("Tb"), "Pb");
+		test.equal(stringUtils.nextSizeType("Pb"), "Pb");
+		test.done();
+	},	
+	
+	"nextSizeType: Returns null if not expected value is passed": function(test){
+		test.equal(stringUtils.nextSizeType("thisIsNotValid"), null);
+		test.equal(stringUtils.nextSizeType("fooBar"), null);
+		test.equal(stringUtils.nextSizeType("123"), null);
+		test.equal(stringUtils.nextSizeType("asdfg"), null);
+		test.done();
+	},	
+	
+	"formatFileSize: Formats as expected": function(test){
+		
+		test.equal(stringUtils.formatFileSize(500, "b"), "500.00b");
+		test.equal(stringUtils.formatFileSize(500, "b", 0), "500b");
+		test.equal(stringUtils.formatFileSize(1024, "b", 2), "1.00Kb");
+		test.equal(stringUtils.formatFileSize(1024, "b"), "1.00Kb");
+		test.equal(stringUtils.formatFileSize(2048, "b", 3), "2.000Kb");
+		test.equal(stringUtils.formatFileSize(2013, "Mb", 4), "1.9658Gb");
+		test.equal(stringUtils.formatFileSize(2912, "Gb", 5), "2.84375Tb");
+		test.equal(stringUtils.formatFileSize(1025, "Tb", 1), "1.0Pb");
+		test.equal(stringUtils.formatFileSize(2048, "Pb", 0), "2048Pb");
+		test.done();
+	},
+		
 	"parseSequence: Correctly parses a sequence (segment length can be number string)": function(test){
 		var sd = {
 			"Valor Fixo": 3,	
