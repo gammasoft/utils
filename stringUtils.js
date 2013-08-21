@@ -2,6 +2,36 @@ var
 	numberUtils = require("./numberUtils"),
 	net = require("net");
 
+module.exports.startsWith = startsWith; 
+function startsWith(str, starts){
+	if (starts === '') return true;
+    if (str == null || starts == null) return false;
+    str = String(str); starts = String(starts);
+    return str.length >= starts.length && str.slice(0, starts.length) === starts;
+}
+
+module.exports.endsWith = endsWith;
+function endsWith(str, ends){
+	if (ends === '') return true;
+    if (str == null || ends == null) return false;
+    str = String(str); ends = String(ends);
+    return str.length >= ends.length && str.slice(str.length - ends.length) === ends;
+}
+
+module.exports.joinUrls = joinUrls;
+function joinUrls(a, b){
+	if(a === "") return b;
+	else if(b === "") return a;
+	else if(endsWith(a, "/") && startsWith(b, "/"))
+		return a + b.substr(1);
+	else if(endsWith(a, "/") && !startsWith(b, "/"))
+		return a + b;
+	else if(!endsWith(a, "/") && startsWith(b, "/"))
+		return a + b;
+	else if(!endsWith(a, "/") && !startsWith(b, "/"))
+		return a + "/" + b;
+}
+
 module.exports.nextSizeType = nextSizeType; 
 function nextSizeType(type){
 	if(type === "b")
