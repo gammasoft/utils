@@ -11,6 +11,17 @@ module.exports = {
 		test.done();
 	},		
 	
+	"getUrlSubpaths: Returns expected results": function(test){
+		test.deepEqual(stringUtils.getUrlSubpaths("/this/is/a/good/test/"), [
+		                                                                   "this",
+		                                                                   "this/is",
+		                                                                   "this/is/a",
+		                                                                   "this/is/a/good",
+		                                                                   "this/is/a/good/test",
+		                                                                   ]);
+		test.done();
+	},
+	
 	"joinUrls: Returns expected results": function(test){
 		test.equal(stringUtils.joinUrls("", "/is/good"), "/is/good");
 		test.equal(stringUtils.joinUrls("/testing", ""), "/testing");

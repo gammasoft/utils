@@ -32,6 +32,21 @@ function joinUrls(a, b){
 		return a + "/" + b;
 }
 
+module.exports.getUrlSubpaths = getUrlSubpaths;
+function getUrlSubpaths(path){
+	var result = [];
+	path = path.split("/").filter(function(segment){
+		return segment !== "";
+	});
+	
+	path.forEach(function(segment, index){
+		if(index === 0) result.push(segment);
+		else result.push(joinUrls(result[index - 1], segment));
+	});
+	
+	return result;
+}
+
 module.exports.nextSizeType = nextSizeType; 
 function nextSizeType(type){
 	if(type === "b")
