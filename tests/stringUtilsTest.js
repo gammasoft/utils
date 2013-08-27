@@ -1,6 +1,52 @@
 var stringUtils = require("../stringUtils");
 
 module.exports = {
+	"findPrefix: Returns expected results": function(test){
+	
+		var data = [
+		            "Metallica - Ride The Lightning",
+		            "Metallica - Master Of Puppets",
+		            "Metallica - ...And Justice For All",
+		            ];
+		
+		test.equal(stringUtils.findPrefix(data), "Metallica - ");
+		
+		var data = [
+		            "1234",
+		            "1235",
+		            "12",
+		            ];
+		
+		test.equal(stringUtils.findPrefix(data), "12");
+		
+		test.done();
+	},
+	
+	"removePrefix: Returns expected results": function(test){
+		
+		var data = [
+		            "Metallica - Ride The Lightning",
+		            "Metallica - Master Of Puppets",
+		            "Metallica - ...And Justice For All"
+		            ];
+		
+		test.deepEqual(stringUtils.removePrefix(data), [
+														"Ride The Lightning",
+														"Master Of Puppets",
+														"...And Justice For All"
+		                                              ]);
+		
+		var data = [
+		            "1234",
+		            "1235",
+		            "12",
+		            ];
+		
+		test.deepEqual(stringUtils.removePrefix(data), ["34", "35", ""]);
+		
+		test.done();
+	},
+		
 	"startWith: Returns expected results": function(test){
 		test.ok(stringUtils.startsWith("startsWith", "starts"));
 		test.done();

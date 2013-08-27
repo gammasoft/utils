@@ -2,6 +2,41 @@ var
 	numberUtils = require("./numberUtils"),
 	net = require("net");
 
+module.exports.findPrefix = findPrefix;
+function findPrefix(strings){
+	if(strings && strings.length > 0){
+		var prefix = "";
+		
+		var characters = strings[0].split("");
+		for(var i = 0; i < characters.length; i++){
+			var isPrefix = true;
+			var character = characters[i];
+			
+			for(var j = 0; j < strings.length; j++) {
+				var string = strings[j];
+
+				isPrefix = isPrefix && (string.length >= i + 1 && string[i] === character);
+			}
+			
+			if(isPrefix) prefix += character; 
+			else return prefix;
+		}
+	}
+	else return null;
+}
+
+module.exports.removePrefix = removePrefix;
+function removePrefix(strings){
+	var prefix = findPrefix(strings);
+	
+	var result = [];
+	strings.forEach(function(string){
+		result.push(string.replace(prefix, ""));
+	});
+	
+	return result;
+}
+
 module.exports.startsWith = startsWith; 
 function startsWith(str, starts){
 	if (starts === '') return true;
