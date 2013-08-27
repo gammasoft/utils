@@ -2,6 +2,11 @@ var
 	numberUtils = require("./numberUtils"),
 	net = require("net");
 
+module.exports.findPrefixes = findPrefixes;
+function findPrefixes(strings){
+	return null;
+}
+
 module.exports.findPrefix = findPrefix;
 function findPrefix(strings){
 	if(strings && strings.length > 0){
