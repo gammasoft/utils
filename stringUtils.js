@@ -2,9 +2,24 @@ var
 	numberUtils = require("./numberUtils"),
 	net = require("net");
 
+module.exports.reverseString = reverseString; 
+function reverseString(string){
+	return string.split("").reverse().join("");
+}
+
 module.exports.findPrefixes = findPrefixes;
 function findPrefixes(strings){
 	return null;
+}
+
+module.exports.findSuffix = findSuffix;
+function findSuffix(strings, prefix){
+	var reversed = [];
+	strings.forEach(function(string){
+		reversed.push(reverseString(string));
+	});
+	
+	return reverseString(findPrefix(reversed));
 }
 
 module.exports.findPrefix = findPrefix;

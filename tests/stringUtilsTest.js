@@ -1,6 +1,11 @@
 var stringUtils = require("../stringUtils");
 
 module.exports = {
+	"reverseString: ": function(test){
+		test.equal(stringUtils.reverseString("Gammasoft Desenvolvimento de Software Ltda"), "adtL erawtfoS ed otnemivlovneseD tfosammaG");
+		test.done();
+	},	
+		
 	"findPrefixes: ": function(test){
 		var data = [
 		            "Metallica - Ride The Lightning",
@@ -17,8 +22,31 @@ module.exports = {
 														"Megadeth - ",
 														"Iron Maiden - ",
 		                                              ]);
+		
+		test.done();
 	},	
 		
+	"findSuffix: Returns expected results": function(test){
+		
+		var data = [
+		            "Metallica - Ride The Lightning - Uploaded by John Doe",
+		            "Metallica - Master Of Puppets - Uploaded by John Doe",
+		            "Metallica - ...And Justice For All - Uploaded by John Doe",
+		            ];
+		
+		test.equal(stringUtils.findSuffix(data), " - Uploaded by John Doe");
+		
+		var data = [
+		            "12346",
+		            "123546",
+		            "1246",
+		            ];
+		
+		test.equal(stringUtils.findSuffix(data), "46");
+		
+		test.done();
+	},
+	
 	"findPrefix: Returns expected results": function(test){
 	
 		var data = [
