@@ -7,11 +7,6 @@ function reverseString(string){
 	return string.split("").reverse().join("");
 }
 
-module.exports.findPrefixes = findPrefixes;
-function findPrefixes(strings){
-	return null;
-}
-
 module.exports.findSuffix = findSuffix;
 function findSuffix(strings, prefix){
 	var reversed = [];

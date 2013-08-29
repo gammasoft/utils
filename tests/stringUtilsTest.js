@@ -6,26 +6,6 @@ module.exports = {
 		test.done();
 	},	
 		
-	"findPrefixes: ": function(test){
-		var data = [
-		            "Metallica - Ride The Lightning",
-		            "Metallica - Master Of Puppets",
-		            "Metallica - ...And Justice For All",
-		            "Megadeth - Rust In Peace",
-		            "Megadeth - Peace Sells... But Whos buying?",
-		            "Megadeth - Countdown to Extinction",
-		            "Iron Maiden - Brave New World"
-		            ];
-	
-		test.deepEqual(stringUtils.findPrefixes(data), [
-														"Metallica - ",
-														"Megadeth - ",
-														"Iron Maiden - ",
-		                                              ]);
-		
-		test.done();
-	},	
-		
 	"findSuffix: Returns expected results": function(test){
 		
 		var data = [
