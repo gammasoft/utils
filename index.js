@@ -6,4 +6,5 @@ module.exports = {
 	number: require("./numberUtils"),
 	object: require("./objectUtils"),
 	string: require("./stringUtils"),
+	url: require("./urlUtils"),
 };

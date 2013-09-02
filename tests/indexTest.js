@@ -9,6 +9,7 @@ module.exports = {
 		test.ok(utils.number);
 		test.ok(utils.object);
 		test.ok(utils.string);
+		test.ok(utils.url);
 		
 		test.done();
 	}
