@@ -1,6 +1,21 @@
 var arrayUtils = require("../arrayUtils");
 
 module.exports = {
+	"getRandomItems: Item returned is within the original array": function(test){
+		var array = [1, 2, 3, 4];
+		test.ok(array.indexOf(arrayUtils.getRandomItem(array)) !== -1);
+		test.ok(array.indexOf(arrayUtils.getRandomItem(array)) !== -1);
+		test.ok(array.indexOf(arrayUtils.getRandomItem(array)) !== -1);
+		test.ok(array.indexOf(arrayUtils.getRandomItem(array)) !== -1);
+		
+		var array2 = ["Fulano", "Ciclano", "Beltrano"];
+		test.ok(array2.indexOf(arrayUtils.getRandomItem(array2)) !== -1);
+		test.ok(array2.indexOf(arrayUtils.getRandomItem(array2)) !== -1);
+		test.ok(array2.indexOf(arrayUtils.getRandomItem(array2)) !== -1);
+		
+		test.done();
+	},		
+		
 	"movingAverage: Testing with length 1 should return same array": function(test){
 		var array = [1, 2, 3, 4];
 		

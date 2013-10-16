@@ -1,5 +1,9 @@
 var objectUtils = require("./objectUtils");
 
+module.exports.getRandomItem = function(array){
+	return array[Math.floor(Math.random() * array.length)];
+};
+
 module.exports.movingAverage = function(array, length){
 	var result = [];
 	

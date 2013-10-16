@@ -10,6 +10,7 @@ module.exports = {
 		test.ok(utils.object);
 		test.ok(utils.string);
 		test.ok(utils.url);
+		test.ok(utils.validation);
 		
 		test.done();
 	}

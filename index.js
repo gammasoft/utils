@@ -7,4 +7,5 @@ module.exports = {
 	object: require("./objectUtils"),
 	string: require("./stringUtils"),
 	url: require("./urlUtils"),
+	validation: require("./validationUtils")
 };
