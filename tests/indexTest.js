@@ -11,6 +11,7 @@ module.exports = {
 		test.ok(utils.string);
 		test.ok(utils.url);
 		test.ok(utils.validation);
+		test.ok(utils.barcode);
 		
 		test.done();
 	}
