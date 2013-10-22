@@ -1,17 +1,16 @@
+var fs = require("fs");
 var utils = require("../index");
 
 module.exports = {
 	"Checks that every submodule is available": function(test){
-		test.ok(utils.array);
-		test.ok(utils.console);
-		test.ok(utils.crypto);
-		test.ok(utils.math);
-		test.ok(utils.number);
-		test.ok(utils.object);
-		test.ok(utils.string);
-		test.ok(utils.url);
-		test.ok(utils.validation);
-		test.ok(utils.barcode);
+		fs.readdirSync(__dirname + "/..").forEach(function(file){
+			var match = file.match(/(.*)Utils.js/);
+			
+			if(match){
+				console.log(match[1] + " / " + typeof utils[match[1]]);
+				test.ok(utils[match[1]]);
+			}
+		});
 		
 		test.done();
 	}
