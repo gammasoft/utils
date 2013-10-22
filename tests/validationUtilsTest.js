@@ -17,5 +17,16 @@ module.exports = {
 		test.ok(!validationUtils.isValidEmail("one-more%@gmail.com"));
 		
 		test.done();
+	},
+	
+	"Contains only numbers": function(test){
+		test.ok(validationUtils.isNumericString("0123"));
+		test.ok(validationUtils.isNumericString("134135"));
+		test.ok(validationUtils.isNumericString("0000001223"));
+		test.ok(!validationUtils.isNumericString("012x3"));
+		test.ok(!validationUtils.isNumericString("afds12"));
+		test.ok(!validationUtils.isNumericString("0000001223_!"));
+		
+		test.done();
 	}
 };

@@ -5,3 +5,7 @@ module.exports.validEmailRegExp = validEmailRegExp;
 module.exports.isValidEmail = function(email) {
     return validEmailRegExp.test(email);
 };
+
+module.exports.isNumericString = function(text){
+	return /^[0-9]+$/.test(text);
+};
