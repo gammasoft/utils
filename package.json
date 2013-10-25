@@ -1,6 +1,6 @@
 {
   "name": "gammautils",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Lots of utilities for Node.js",
   "main": "index.js",
   "directories": {

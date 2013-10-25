@@ -1,6 +1,58 @@
 var 
+	accentMap = require("./accentMap"), 
 	numberUtils = require("./numberUtils"),
 	net = require("net");
+
+//this algorithm was taken from underscore.string module
+//all credits to them
+module.exports.pad = pad;
+function pad(str, length, padStr, type) {
+	str = str == null ? '' : String(str);
+	length = ~~length;
+
+	var padlen  = 0;
+
+	if (!padStr)
+		padStr = ' ';
+	else if (padStr.length > 1)
+		padStr = padStr.charAt(0);
+
+	switch(type) {
+		case 'right':
+			padlen = length - str.length;
+			return str + strRepeat(padStr, padlen);
+		case 'both':
+			padlen = length - str.length;
+			return strRepeat(padStr, Math.ceil(padlen/2)) + str
+                  + strRepeat(padStr, Math.floor(padlen/2));
+		default: // 'left'
+			padlen = length - str.length;
+			return strRepeat(padStr, padlen) + str;
+	}
+	
+	function strRepeat(str, qty){
+		if (qty < 1) return '';
+		var result = '';
+		while (qty > 0) {
+			if (qty & 1) result += str;
+				qty >>= 1, str += str;
+			}
+		
+		return result;
+	};
+}
+
+module.exports.removeDiacritics = removeDiacritics;
+function removeDiacritics(string) {
+	if (!string) return '';
+  
+  	var result = '';
+  	for (var i = 0; i < string.length; i++) {
+  		result += accentMap[string.charAt(i)] || string.charAt(i);
+  	}
+  
+  	return result;
+};
 
 module.exports.reverseString = reverseString; 
 function reverseString(string){

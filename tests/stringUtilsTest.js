@@ -1,6 +1,20 @@
 var stringUtils = require("../stringUtils");
 
 module.exports = {
+	"pad: Check that pads left/right/both positions": function(test){
+		test.equal(stringUtils.pad("1", 5, "0"), "00001");
+		test.equal(stringUtils.pad("1", 5, "0", "left"), "00001");
+		test.equal(stringUtils.pad("1", 5, "0", "right"), "10000");
+		test.equal(stringUtils.pad("1", 5, "0", "both"), "00100");
+		
+		test.done();
+	},
+		
+	"removeDiacritics: ": function(test){
+		test.equal(stringUtils.removeDiacritics("áâàãÁÂÀÃéêèÉÊÈíîìÍÎÌóôòõÓÔÒÕúûùÚÛÙ"), "aaaaAAAAeeeEEEiiiIIIooooOOOOuuuUUU");
+		test.done();
+	},	
+		
 	"reverseString: ": function(test){
 		test.equal(stringUtils.reverseString("Gammasoft Desenvolvimento de Software Ltda"), "adtL erawtfoS ed otnemivlovneseD tfosammaG");
 		test.done();
@@ -162,6 +176,7 @@ module.exports = {
 		test.equal(sd["DV"], "1");
 		test.done();
 	},
+	
 	"onlyLettersAndNumbers: Check that only contains letters and numbers": function(test){
 		test.ok(stringUtils.onlyLettersAndNumbers("AaBbCc1872817873aodsiufh"));
 		test.ok(stringUtils.onlyLettersAndNumbers("AOIUHAoiuhi3429876492iuyegfwuadiu"));
