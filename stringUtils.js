@@ -3,6 +3,21 @@ var
 	numberUtils = require("./numberUtils"),
 	net = require("net");
 
+module.exports.generateGuid = generateGuid; 
+function generateGuid(separators){
+    if(typeof separators === "undefined") separators = true;
+ 
+    var S4 = function (){
+        return Math.floor(Math.random() * 0x10000).toString(16);
+    };
+ 
+    return (S4() + S4() + (separators? "-" : "") +
+            S4() + (separators ? "-" : "") +
+            S4() + (separators ? "-" : "") +
+            S4() + (separators ? "-" : "") +
+            S4() + S4() + S4());
+};
+
 //this algorithm was taken from underscore.string module
 //all credits to them
 module.exports.pad = pad;

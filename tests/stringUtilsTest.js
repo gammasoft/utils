@@ -1,6 +1,10 @@
 var stringUtils = require("../stringUtils");
 
 module.exports = {
+	"generateGuid": {
+		//too random to test
+	},	
+		
 	"pad: Check that pads left/right/both positions": function(test){
 		test.equal(stringUtils.pad("1", 5, "0"), "00001");
 		test.equal(stringUtils.pad("1", 5, "0", "left"), "00001");
