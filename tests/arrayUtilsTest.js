@@ -65,15 +65,27 @@ module.exports = {
 		test.done();
 	},
 	
-	"multiply: Multiply correct when elements are string numbers": function(test){
+	"multiply: Multiply correctly when elements are string numbers": function(test){
 		var array = ["1", "2", "3"];
 		test.equal(6, arrayUtils.multiply(array));
 		test.done();
 	},
-		
+	
+	"multiply: Multiply correctly when elements are objects": function(test){
+		var array = [{ price: 2 }, { price: 3 }, { price: 4}];
+		test.equal(arrayUtils.multiply(array, "price"), 24);
+		test.done();
+	},
+	
 	"sum: Sums correctly when elements are objects": function(test){
 		var array = [{ price: 12.50 }, { price: 0.50 }, { price: 7}];
 		test.equal(20, arrayUtils.sum(array, "price"));
+		test.done();
+	},
+	
+	"sum: Sums correctly when there is only one objects": function(test){
+		var array = [{ price: 7}];
+		test.equal(arrayUtils.sum(array, "price"), 7);
 		test.done();
 	},
 		

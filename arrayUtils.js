@@ -23,26 +23,27 @@ module.exports.movingAverage = function(array, length){
 	return result;
 };
 
+function getValue(element, property){
+	if(objectUtils.isNumber(element)) return parseFloat(element, 10);
+	else if(objectUtils.isString(element)) return element;
+	else if(property in element) return parseFloat(element[property], 10);
+	else throw new Error("Property '" + property + "' was not found on array's element");
+}
+
 module.exports.multiply = function(array, property){
-	return sum(array, property, function(a, b){
-		return a * b;
-	});
+	return array.reduce(function(a, b){ return getValue(a, property) * getValue(b, property); }, 1);
 };
 
 module.exports.sum = sum;
 function sum(array, property, fn){
-	if(objectUtils.isUndefined(fn)) fn = function(a, b){
-		return getValue(a) + getValue(b);	
+	if(objectUtils.isUndefined(fn)) fn = function(a, b, index){
+		if(index === 0 && typeof b === "string") a = "";
+		if(index === 0 && typeof b !== "string") a = 0;
+		
+		return getValue(a, property) + getValue(b, property);	
 	}; 
-	
-	function getValue(a){
-		if(objectUtils.isNumber(a)) return parseFloat(a, 10);
-		else if(objectUtils.isString(a)) return a;
-		else if(property in a) return parseFloat(a[property], 10);
-		else throw new Error("Property '" + property + "' was not found on array's element");
-	}
-	
-	return array.reduce(fn);
+
+	return array.reduce(fn, 0);
 };
 
 module.exports.removeLast = function(array){
