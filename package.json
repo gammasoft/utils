@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "clear; nodeunit ./tests/*"
+    "test": "grunt test --verbose"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,10 @@
   "author": "Renato Gama <renato@gammasoft.com.br>",
   "license": "MIT",
   "devDependencies": {
-    "nodeunit": "~0.8.0"
+    "nodeunit": "~0.8.0",
+    "alltested": "0.0.3",
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-nodeunit": "~0.2.2"
   }
 }
