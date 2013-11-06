@@ -3,6 +3,20 @@
 var mathUtils = require('../lib/mathUtils');
 
 module.exports = {
+    'bigSum': {
+        'Can perform trivial sumations': function(test) {
+            test.equal(mathUtils.bigSum(2, 3), '5');
+            test.equal(mathUtils.bigSum(3, 8), '11');
+            test.equal(mathUtils.bigSum(800, 800), '1600');
+            test.equal(mathUtils.bigSum(2347, 2785679), '2788026');
+            test.equal(mathUtils.bigSum(23472347, 27856792785679), '27856816258026');
+            test.equal(mathUtils.bigSum('2347234723472347', '2785679278567927856792785679'), '2785679278570275091516258026');
+            test.equal(mathUtils.bigSum('23472347234723472347234723472347', '27856792785679278567927856792785679278567927856792785679'), '27856792785679278567927880265132914002040275091516258026');
+
+            test.done();
+        }
+    },
+
     'median': {
         'Check that median is correctly calculated': function(test){
             test.equal(mathUtils.median([5, 10]), 7.5);
