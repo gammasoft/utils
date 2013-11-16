@@ -3,6 +3,25 @@
 var urlUtils = require('../lib/urlUtils');
 
 module.exports = {
+    'sortRoutes': {
+        'Can sort routes in array of strings': function(test) {
+            var routes = ['/user/:id', '/user/:id/preferences', '/', '/users', '/users/:group'],
+                expected = ['/', '/users', '/users/:group', '/user/:id', '/user/:id/preferences'];
+
+            test.deepEqual(urlUtils.sortRoutes(routes), expected);
+            test.done();
+        },
+
+        'Can sort routes in array of objects': function(test) {
+            var routes = [{ path: '/user/:id' }, { path: '/user/:id/preferences' }, { path: '/' }, { path: '/users' }, { path: '/users/:group' }],
+                expected = [{ path: '/' }, { path: '/users' }, { path: '/users/:group' }, { path: '/user/:id' }, { path: '/user/:id/preferences' }];
+
+
+            test.deepEqual(urlUtils.sortRoutes(routes, 'path'), expected);
+            test.done();
+        }
+    },
+
     'getSubpaths': {
         'Works as expected': function(test){
             test.deepEqual(urlUtils.getSubpaths('/this/is/a/test'), [
