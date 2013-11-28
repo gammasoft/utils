@@ -3,6 +3,40 @@
 var mathUtils = require('../lib/mathUtils');
 
 module.exports = {
+    'isPrime': {
+        'Indentifies first primes': function(test) {
+            test.ok(mathUtils.isPrime(2));
+            test.ok(mathUtils.isPrime(3));
+            test.ok(mathUtils.isPrime(5));
+            test.ok(mathUtils.isPrime(7));
+            test.ok(mathUtils.isPrime(11));
+            test.ok(mathUtils.isPrime(13));
+            test.ok(mathUtils.isPrime(17));
+            test.ok(mathUtils.isPrime(19));
+            test.ok(mathUtils.isPrime(23));
+            test.ok(mathUtils.isPrime(29));
+            test.ok(mathUtils.isPrime(31));
+            test.ok(mathUtils.isPrime(41));
+            test.ok(mathUtils.isPrime(43));
+            test.ok(mathUtils.isPrime(47));
+
+            test.done();
+        }
+    },
+
+    'getPrimeFactors': {
+        'Get right results for some known cases': function(test) {
+            test.deepEqual(mathUtils.getPrimeFactors(4), [2, 2]);
+            test.deepEqual(mathUtils.getPrimeFactors(6), [2, 3]);
+            test.deepEqual(mathUtils.getPrimeFactors(8), [2, 2, 2]);
+            test.deepEqual(mathUtils.getPrimeFactors(9), [3, 3]);
+            test.deepEqual(mathUtils.getPrimeFactors(10), [2, 5]);
+            //test.deepEqual(mathUtils.getPrimeFactors(472342734872390487), [3, 7, 827, 978491, 27795571]);
+
+            test.done();
+        }
+    },
+
     'bigSum': {
         'Can perform trivial sumations': function(test) {
             test.equal(mathUtils.bigSum(2, 3), '5');
