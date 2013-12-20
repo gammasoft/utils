@@ -43,6 +43,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
+//    grunt.registerTask('buildDocs', function() {
+//        var pkg = grunt.file.readJSON('package.json'),
+//            markdown = '';
+//
+//
+//    });
+
     grunt.registerTask('test', [
         'jshint',
         'nodeunit'

@@ -3,7 +3,7 @@
 var fs = require('fs'),
     path = require('path'),
     alltested = require('alltested'),
-    utils = require('../lib/index');
+    utils = require('../index');
 
 module.exports = {
     'Checks that every submodule is available': function(test){
