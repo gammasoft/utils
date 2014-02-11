@@ -3,6 +3,24 @@
 var stringUtils = require('../lib/stringUtils');
 
 module.exports = {
+    'parseFormattedEmailAddress': {
+        'Check that parses correctly': function(test) {
+            var email = 'Renato Gama <renatogama@example.com>',
+                data = stringUtils.parseFormattedEmailAddress(email);
+
+            test.equal(data.name, 'Renato Gama');
+            test.equal(data.email, 'renatogama@example.com');
+            test.done();
+        },
+
+        'Return same thing if no formatted email detected': function(test) {
+            test.equal(stringUtils.parseFormattedEmailAddress(42), 42);
+            test.equal(stringUtils.parseFormattedEmailAddress(undefined), undefined);
+            test.equal(stringUtils.parseFormattedEmailAddress('Not a formatted email address'), 'Not a formatted email address');
+
+            test.done();
+        }
+    },
     'getSearchString': {
         'Check that search string is generated properly': function(test) {
             test.equal(stringUtils.getSearchString('São Paulo'), 'saopaulo');

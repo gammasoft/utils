@@ -3,6 +3,20 @@
 var validationUtils = require('../lib/validationUtils');
 
 module.exports = {
+    'validFormattedEmailAddressRegExp': {
+        'Check that RegExp matches major cases': function(test) {
+            var regExp = validationUtils.validFormattedEmailAddressRegExp;
+
+            var data = 'Fulano de Tal <fulano_de_tal@example.com>'.match(regExp);
+
+            test.notEqual(data, null);
+            test.equal(data[1], 'Fulano de Tal');
+            test.equal(data[2], 'fulano_de_tal@example.com');
+
+            test.done();
+        }
+    },
+
     'validEmailRegExpForJade': {
         'Check that validEmailRegExpForJade is the same as validEmailRegExp': function(test) {
             test.equal(new RegExp(validationUtils.validEmailRegExpForJade).toString(), validationUtils.validEmailRegExp.toString());
