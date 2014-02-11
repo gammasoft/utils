@@ -3,6 +3,28 @@
 var arrayUtils = require('../lib/arrayUtils');
 
 module.exports = {
+    'toUpperCase': {
+        'Verify all items are in upper case': function(test) {
+            var data = ['this', 'is', 42, 'a', 'test'];
+
+            data = arrayUtils.toUpperCase(data);
+
+            test.deepEqual(data, ['THIS', 'IS', 42, 'A', 'TEST']);
+            test.done();
+        }
+    },
+
+    'toLowerCase': {
+        'Verify all items are in lower case': function(test) {
+            var data = ['THIS', 'IS', 42, 'A', 'TEST'];
+
+            data = arrayUtils.toLowerCase(data);
+
+            test.deepEqual(data, ['this', 'is', 42, 'a', 'test']);
+            test.done();
+        }
+    },
+
     'getRandomItem': {
         'Item returned is within the original array': function(test){
             var array = [1, 2, 3, 4];

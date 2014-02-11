@@ -3,6 +3,15 @@
 var stringUtils = require('../lib/stringUtils');
 
 module.exports = {
+    'getSearchString': {
+        'Check that search string is generated properly': function(test) {
+            test.equal(stringUtils.getSearchString('São Paulo'), 'saopaulo');
+            test.equal(stringUtils.getSearchString(' São-Paulo. Rio-de-Janeiro.'), 'saopauloriodejaneiro');
+
+            test.done();
+        }
+    },
+
     'generateGuid': {
         //too random to test
     },
@@ -191,7 +200,7 @@ module.exports = {
 
     'formatFileSize': {
         'Formats as expected': function(test){
-
+            test.equal(stringUtils.formatFileSize(0, 'b'), '0.00b');
             test.equal(stringUtils.formatFileSize(500, 'b'), '500.00b');
             test.equal(stringUtils.formatFileSize(500, 'b', 0), '500b');
             test.equal(stringUtils.formatFileSize(1024, 'b', 2), '1.00Kb');
