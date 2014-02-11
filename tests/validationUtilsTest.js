@@ -3,6 +3,13 @@
 var validationUtils = require('../lib/validationUtils');
 
 module.exports = {
+    'validEmailRegExpForJade': {
+        'Check that validEmailRegExpForJade is the same as validEmailRegExp': function(test) {
+            test.equal(new RegExp(validationUtils.validEmailRegExpForJade).toString(), validationUtils.validEmailRegExp.toString());
+            test.done();
+        }
+    },
+
     'validEmailRegExp': {
         //tested by isValidEmail tests above
     },
