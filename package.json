@@ -1,6 +1,6 @@
 {
   "name": "gammautils",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "Lots of utilities for Node.js",
   "main": "index.js",
   "directories": {
@@ -28,7 +28,7 @@
     "crypto",
     "cryptography"
   ],
-  "author": "Renato Gama <renato@gammasoft.com.br>",
+  "author": "Gammasoft Desenvolvimento de Software Ltda <contact@gammasoft.com.br>",
   "license": "MIT",
   "devDependencies": {
     "nodeunit": "~0.8.0",

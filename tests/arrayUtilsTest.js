@@ -3,6 +3,75 @@
 var arrayUtils = require('../lib/arrayUtils');
 
 module.exports = {
+    'groupBy': {
+        'Check that items are properly grouped': function(test) {
+            var items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+            function groupingFunction(item, cb) {
+                return cb(null, item % 2 ? 'odd' : 'even');
+            }
+
+            arrayUtils.groupBy(items, groupingFunction, function(err, groupedItems) {
+                test.ifError(err);
+                test.deepEqual(groupedItems, {
+                    odd: [1, 3, 5, 7, 9],
+                    even: [0, 2, 4, 6, 8, 10]
+                });
+                test.done();
+            });
+        },
+
+        'Check that items are properly placed within an array and grouped as expected': function(test) {
+            var items = ['Gammasoft', 'Renato', 'Gama', 'Node'];
+
+            function groupingFunction(item, cb) {
+                var group;
+
+                if(item.length > 8) {
+                    group = 'length more than 8 characters';
+                } else if(item.length >= 5 && item.length <= 8) {
+                    group = 'length between 5 and 8 characters';
+                } else if(item.length > 0 && item.length <= 4){
+                    group = 'length between 1 and 4 characters';
+                } else {
+                    group = 'length equals 0';
+                }
+
+                return cb(null, group);
+            }
+
+            function toArray(group, items) {
+                return {
+                    group: group,
+                    items: items,
+                    length: items.length
+                };
+            }
+
+            arrayUtils.groupBy(items, groupingFunction, toArray, function(err, groupedItems) {
+                test.ifError(err);
+                test.ok(Array.isArray(groupedItems));
+
+                var expected = [{
+                    group: 'length more than 8 characters',
+                    items: ['Gammasoft'],
+                    length: 1
+                }, {
+                    group: 'length between 5 and 8 characters',
+                    items: ['Renato'],
+                    length: 1
+                }, {
+                    group: 'length between 1 and 4 characters',
+                    items: ['Gama', 'Node'],
+                    length: 2
+                }];
+
+                test.deepEqual(groupedItems, expected);
+                test.done();
+            });
+        }
+    },
+
     'toUpperCase': {
         'Verify all items are in upper case': function(test) {
             var data = ['this', 'is', 42, 'a', 'test'];
