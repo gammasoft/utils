@@ -3,7 +3,11 @@ utils
 
 [![Build Status](https://travis-ci.org/gammasoft/utils.png?branch=master)](https://travis-ci.org/gammasoft/utils)
 
-Every sort of utilities for Node.js
+Every sort of utilities for Node.js  
+
+**LIGHTWEIGHT MODULE: NO DEPENDENCIES**
+
+### INSTALATION
 
     npm install gammautils
 
