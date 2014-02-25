@@ -3,6 +3,69 @@
 var arrayUtils = require('../lib/arrayUtils');
 
 module.exports = {
+    'groupBySync': {
+        'Check that items are properly grouped': function(test) {
+            var items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+            function groupingFunction(item) {
+                return item % 2 ? 'odd' : 'even';
+            }
+
+            test.deepEqual(arrayUtils.groupBySync(items, groupingFunction), {
+                odd: [1, 3, 5, 7, 9],
+                even: [0, 2, 4, 6, 8, 10]
+            });
+
+            test.done();
+        },
+
+        'Check that items are properly placed within an array and grouped as expected': function(test) {
+            var items = ['Gammasoft', 'Renato', 'Gama', 'Node'];
+
+            function groupingFunction(item) {
+                var group;
+
+                if(item.length > 8) {
+                    group = 'length more than 8 characters';
+                } else if(item.length >= 5 && item.length <= 8) {
+                    group = 'length between 5 and 8 characters';
+                } else if(item.length > 0 && item.length <= 4){
+                    group = 'length between 1 and 4 characters';
+                } else {
+                    group = 'length equals 0';
+                }
+
+                return group;
+            }
+
+            function toArray(group, items) {
+                return {
+                    group: group,
+                    items: items,
+                    length: items.length
+                };
+            }
+
+            var groupedItems = arrayUtils.groupBySync(items, groupingFunction, toArray),
+                expected = [{
+                    group: 'length more than 8 characters',
+                    items: ['Gammasoft'],
+                    length: 1
+                }, {
+                    group: 'length between 5 and 8 characters',
+                    items: ['Renato'],
+                    length: 1
+                }, {
+                    group: 'length between 1 and 4 characters',
+                    items: ['Gama', 'Node'],
+                    length: 2
+                }];
+
+            test.ok(Array.isArray(groupedItems));
+            test.deepEqual(groupedItems, expected);
+            test.done();
+        }
+    },
     'groupBy': {
         'Check that items are properly grouped': function(test) {
             var items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
