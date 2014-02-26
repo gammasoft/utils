@@ -5,7 +5,9 @@ utils
 
 Every sort of utilities for Node.js  
 
-**LIGHTWEIGHT MODULE: NO DEPENDENCIES**
+**THIS IS A LIGHTWEIGHT MODULE: ZERO DEPENDENCIES**  
+
+*This module makes use of some algorithms found on underscore.string (MIT license), this is stated throughout the code when necessary. All credits to them*  
 
 ### INSTALATION
 

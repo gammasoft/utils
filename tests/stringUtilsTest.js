@@ -3,6 +3,41 @@
 var stringUtils = require('../lib/stringUtils');
 
 module.exports = {
+    'slugify': {
+        //Taken from underscore.string, all credits to them
+        'Testing basic functionality': function(test) {
+            test.equal(stringUtils.slugify('Jack & Jill like numbers 1,2,3 and 4 and silly characters ?%.$!/'), 'jack-jill-like-numbers-123-and-4-and-silly-characters');
+            test.equal(stringUtils.slugify('Un éléphant à l\'orée du bois'), 'un-elephant-a-loree-du-bois');
+            test.equal(stringUtils.slugify('I know latin characters: á í ó ú ç ã õ ñ ü ă ș ț'), 'i-know-latin-characters-a-i-o-u-c-a-o-n-u-a-s-t');
+            test.equal(stringUtils.slugify('I am a word too, even though I am but a single letter: i!'), 'i-am-a-word-too-even-though-i-am-but-a-single-letter-i');
+            test.equal(stringUtils.slugify(''), '');
+            test.equal(stringUtils.slugify(null), '');
+            test.equal(stringUtils.slugify(undefined), '');
+            test.done();
+        }
+    },
+
+    'dasherize': {
+        //Taken from underscore.string, all credits to them
+        'Testing basic functionality': function(test) {
+            test.equal(stringUtils.dasherize('the_dasherize_string_method'), 'the-dasherize-string-method');
+            test.equal(stringUtils.dasherize('TheDasherizeStringMethod'), '-the-dasherize-string-method');
+            test.equal(stringUtils.dasherize('thisIsATest'), 'this-is-a-test');
+            test.equal(stringUtils.dasherize('this Is A Test'), 'this-is-a-test');
+            test.equal(stringUtils.dasherize('thisIsATest123'), 'this-is-a-test123');
+            test.equal(stringUtils.dasherize('123thisIsATest'), '123this-is-a-test');
+            test.equal(stringUtils.dasherize('the dasherize string method'), 'the-dasherize-string-method');
+            test.equal(stringUtils.dasherize('the  dasherize string method  '), 'the-dasherize-string-method');
+            test.equal(stringUtils.dasherize('téléphone'), 'téléphone');
+            test.equal(stringUtils.dasherize('foo$bar'), 'foo$bar');
+            test.equal(stringUtils.dasherize(''), '');
+            test.equal(stringUtils.dasherize(null), '');
+            test.equal(stringUtils.dasherize(undefined), '');
+            test.equal(stringUtils.dasherize(123), '123');
+            test.done();
+        }
+    },
+
     'parseFormattedEmailAddress': {
         'Check that parses correctly': function(test) {
             var email = 'Renato Gama <renatogama@example.com>',
