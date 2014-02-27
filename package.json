@@ -1,6 +1,6 @@
 {
   "name": "gammautils",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "Lots of utilities for Node.js",
   "main": "index.js",
   "directories": {
@@ -26,7 +26,10 @@
     "format",
     "date",
     "crypto",
-    "cryptography"
+    "cryptography",
+    "controller",
+    "fs",
+    "file system"
   ],
   "author": "Gammasoft Desenvolvimento de Software Ltda <contact@gammasoft.com.br>",
   "license": "MIT",

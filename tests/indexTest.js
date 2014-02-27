@@ -7,12 +7,11 @@ var fs = require('fs'),
 
 module.exports = {
     'Checks that every submodule is available': function(test){
-        fs.readdirSync(__dirname + '/..').forEach(function(file){
-            var match = file.match(/(.*)Utils.js/);
+        fs.readdirSync(__dirname + '/../lib').forEach(function(file){
+            var match = file.match(/^(.*)Utils\.js$/);
 
             if(match){
-                console.log(match[1] + ' / ' + typeof utils[match[1]]);
-                test.ok(utils[match[1]]);
+                test.ok(utils[match[1]], file + ' is not being exposed');
             }
         });
 

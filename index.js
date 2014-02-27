@@ -4,6 +4,8 @@ module.exports = {
     array: require('./lib/arrayUtils'),
     console: require('./lib/consoleUtils'),
     crypto: require('./lib/cryptoUtils'),
+    controller: require('./lib/controllerUtils'),
+    fs: require('./lib/fsUtils'),
     math: require('./lib/mathUtils'),
     number: require('./lib/numberUtils'),
     object: require('./lib/objectUtils'),
