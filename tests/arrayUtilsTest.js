@@ -3,6 +3,14 @@
 var arrayUtils = require('../lib/arrayUtils');
 
 module.exports = {
+    'shuffle': {
+        'Shuffling an array changes the order of its items': function(test) {
+            var initial = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+            test.notDeepEqual(arrayUtils.shuffle(initial));
+            test.done();
+        }
+    },
     'groupBySync': {
         'Check that items are properly grouped': function(test) {
             var items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

@@ -3,6 +3,75 @@
 var mathUtils = require('../lib/mathUtils');
 
 module.exports = {
+    'LinearRegression': {
+        'Adding data increments length proplerly': function(test) {
+            var linearRegression = new mathUtils.LinearRegression();
+
+            linearRegression.add({ x: 30, y: 430 });
+            test.equal(linearRegression.length, 1);
+
+            linearRegression.add({ x: 21, y: 335 });
+            test.equal(linearRegression.length, 2);
+
+            linearRegression.add({ x: 35, y: 520 });
+            test.equal(linearRegression.length, 3);
+
+            test.done();
+        },
+        'tests main functionality': function(test) {
+            var linearRegression = new mathUtils.LinearRegression();
+
+            linearRegression.add({ x: 30, y: 430 });
+            linearRegression.add({ x: 21, y: 335 });
+            linearRegression.add({ x: 35, y: 520 });
+            linearRegression.add({ x: 42, y: 490 });
+            linearRegression.add({ x: 37, y: 470 });
+            linearRegression.add({ x: 20, y: 210 });
+            linearRegression.add({ x: 8, y: 195 });
+            linearRegression.add({ x: 17, y: 270 });
+            linearRegression.add({ x: 35, y: 400 });
+            linearRegression.add({ x: 25, y: 480});
+
+            test.equal(linearRegression.a().toFixed(2), '117.07');
+            test.equal(linearRegression.b().toFixed(2), '9.74');
+
+            test.done();
+        }
+    },
+
+    'linearRegression': {
+        '': function(test) {
+            var data = [{ x: 30, y: 430 },
+                        { x: 21, y: 335 },
+                        { x: 35, y: 520 },
+                        { x: 42, y: 490 },
+                        { x: 37, y: 470 },
+                        { x: 20, y: 210 },
+                        { x: 8, y: 195 },
+                        { x: 17, y: 270 },
+                        { x: 35, y: 400 },
+                        { x: 25, y: 480}];
+
+            var linearRegression = mathUtils.linearRegression(data);
+
+            test.equal(linearRegression.a.toFixed(2), '117.07');
+            test.equal(linearRegression.b.toFixed(2), '9.74');
+
+            test.equal(linearRegression.fn(30).toFixed(2), '409.21');
+            test.equal(linearRegression.fn(21).toFixed(2), '321.57');
+            test.equal(linearRegression.fn(35).toFixed(2), '457.91');
+            test.equal(linearRegression.fn(42).toFixed(2), '526.07');
+            test.equal(linearRegression.fn(37).toFixed(2), '477.38');
+            test.equal(linearRegression.fn(20).toFixed(2), '311.83');
+            test.equal(linearRegression.fn(8).toFixed(2), '194.98');
+            test.equal(linearRegression.fn(17).toFixed(2), '282.62');
+            test.equal(linearRegression.fn(35).toFixed(2), '457.91');
+            test.equal(linearRegression.fn(25).toFixed(2), '360.52');
+
+            test.done();
+        }
+    },
+
     'isPrime': {
         'Indentifies first primes': function(test) {
             test.ok(mathUtils.isPrime(2));

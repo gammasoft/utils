@@ -10,8 +10,10 @@ module.exports = {
     number: require('./lib/numberUtils'),
     object: require('./lib/objectUtils'),
     string: require('./lib/stringUtils'),
+    boolean: require('./lib/booleanUtils'),
     recomendation: require('./lib/recomendationUtils'),
     url: require('./lib/urlUtils'),
     validation: require('./lib/validationUtils'),
     barcode: require('./lib/barcodeUtils'),
+    regExp: require('./lib/regExpUtils'),
 };
