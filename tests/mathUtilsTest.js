@@ -1,8 +1,34 @@
 'use strict';
 
-var mathUtils = require('../lib/mathUtils');
+var util = require('util'),
+    mathUtils = require('../lib/mathUtils');
 
 module.exports = {
+    'Average': {
+        'Return expected results and increases length properly': function(test) {
+            var average = new mathUtils.Average();
+
+            test.equal(average.length, 0);
+            average.add(1);
+            test.equal(average.length, 1);
+            average.add(2);
+            test.equal(average.length, 2);
+
+            test.equal(average.result, 1.5);
+            test.done();
+        },
+
+        'Can obtain value from any property and can convert from string': function(test) {
+            var average = new mathUtils.Average('value');
+
+            average.add({ value: 10 });
+            average.add({ value: '10' });
+
+            test.equal(average.result, 10);
+            test.done();
+        }
+    },
+
     'LinearRegression': {
         'Adding data increments length proplerly': function(test) {
             var linearRegression = new mathUtils.LinearRegression();
@@ -18,7 +44,8 @@ module.exports = {
 
             test.done();
         },
-        'tests main functionality': function(test) {
+
+        'Tests main functionality': function(test) {
             var linearRegression = new mathUtils.LinearRegression();
 
             linearRegression.add({ x: 30, y: 430 });
@@ -36,11 +63,77 @@ module.exports = {
             test.equal(linearRegression.b().toFixed(2), '9.74');
 
             test.done();
+        },
+
+        'Testing ability to obtain values from any other property and with number conversion': function(test) {
+            var linearRegression = new mathUtils.LinearRegression('time', 'value');
+
+            linearRegression.add({ time: 30, value: 430 });
+            linearRegression.add({ time: 21, value: 335 });
+            linearRegression.add({ time: 35, value: 520 });
+            linearRegression.add({ time: 42, value: '490' });
+            linearRegression.add({ time: 37, value: 470 });
+            linearRegression.add({ time: 20, value: 210 });
+            linearRegression.add({ time: 8, value: 195 });
+            linearRegression.add({ time: 17, value: '270' });
+            linearRegression.add({ time: 35, value: 400 });
+            linearRegression.add({ time: 25, value: '480' });
+
+            test.equal(linearRegression.a().toFixed(2), '117.07');
+            test.equal(linearRegression.b().toFixed(2), '9.74');
+
+            test.done();
+        },
+
+        'Tests ability of getting next value, and that correlation is properly calculated': function(test) {
+            var linearRegression = new mathUtils.LinearRegression('time', 'value');
+
+            linearRegression.add({ time: 1, value: 1 });
+            linearRegression.add({ time: 2, value: 2 });
+            linearRegression.add({ time: 3, value: 3 });
+            linearRegression.add({ time: 4, value: 4 });
+            linearRegression.add({ time: 5, value: 5 });
+
+            test.equal(linearRegression.correlation().toFixed(0), '1');
+
+            test.deepEqual(linearRegression.next(), { x: 6, y: 6 });
+            test.deepEqual(linearRegression.next(), { x: 7, y: 7 });
+            test.deepEqual(linearRegression.next(), { x: 8, y: 8 });
+            test.deepEqual(linearRegression.next(), { x: 9, y: 9 });
+            test.deepEqual(linearRegression.next(), { x: 10, y: 10 });
+
+            test.done();
+        },
+
+        'Testing correlation': function(test) {
+            var linearRegression = new mathUtils.LinearRegression('time', 'value');
+
+            linearRegression.add({ time: 1, value: 5 });
+            linearRegression.add({ time: 2, value: 4 });
+            linearRegression.add({ time: 3, value: 3 });
+            linearRegression.add({ time: 4, value: 2 });
+            linearRegression.add({ time: 5, value: 1 });
+
+            test.equal(linearRegression.correlation().toFixed(0), '-1');
+
+            test.done();
+        },
+
+        'Should return error if trying to use next but samples was not provided in ascending order of X': function(test) {
+            var linearRegression = new mathUtils.LinearRegression('time', 'value');
+
+            linearRegression.add({ time: 3, value: 3 });
+            linearRegression.add({ time: 1, value: 1 });
+            linearRegression.add({ time: 4, value: 4 });
+
+            test.ok(util.isError(linearRegression.next()));
+
+            test.done();
         }
     },
 
     'linearRegression': {
-        '': function(test) {
+        'Return expected results': function(test) {
             var data = [{ x: 30, y: 430 },
                         { x: 21, y: 335 },
                         { x: 35, y: 520 },
