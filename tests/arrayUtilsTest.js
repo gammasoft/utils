@@ -1,8 +1,203 @@
 'use strict';
 
-var arrayUtils = require('../lib/arrayUtils');
+var util = require('util'),
+    arrayUtils = require('../lib/arrayUtils');
 
 module.exports = {
+    'Group': {
+        'Adding elements increases group length properly': function(test) {
+            var group = new arrayUtils.Group();
+
+            group.add(1, 'Gammasoft');
+            group.add(2, 'Desenvolvimento');
+            group.add(2, 'de');
+            group.add(2, 'Software');
+            group.add(3, 'Ltda');
+
+            test.equal(group.length, 3);
+
+            test.done();
+        },
+
+        'Removing elements decrements length properly': function(test) {
+            var group = new arrayUtils.Group();
+
+            group.add(1, 'Gammasoft');
+            group.add(2, 'Desenvolvimento');
+            group.add(2, 'de');
+            group.add(2, 'Software');
+            group.add(3, 'Ltda');
+
+            group.remove(2);
+
+            test.equal(group.length, 2);
+
+            test.done();
+        },
+
+        'Creates array when in "array" mode. Default mode is array mode.': function(test) {
+            var group = new arrayUtils.Group();
+
+            group.add('group1', 'Test');
+            test.ok(util.isArray(group.get('group1')));
+            test.done();
+        },
+
+        'Properly push items to group when in array mode': function(test) {
+            var group = new arrayUtils.Group();
+
+            group.add('group1', 'Test');
+            test.equal(group.get('group1').length, 1);
+            group.add('group1', 'is');
+            test.equal(group.get('group1').length, 2);
+            group.add('group1', 'gonna');
+            test.equal(group.get('group1').length, 3);
+            group.add('group1', 'pass');
+            test.equal(group.get('group1').length, 4);
+
+            test.done();
+        },
+
+        'Attach variable when in single mode.': function(test) {
+            var group = new arrayUtils.Group('single');
+
+            group.add('group1', 'Test');
+            group.add('group2', 1);
+
+            test.ok(!util.isArray(group.get('group1')));
+
+            test.equal(group.get('group1').value, 'Test');
+            test.equal(group.get('group2').value, 1);
+
+            test.done();
+        },
+
+        'Can retrieve raw data object in single mode': function(test) {
+            var group = new arrayUtils.Group('single');
+
+            group.add('group1', 'Test', 'Meta');
+            group.add('group2', 1, 'Some more meta');
+
+            test.deepEqual(group.raw(), {
+                'group1': {
+                    value: 'Test',
+                    meta: 'Meta'
+                },
+                'group2': {
+                    value: 1,
+                    meta: 'Some more meta'
+                }
+            });
+
+            test.done();
+        },
+
+        'Can retrieve raw data object in array mode': function(test) {
+            var group = new arrayUtils.Group();
+
+            group.add('group1', 'Test', 'Meta');
+            group.add('group1', 'Test2', 'Meta2');
+
+            group.add('group2', 1, 'Some more meta');
+            group.add('group2', 2, 'SOME MORE META 2');
+
+            test.deepEqual(group.raw(), {
+                'group1': [{
+                    value: 'Test',
+                    meta: 'Meta'
+                }, {
+                    value: 'Test2',
+                    meta: 'Meta2'
+                }],
+
+                'group2': [{
+                    value: 1,
+                    meta: 'Some more meta'
+                }, {
+                    value: 2,
+                    meta: 'SOME MORE META 2'
+                }]
+            });
+
+            test.done();
+        },
+
+        'Get method return the right key': function(test) {
+            var group = new arrayUtils.Group();
+
+            group.add('group1', 'Test', 'Meta');
+            group.add('group1', 'Test2', 'Meta2');
+
+            group.add('group2', 1, 'Some more meta');
+            group.add('group2', 2, 'SOME MORE META 2');
+
+            test.deepEqual(group.get('group1'), [{
+                    value: 'Test',
+                    meta: 'Meta'
+                }, {
+                    value: 'Test2',
+                    meta: 'Meta2'
+                }]);
+
+            test.done();
+        },
+
+        'ForEach iterates properly through the keys': function(test) {
+            var group = new arrayUtils.Group();
+
+            group.add(1, 'This', 'Meta');
+            group.add(1, 'is', 'Meta');
+            group.add(1, 'a', 'Meta');
+            group.add(1, 'test', 'Meta');
+
+            group.add(2, 'Another', 'Meta');
+            group.add(2, 'group', 'Meta');
+            group.add(2, 'was', 'Meta');
+            group.add(2, 'added', 'Meta');
+
+            test.expect(14);
+
+            group.forEach(function(group, item) {
+                test.ok(['1', '2'].indexOf(group) !== -1);
+                test.ok(Array.isArray(item));
+                test.ok(item.length === 4);
+            });
+
+            group.get(1).forEach(function(item) {
+                test.ok(typeof item !== 'undefined');
+            });
+
+            group.get(2).forEach(function(item) {
+                test.ok(typeof item !== 'undefined');
+            });
+
+            test.done();
+        },
+
+        'AddIfNone works as expected': function(test) {
+            var group = new arrayUtils.Group('single');
+
+            group.addIfNone(1, 'Test');
+            test.equal(group.get(1).value, 'Test');
+
+            group.addIfNone(1, 'Another');
+            test.equal(group.get(1).value, 'Test');
+            test.equal(group.length, 1);
+
+            var group2 = new arrayUtils.Group();
+
+            group2.addIfNone(1, 'Test');
+            test.equal(group2.get(1).length, 1);
+
+            group2.addIfNone(1, 'Another');
+            test.equal(group2.get(1).length, 1);
+            test.equal(group2.length, 1);
+
+            test.done();
+        }
+
+    },
+
     'shuffle': {
         'Shuffling an array changes the order of its items': function(test) {
             var initial = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
