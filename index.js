@@ -5,6 +5,7 @@ module.exports = {
     console: require('./lib/consoleUtils'),
     crypto: require('./lib/cryptoUtils'),
     controller: require('./lib/controllerUtils'),
+    date: require('./lib/dateUtils'),
     fs: require('./lib/fsUtils'),
     math: require('./lib/mathUtils'),
     number: require('./lib/numberUtils'),

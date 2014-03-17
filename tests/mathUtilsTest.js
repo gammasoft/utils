@@ -4,6 +4,56 @@ var util = require('util'),
     mathUtils = require('../lib/mathUtils');
 
 module.exports = {
+    'Maximum': {
+        'Tests basic functionality': function(test) {
+            var maximum = new mathUtils.Maximum();
+
+            maximum.compare(5);
+            maximum.compare(2);
+            maximum.compare(9);
+            maximum.compare(1);
+            maximum.compare(7);
+
+            test.equal(maximum.current, 9);
+            test.done();
+        },
+
+        'Can get values from strings': function(test) {
+            var maximum = new mathUtils.Maximum();
+
+            maximum.compare('7');
+            maximum.compare('200');
+            maximum.compare('190');
+
+            test.equal(maximum.current, 200);
+            test.done();
+        }
+    },
+    'Minimum': {
+        'Tests basic functionality': function(test) {
+            var minimum = new mathUtils.Minimum();
+
+            minimum.compare(5);
+            minimum.compare(2);
+            minimum.compare(9);
+            minimum.compare(1);
+            minimum.compare(7);
+
+            test.equal(minimum.current, 1);
+            test.done();
+        },
+
+        'Can get values from strings': function(test) {
+            var minimum = new mathUtils.Minimum();
+
+            minimum.compare('7');
+            minimum.compare('200');
+            minimum.compare('190');
+
+            test.equal(minimum.current, 7);
+            test.done();
+        }
+    },
     'MovingAverage': {
         'Return expected values': function(test) {
             var movingAverage = new mathUtils.MovingAverage(3);

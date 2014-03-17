@@ -4,6 +4,25 @@ var util = require('util'),
     arrayUtils = require('../lib/arrayUtils');
 
 module.exports = {
+    'pushIfNotAlready': {
+        'Tests main functionality': function(test) {
+            var array = [1, 2, 3];
+
+            arrayUtils.pushIfNotAlready(array, 4);
+            test.equal(array.indexOf(4), 3);
+
+            arrayUtils.pushIfNotAlready(array, 4);
+            test.equal(array.length, 4);
+            test.equal(array.indexOf(4), 3);
+
+            test.done();
+        },
+        'Returns the array': function(test) {
+            test.ok(Array.isArray(arrayUtils.pushIfNotAlready([], 1)));
+
+            test.done();
+        }
+    },
     'average': {
         'Tests main functinality': function(test) {
             test.equal(arrayUtils.average([1, 1, 1]), 1);
