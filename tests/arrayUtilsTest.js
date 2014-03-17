@@ -4,6 +4,17 @@ var util = require('util'),
     arrayUtils = require('../lib/arrayUtils');
 
 module.exports = {
+    'average': {
+        'Tests main functinality': function(test) {
+            test.equal(arrayUtils.average([1, 1, 1]), 1);
+            test.equal(arrayUtils.average([1, 2, 3]), 2);
+            test.equal(arrayUtils.average([10, 20, 30]), 20);
+            test.equal(arrayUtils.average([1]), 1);
+            test.equal(arrayUtils.average([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 5.5);
+
+            test.done();
+        }
+    },
     'Group': {
         'Adding elements increases group length properly': function(test) {
             var group = new arrayUtils.Group();

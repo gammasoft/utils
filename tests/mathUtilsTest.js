@@ -4,6 +4,110 @@ var util = require('util'),
     mathUtils = require('../lib/mathUtils');
 
 module.exports = {
+    'MovingAverage': {
+        'Return expected values': function(test) {
+            var movingAverage = new mathUtils.MovingAverage(3);
+
+            test.equal(movingAverage.add(1), undefined);
+            test.equal(movingAverage.add(2), undefined);
+            test.equal(movingAverage.add(3), 2);
+            test.equal(movingAverage.add(4), 3);
+            test.equal(movingAverage.add(5), 4);
+            test.equal(movingAverage.add(6), 5);
+            test.equal(movingAverage.add(7), 6);
+
+            test.done();
+        },
+
+        'Can fill values': function(test) {
+            var movingAverage = new mathUtils.MovingAverage(3, true);
+
+            test.equal(movingAverage.add(1), 1);
+            test.equal(movingAverage.add(2), 1.5);
+            test.equal(movingAverage.add(3), 2);
+            test.equal(movingAverage.add(4), 3);
+            test.equal(movingAverage.add(5), 4);
+            test.equal(movingAverage.add(6), 5);
+            test.equal(movingAverage.add(7), 6);
+
+            test.done();
+        },
+
+        'Can obtain values from strings': function(test) {
+            var movingAverage = new mathUtils.MovingAverage(3, true);
+
+            test.equal(movingAverage.add('1'), 1);
+            test.equal(movingAverage.add('2'), 1.5);
+            test.equal(movingAverage.add('3'), 2);
+            test.equal(movingAverage.add('4'), 3);
+            test.equal(movingAverage.add('5'), 4);
+            test.equal(movingAverage.add('6'), 5);
+            test.equal(movingAverage.add('7'), 6);
+
+            test.done();
+        },
+
+        'Can apply weights': function(test) {
+            //the same as [1, 2, 3]
+            var movingAverage = new mathUtils.MovingAverage(3, false, true);
+
+            test.equal(movingAverage.add(1), undefined);
+            test.equal(movingAverage.add(2), undefined);
+            test.equal(movingAverage.add(3).toFixed(2), '2.33');
+            test.equal(movingAverage.add(4).toFixed(2), '3.33');
+            test.equal(movingAverage.add(5).toFixed(2), '4.33');
+
+            test.done();
+        },
+
+        'Can fill with applied weights': function(test) {
+            //the same as [1, 2, 3]
+            var movingAverage = new mathUtils.MovingAverage(3, true, true);
+
+            test.equal(movingAverage.add(1), 1);
+            test.equal(movingAverage.add(2).toFixed(2), '1.67');
+            test.equal(movingAverage.add(3).toFixed(2), '2.33');
+            test.equal(movingAverage.add(4).toFixed(2), '3.33');
+            test.equal(movingAverage.add(5).toFixed(2), '4.33');
+
+            test.done();
+        },
+
+        'Can pass specific weights': function(test) {
+            var movingAverage = new mathUtils.MovingAverage(5, false, [1, 1, 2, 2, 3]);
+
+            test.equal(movingAverage.add(1), undefined);
+            test.equal(movingAverage.add(2), undefined);
+            test.equal(movingAverage.add(3), undefined);
+            test.equal(movingAverage.add(4), undefined);
+            test.equal(movingAverage.add(5).toFixed(2), '3.56');
+            test.equal(movingAverage.add(6).toFixed(2), '4.56');
+
+            test.done();
+        },
+
+        'Can fill when passing specific weights': function(test) {
+            var movingAverage = new mathUtils.MovingAverage(5, true, [1, 1, 2, 2, 3]);
+
+            test.equal(movingAverage.add(1), 1);
+            test.equal(movingAverage.add(2), 1.5);
+            test.equal(movingAverage.add(3), 2.25);
+            test.equal(movingAverage.add(4).toFixed(2), '2.83');
+            test.equal(movingAverage.add(5).toFixed(2), '3.56');
+            test.equal(movingAverage.add(6).toFixed(2), '4.56');
+
+            test.done();
+        },
+
+        'If passing weights then weight array must have same length as samples to count': function(test) {
+            var movingAverage = new mathUtils.MovingAverage(5, true, [1, 1, 2, 2]);
+
+            test.ok(util.isError(movingAverage));
+
+            test.done();
+        },
+    },
+
     'Average': {
         'Return expected results and increases length properly': function(test) {
             var average = new mathUtils.Average();
