@@ -6,6 +6,7 @@ module.exports = {
     crypto: require('./lib/cryptoUtils'),
     controller: require('./lib/controllerUtils'),
     date: require('./lib/dateUtils'),
+    timezone: require('./lib/timezoneUtils'),
     fs: require('./lib/fsUtils'),
     math: require('./lib/mathUtils'),
     number: require('./lib/numberUtils'),

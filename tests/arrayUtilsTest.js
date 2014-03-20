@@ -4,6 +4,62 @@ var util = require('util'),
     arrayUtils = require('../lib/arrayUtils');
 
 module.exports = {
+    'smaller': {
+        'return expected results': function(test) {
+            var array = [3, 4, 2, 9, 1];
+
+            test.equal(arrayUtils.smaller(array), 1);
+            test.done();
+        },
+
+        'can convert form string': function(test) {
+            var array = ['3', '4', '2', '9', '1'];
+
+            test.equal(arrayUtils.smaller(array), 1);
+            test.done();
+        },
+
+        'can get value from property': function(test) {
+            var array = [{
+                value: 4
+            }, {
+                value: 1
+            }, {
+                value: 10
+            }];
+
+            test.equal(arrayUtils.smaller(array, 'value'), 1);
+            test.done();
+        },
+    },
+    'bigger': {
+        'return expected results': function(test) {
+            var array = [3, 4, 2, 9, 1];
+
+            test.equal(arrayUtils.bigger(array), 9);
+            test.done();
+        },
+
+        'can convert form string': function(test) {
+            var array = ['3', '4', '2', '9', '1'];
+
+            test.equal(arrayUtils.bigger(array), 9);
+            test.done();
+        },
+
+        'can get value from property': function(test) {
+            var array = [{
+                value: 4
+            }, {
+                value: 1
+            }, {
+                value: 10
+            }];
+
+            test.equal(arrayUtils.bigger(array, 'value'), 10);
+            test.done();
+        },
+    },
     'pushIfNotAlready': {
         'Tests main functionality': function(test) {
             var array = [1, 2, 3];

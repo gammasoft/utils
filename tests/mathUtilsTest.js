@@ -4,6 +4,21 @@ var util = require('util'),
     mathUtils = require('../lib/mathUtils');
 
 module.exports = {
+    'smaller': function(test) {
+        test.equal(mathUtils.smaller(1, 3), 1);
+        test.equal(mathUtils.smaller(10, 200), 10);
+        test.equal(mathUtils.smaller(10, -10), -10);
+
+        test.done();
+    },
+
+    'bigger': function(test) {
+        test.equal(mathUtils.bigger(1, 3), 3);
+        test.equal(mathUtils.bigger(10, 200), 200);
+        test.equal(mathUtils.bigger(10, -10), 10);
+
+        test.done();
+    },
     'Maximum': {
         'Tests basic functionality': function(test) {
             var maximum = new mathUtils.Maximum();
