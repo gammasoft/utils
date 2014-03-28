@@ -3,6 +3,44 @@
 var objectUtils = require('../lib/objectUtils');
 
 module.exports = {
+    'merge': {
+        'can merge properly': function(test) {
+            var dest = {
+                a: 1,
+                b: 'Test',
+                c: 'Cant touch this!'
+            };
+
+
+            test.deepEqual(objectUtils.merge(dest, { a: 2, b: 3, d: 4 }), {
+                a: 2,
+                b: 3,
+                c: 'Cant touch this!',
+                d: 4
+            });
+
+            test.done();
+        },
+
+        'can merge with undefined object': function(test) {
+            test.deepEqual(objectUtils.merge({a: 1}, undefined), { a: 1 });
+
+            test.done();
+        },
+
+        'can handle undefineds': function(test) {
+            test.deepEqual(objectUtils.merge(undefined, undefined), { });
+
+            test.done();
+        },
+
+        'can have undefined destination': function(test) {
+            test.deepEqual(objectUtils.merge(undefined, { a: 1 }), { a: 1 });
+
+            test.done();
+        },
+    },
+
     'resolveProperty': {
         'can resolve shallow properties': function(test) {
             var object = {

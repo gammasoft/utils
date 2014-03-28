@@ -15,28 +15,28 @@ module.exports = {
         'can sort numbers ascending': function(test) {
             var array = [2, 3, 5, 1, 6];
 
-            test.deepEqual(arrayUtils.sort(array, 'asc'), [1, 2, 3, 5, 6]);
+            test.deepEqual(arrayUtils.sort(array, { order: 'asc' }), [1, 2, 3, 5, 6]);
             test.done();
         },
 
         'can sort numbers descending': function(test) {
             var array = [2, 3, 5, 1, 6];
 
-            test.deepEqual(arrayUtils.sort(array, 'desc'), [6, 5, 3, 2, 1]);
+            test.deepEqual(arrayUtils.sort(array, { order: 'desc' }), [6, 5, 3, 2, 1]);
             test.done();
         },
 
         'can sort strings ascending': function(test) {
             var array = ['a', 'd', 'b', 'e', 'c'];
 
-            test.deepEqual(arrayUtils.sort(array, 'asc'), ['a', 'b', 'c', 'd', 'e']);
+            test.deepEqual(arrayUtils.sort(array, { order: 'asc' }), ['a', 'b', 'c', 'd', 'e']);
             test.done();
         },
 
         'can sort strings descending': function(test) {
             var array = ['a', 'd', 'b', 'e', 'c'];
 
-            test.deepEqual(arrayUtils.sort(array, 'desc'), ['e', 'd', 'c', 'b', 'a']);
+            test.deepEqual(arrayUtils.sort(array, { order: 'desc' }), ['e', 'd', 'c', 'b', 'a']);
             test.done();
         },
 
@@ -45,7 +45,7 @@ module.exports = {
                 ordered = [new Date(2014, 0, 3), new Date(2014, 0, 5), new Date(2014, 0, 10), new Date(2014, 0, 15)];
 
             test.expect(4);
-            arrayUtils.sort(unordered, 'asc').forEach(function(item, index) {
+            arrayUtils.sort(unordered, { order: 'asc' }).forEach(function(item, index) {
                 test.equal(item.valueOf(), ordered[index].valueOf());
             });
 
@@ -57,7 +57,7 @@ module.exports = {
                 ordered = [new Date(2014, 0, 15), new Date(2014, 0, 10), new Date(2014, 0, 5), new Date(2014, 0, 3)];
 
             test.expect(4);
-            arrayUtils.sort(unordered, 'desc').forEach(function(item, index) {
+            arrayUtils.sort(unordered, { order: 'desc' }).forEach(function(item, index) {
                 test.equal(item.valueOf(), ordered[index].valueOf());
             });
 
@@ -84,7 +84,7 @@ module.exports = {
                     value: 5
                 }];
 
-            test.deepEqual(arrayUtils.sort(unordered, 'asc', 'value'), ordered);
+            test.deepEqual(arrayUtils.sort(unordered, { order: 'asc', property: 'value' }), ordered);
 
             test.done();
         },
@@ -109,7 +109,7 @@ module.exports = {
                     value: 'a'
                 }];
 
-            test.deepEqual(arrayUtils.sort(unordered, 'desc', 'value'), ordered);
+            test.deepEqual(arrayUtils.sort(unordered, { order: 'desc', property: 'value' }), ordered);
 
             test.done();
         },
@@ -150,7 +150,7 @@ module.exports = {
                     }
                 }];
 
-            test.deepEqual(arrayUtils.sort(unordered, 'desc', 'person.name'), ordered);
+            test.deepEqual(arrayUtils.sort(unordered, { order: 'desc', property: 'person.name' }), ordered);
 
             test.done();
         },
@@ -175,10 +175,34 @@ module.exports = {
                     'person.name': 'a'
                 }];
 
-            test.deepEqual(arrayUtils.sort(unordered, 'desc', 'person.name', false), ordered);
+            test.deepEqual(arrayUtils.sort(unordered, { order: 'desc', property: 'person.name', deep: false }), ordered);
 
             test.done();
-        }
+        },
+
+        'can pass transformation function (string example)': function(test) {
+            var unsorted = ['a', 'B', 'C', 'b', 'c', 'A'],
+            sorted = ['a', 'A', 'B', 'b', 'C', 'c'],
+            transform = function(value) {
+                return value.toLowerCase();
+            };
+
+            test.deepEqual(arrayUtils.sort(unsorted, { transform: transform }), sorted);
+
+            test.done();
+        },
+
+        'can pass transformation function (array example)': function(test) {
+            var unsorted = [[1, 2], [1], [1, 2, 3]],
+                sorted = [[1, 2, 3], [1, 2], [1]],
+                transform = function(value) {
+                    return value.length;
+                };
+
+            test.deepEqual(arrayUtils.sort(unsorted, { order: 'desc', transform: transform }), sorted);
+
+            test.done();
+        },
     },
 
     'smaller': {
