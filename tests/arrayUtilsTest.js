@@ -4,6 +4,117 @@ var util = require('util'),
     arrayUtils = require('../lib/arrayUtils');
 
 module.exports = {
+    'sort': {
+        'default sorting is ascending': function(test) {
+            var array = [2, 3, 5, 1, 6];
+
+            test.deepEqual(arrayUtils.sort(array), [1, 2, 3, 5, 6]);
+            test.done();
+        },
+
+        'can sort numbers ascending': function(test) {
+            var array = [2, 3, 5, 1, 6];
+
+            test.deepEqual(arrayUtils.sort(array, 'asc'), [1, 2, 3, 5, 6]);
+            test.done();
+        },
+
+        'can sort numbers descending': function(test) {
+            var array = [2, 3, 5, 1, 6];
+
+            test.deepEqual(arrayUtils.sort(array, 'desc'), [6, 5, 3, 2, 1]);
+            test.done();
+        },
+
+        'can sort strings ascending': function(test) {
+            var array = ['a', 'd', 'b', 'e', 'c'];
+
+            test.deepEqual(arrayUtils.sort(array, 'asc'), ['a', 'b', 'c', 'd', 'e']);
+            test.done();
+        },
+
+        'can sort strings descending': function(test) {
+            var array = ['a', 'd', 'b', 'e', 'c'];
+
+            test.deepEqual(arrayUtils.sort(array, 'desc'), ['e', 'd', 'c', 'b', 'a']);
+            test.done();
+        },
+
+        'can sort date ascending': function(test) {
+            var unordered = [new Date(2014, 0, 15), new Date(2014, 0, 10), new Date(2014, 0, 3), new Date(2014, 0, 5)],
+                ordered = [new Date(2014, 0, 3), new Date(2014, 0, 5), new Date(2014, 0, 10), new Date(2014, 0, 15)];
+
+            test.expect(4);
+            arrayUtils.sort(unordered, 'asc').forEach(function(item, index) {
+                test.equal(item.valueOf(), ordered[index].valueOf());
+            });
+
+            test.done();
+        },
+
+        'can sort date descending': function(test) {
+            var unordered = [new Date(2014, 0, 15), new Date(2014, 0, 10), new Date(2014, 0, 3), new Date(2014, 0, 5)],
+                ordered = [new Date(2014, 0, 15), new Date(2014, 0, 10), new Date(2014, 0, 5), new Date(2014, 0, 3)];
+
+            test.expect(4);
+            arrayUtils.sort(unordered, 'desc').forEach(function(item, index) {
+                test.equal(item.valueOf(), ordered[index].valueOf());
+            });
+
+            test.done();
+        },
+
+        'can sort ascending from a property': function(test) {
+            var unordered = [{
+                    value: 4
+                }, {
+                    value: 2
+                },{
+                    value: 1
+                }, {
+                    value: 5
+                }],
+                ordered = [{
+                    value: 1
+                }, {
+                    value: 2
+                },{
+                    value: 4
+                }, {
+                    value: 5
+                }];
+
+            test.deepEqual(arrayUtils.sort(unordered, 'asc', 'value'), ordered);
+
+            test.done();
+        },
+
+        'can sort desceding from a property': function(test) {
+            var unordered = [{
+                    value: 'a'
+                }, {
+                    value: 'b'
+                },{
+                    value: 'd'
+                }, {
+                    value: 'c'
+                }],
+                ordered = [{
+                    value: 'd'
+                }, {
+                    value: 'c'
+                },{
+                    value: 'b'
+                }, {
+                    value: 'a'
+                }];
+
+            test.deepEqual(arrayUtils.sort(unordered, 'desc', 'value'), ordered);
+
+            test.done();
+        }
+    },
+
     'smaller': {
         'return expected results': function(test) {
             var array = [3, 4, 2, 9, 1];
@@ -28,7 +139,7 @@ module.exports = {
                 value: 10
             }];
 
-            test.equal(arrayUtils.smaller(array, 'value'), 1);
+            test.equal(arrayUtils.smaller(array, 'value'), 1); //TODO: return the whole object, not only its value
             test.done();
         },
     },
@@ -56,7 +167,7 @@ module.exports = {
                 value: 10
             }];
 
-            test.equal(arrayUtils.bigger(array, 'value'), 10);
+            test.equal(arrayUtils.bigger(array, 'value'), 10); //TODO: return the whole object, not only its value
             test.done();
         },
     },
