@@ -112,6 +112,72 @@ module.exports = {
             test.deepEqual(arrayUtils.sort(unordered, 'desc', 'value'), ordered);
 
             test.done();
+        },
+
+        'can sort based on nested objects': function(test) {
+            var unordered = [{
+                    person: {
+                        name: 'a'
+                    }
+                }, {
+                    person: {
+                        name: 'b'
+                    }
+                },{
+                    person: {
+                        name: 'd'
+                    }
+                }, {
+                    person: {
+                        name: 'e'
+                    }
+                }],
+                ordered = [{
+                    person: {
+                        name: 'e'
+                    }
+                }, {
+                    person: {
+                        name: 'd'
+                    }
+                },{
+                    person: {
+                        name: 'b'
+                    }
+                }, {
+                    person: {
+                        name: 'a'
+                    }
+                }];
+
+            test.deepEqual(arrayUtils.sort(unordered, 'desc', 'person.name'), ordered);
+
+            test.done();
+        },
+
+        'can sort from a shallow property': function(test) {
+            var unordered = [{
+                    'person.name': 'a'
+                }, {
+                    'person.name': 'b'
+                },{
+                    'person.name': 'd'
+                }, {
+                    'person.name': 'e'
+                }],
+                ordered = [{
+                    'person.name': 'e'
+                }, {
+                    'person.name': 'd'
+                },{
+                    'person.name': 'b'
+                }, {
+                    'person.name': 'a'
+                }];
+
+            test.deepEqual(arrayUtils.sort(unordered, 'desc', 'person.name', false), ordered);
+
+            test.done();
         }
     },
 

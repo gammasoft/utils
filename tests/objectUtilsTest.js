@@ -3,6 +3,91 @@
 var objectUtils = require('../lib/objectUtils');
 
 module.exports = {
+    'resolveProperty': {
+        'can resolve shallow properties': function(test) {
+            var object = {
+                'company.name': 'Gammasoft'
+            };
+
+            test.equal(objectUtils.resolveProperty(object, 'company.name', false), 'Gammasoft');
+            test.done();
+        },
+
+        'can resolve shallow properties even if set to deep': function(test) {
+            var object = {
+                'name': 'Gammasoft'
+            };
+
+            test.equal(objectUtils.resolveProperty(object, 'name', true), 'Gammasoft');
+            test.done();
+        },
+
+        'can resolve shallow properties passing array': function(test) {
+            var object = {
+                'company.name': 'Gammasoft'
+            };
+
+            test.equal(objectUtils.resolveProperty(object, ['company.name', 'this', 'is', 'gonna', 'be', 'ignored'], false), 'Gammasoft');
+            test.done();
+        },
+
+        'can resolve deep properties by default': function(test) {
+            var object = {
+                company: {
+                    name: 'Gammasoft',
+                    founder: {
+                        name: 'Renato',
+                        preferedNumber: 13
+                    },
+                    country: 'Brazil',
+                    city: 'Brasilia',
+                    technologies: [
+                        'nodejs', 'mongodb', 'aws'
+                    ]
+                }
+            };
+
+            test.equal(objectUtils.resolveProperty(object, 'company.name'), 'Gammasoft');
+            test.equal(objectUtils.resolveProperty(object, 'company.country'), 'Brazil');
+            test.equal(objectUtils.resolveProperty(object, 'company.city'), 'Brasilia');
+            test.equal(objectUtils.resolveProperty(object, 'company.technologies').length, 3);
+            test.equal(objectUtils.resolveProperty(object, 'company.founder.name'), 'Renato');
+            test.equal(objectUtils.resolveProperty(object, 'company.founder.preferedNumber'), 13);
+
+            test.done();
+        },
+
+        'can resolve deep properties passing an array': function(test) {
+            var object = {
+                company: {
+                    name: 'Gammasoft',
+                    founder: {
+                        name: 'Renato',
+                        preferedNumber: {
+                            odd: 13,
+                            even: 8
+                        }
+                    },
+                    country: 'Brazil',
+                    city: 'Brasilia',
+                    technologies: [
+                        'nodejs', 'mongodb', 'aws'
+                    ]
+                }
+            };
+
+            test.equal(objectUtils.resolveProperty(object, ['company', 'name']), 'Gammasoft');
+            test.equal(objectUtils.resolveProperty(object, ['company', 'country']), 'Brazil');
+            test.equal(objectUtils.resolveProperty(object, ['company', 'city']), 'Brasilia');
+            test.equal(objectUtils.resolveProperty(object, ['company', 'technologies']).length, 3);
+            test.equal(objectUtils.resolveProperty(object, ['company', 'founder', 'name']), 'Renato');
+            test.equal(objectUtils.resolveProperty(object, ['company', 'founder', 'preferedNumber', 'odd']), 13);
+            test.equal(objectUtils.resolveProperty(object, ['company', 'founder', 'preferedNumber', 'even']), 8);
+
+            test.done();
+        },
+    },
+
     'values': {
         'Checks that works properly': function(test){
             var values = objectUtils.values({a: '1', b: '2', c:'3'});
