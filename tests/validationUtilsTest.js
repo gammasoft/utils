@@ -3,6 +3,117 @@
 var validationUtils = require('../lib/validationUtils');
 
 module.exports = {
+    'areValidGeoCoordinates': {
+        'can pass values as numbers': function(test) {
+            test.ok(validationUtils.areValidGeoCoordinates(0, 0));
+            test.ok(validationUtils.areValidGeoCoordinates(90, 180));
+            test.ok(validationUtils.areValidGeoCoordinates(-90, -180));
+
+            test.done();
+        },
+
+        'can pass values as strings': function(test) {
+            test.ok(validationUtils.areValidGeoCoordinates('0', '0'));
+            test.ok(validationUtils.areValidGeoCoordinates('90', '180'));
+            test.ok(validationUtils.areValidGeoCoordinates('-90', '-180'));
+
+            test.done();
+        },
+
+        'can pass values as objects': function(test) {
+            test.ok(validationUtils.areValidGeoCoordinates({latitude: 0, longitude: 0 }));
+            test.ok(validationUtils.areValidGeoCoordinates({latitude: 45, longitude: 45 }));
+            test.ok(validationUtils.areValidGeoCoordinates({latitude: 90, longitude: -90 }));
+
+            test.ok(validationUtils.areValidGeoCoordinates({lat: 0, lng: 0 }));
+            test.ok(validationUtils.areValidGeoCoordinates({lat: 45, lng: 45 }));
+            test.ok(validationUtils.areValidGeoCoordinates({lat: 90, lng: -90 }));
+
+            test.done();
+        },
+
+        'can pass values as strings within an object': function(test) {
+            test.ok(validationUtils.areValidGeoCoordinates({latitude: '0', longitude: '0' }));
+            test.ok(validationUtils.areValidGeoCoordinates({latitude: '45', longitude: '45' }));
+            test.ok(validationUtils.areValidGeoCoordinates({latitude: '90', longitude: '-90' }));
+
+            test.done();
+        },
+    },
+    'isValidLatitude': {
+        'is valid if latitude is between -90 and 90': function(test) {
+            test.ok(validationUtils.isValidLatitude(0));
+            test.ok(validationUtils.isValidLatitude(-90));
+            test.ok(validationUtils.isValidLatitude(90));
+            test.ok(validationUtils.isValidLatitude(-45));
+            test.ok(validationUtils.isValidLatitude(45));
+
+            test.done();
+        },
+
+        'is not valid if latitude is lesser than -90 or greater than 90': function(test) {
+            test.ok(!validationUtils.isValidLatitude(-91));
+            test.ok(!validationUtils.isValidLatitude(-100));
+            test.ok(!validationUtils.isValidLatitude(-180));
+
+            test.ok(!validationUtils.isValidLatitude(91));
+            test.ok(!validationUtils.isValidLatitude(100));
+            test.ok(!validationUtils.isValidLatitude(180));
+
+            test.done();
+        },
+
+        'can pass values in a string': function(test) {
+            test.ok(!validationUtils.isValidLatitude('-91'));
+            test.ok(validationUtils.isValidLatitude('90'));
+            test.done();
+        },
+
+        'fails when parameters are not numeric': function(test) {
+            test.ok(!validationUtils.isValidLatitude('test will fail'));
+            test.ok(!validationUtils.isValidLatitude(new Date()));
+            test.ok(!validationUtils.isValidLatitude(/regex/));
+
+            test.done();
+        },
+    },
+    'isValidLongitude': {
+        'is valid if longitude is between -180 and 180': function(test) {
+            test.ok(validationUtils.isValidLongitude(0));
+            test.ok(validationUtils.isValidLongitude(-180));
+            test.ok(validationUtils.isValidLongitude(180));
+            test.ok(validationUtils.isValidLongitude(-90));
+            test.ok(validationUtils.isValidLongitude(90));
+
+            test.done();
+        },
+
+        'is not valid if longitude is lesser than -180 or greater than 180': function(test) {
+            test.ok(!validationUtils.isValidLongitude(-180.23));
+            test.ok(!validationUtils.isValidLongitude(-200));
+            test.ok(!validationUtils.isValidLongitude(-320));
+
+            test.ok(!validationUtils.isValidLongitude(180.23));
+            test.ok(!validationUtils.isValidLongitude(200));
+            test.ok(!validationUtils.isValidLongitude(320));
+
+            test.done();
+        },
+
+        'can pass values in a string': function(test) {
+            test.ok(!validationUtils.isValidLongitude('-181'));
+            test.ok(validationUtils.isValidLongitude('180'));
+            test.done();
+        },
+
+        'fails when parameters are not numeric': function(test) {
+            test.ok(!validationUtils.isValidLongitude('test will fail'));
+            test.ok(!validationUtils.isValidLongitude(new Date()));
+            test.ok(!validationUtils.isValidLongitude(/regex/));
+
+            test.done();
+        },
+    },
     'validFormattedEmailAddressRegExp': {
         'Check that RegExp matches major cases': function(test) {
             var regExp = validationUtils.validFormattedEmailAddressRegExp;
