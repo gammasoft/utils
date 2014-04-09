@@ -217,7 +217,7 @@ module.exports = {
         }
     },
 
-    'joinUrls': {
+    'joinUrls': { //move to urlUtils
         'Returns expected results': function(test){
             test.equal(stringUtils.joinUrls('', '/is/good'), '/is/good');
             test.equal(stringUtils.joinUrls('/testing', ''), '/testing');

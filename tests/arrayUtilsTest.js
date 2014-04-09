@@ -232,6 +232,21 @@ module.exports = {
             test.equal(arrayUtils.smaller(array, 'value'), 1); //TODO: return the whole object, not only its value
             test.done();
         },
+
+        'can get value from property when property is a date': function(test) {
+            var smaller = new Date(2014, 1, 1);
+
+            var array = [{
+                time: smaller
+            }, {
+                time: new Date(2014, 1, 2)
+            }, {
+                time: new Date(2014, 1, 3)
+            }];
+
+            test.equal(arrayUtils.smaller(array, 'time'), smaller.valueOf()); //TODO: return the whole object, not only its value
+            test.done();
+        }
     },
     'bigger': {
         'return expected results': function(test) {
@@ -260,6 +275,21 @@ module.exports = {
             test.equal(arrayUtils.bigger(array, 'value'), 10); //TODO: return the whole object, not only its value
             test.done();
         },
+
+        'can get value from property when property is a date': function(test) {
+            var bigger = new Date(2014, 1, 3);
+
+            var array = [{
+                time: new Date(2014, 1, 1)
+            }, {
+                time: new Date(2014, 1, 2)
+            }, {
+                time: bigger
+            }];
+
+            test.equal(arrayUtils.bigger(array, 'time'), bigger.valueOf()); //TODO: return the whole object, not only its value
+            test.done();
+        }
     },
     'pushIfNotAlready': {
         'Tests main functionality': function(test) {
