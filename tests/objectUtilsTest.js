@@ -3,6 +3,64 @@
 var objectUtils = require('../lib/objectUtils');
 
 module.exports = {
+    'pick': {
+
+        'if whitelist is undefined then returns an empty object': function(test){
+
+            var object = {
+                name: 'Father',
+                job: 'Developer',
+                age: 40
+            };
+
+            test.deepEqual(objectUtils.pick(object), {});
+
+            test.done();
+        },
+
+        'properly pick whitelisted properties': function(test){
+
+            var object = {
+                name: 'Father',
+                job: 'Developer',
+                age: 40
+            };
+
+            test.deepEqual(objectUtils.pick(object, ['name', 'job']), {name: 'Father', job: 'Developer'});
+
+            test.done();
+        },
+
+        'if whitelist is a empty array then returns the original object': function(test){
+
+            var object = {
+                name: 'Father',
+                job: 'Developer',
+                age: 40
+            };
+
+            test.deepEqual(objectUtils.pick(object, []), {});
+
+            test.done();
+        },
+
+        'properly pick whitelisted properties from objects inside an array': function(test) {
+
+            var array = [{
+                name: 'Inobrega',
+                job: 'Developer',
+                age: 40
+            },{
+                name: 'Gammasoft',
+                job: 'Designer',
+                age: 37
+            }];
+
+            test.deepEqual(objectUtils.pick(array, ['name']), [{name: 'Inobrega'}, {name: 'Gammasoft'}]);
+
+            test.done();
+        }
+    },
     'prune': {
 
         'if blacklist is undefined then returns the original object': function(test) {
@@ -17,7 +75,7 @@ module.exports = {
             test.done();
         },
 
-        'if blacklist is empty arra then returns the original object': function(test) {
+        'if blacklist is empty array then returns the original object': function(test) {
 
             var object = {
                 name: 'Gammasoft',
@@ -41,7 +99,7 @@ module.exports = {
             test.done();
         },
 
-        'properly removes blacklisted properties from object inside an array': function(test) {
+        'properly removes blacklisted properties from objects inside an array': function(test) {
 
             var array = [{
                 name: 'Renato',
