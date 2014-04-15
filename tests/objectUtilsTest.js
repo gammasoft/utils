@@ -112,6 +112,37 @@ module.exports = {
             test.deepEqual(objectUtils.prune(array, ['age']), [{ name: 'Renato' }, { name: 'Ilson' }]);
 
             test.done();
+        },
+
+        'can receive blacklist as string': function(test) {
+
+            var array = [{
+                name: 'Renato',
+                age: 27
+            }, {
+                name: 'Ilson',
+                age: 22
+            }];
+
+            test.deepEqual(objectUtils.prune(array, 'age'), [{ name: 'Renato' }, { name: 'Ilson' }]);
+
+            test.done();
+        },
+
+        'can receive blacklist as comma separated strings': function(test) {
+
+            var array = [{
+                name: 'Renato',
+                age: 27,
+                job: 'Engineer'
+            }, {
+                name: 'Ilson',
+                age: 22
+            }];
+
+            test.deepEqual(objectUtils.prune(array, 'age, job'), [{ name: 'Renato' }, { name: 'Ilson' }]);
+
+            test.done();
         }
 
     },
