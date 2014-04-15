@@ -3,6 +3,61 @@
 var objectUtils = require('../lib/objectUtils');
 
 module.exports = {
+    'prune': {
+
+        'if blacklist is undefined then returns the original object': function(test) {
+
+            var object = {
+                name: 'Gammasoft',
+                age: 10
+            };
+
+            test.deepEqual(objectUtils.prune(object), object);
+
+            test.done();
+        },
+
+        'if blacklist is empty arra then returns the original object': function(test) {
+
+            var object = {
+                name: 'Gammasoft',
+                age: 10
+            };
+
+            test.deepEqual(objectUtils.prune(object, []), object);
+
+            test.done();
+        },
+
+        'properly removes blacklisted properties': function(test) {
+
+            var object = {
+                name: 'Gammasoft',
+                age: 10
+            };
+
+            test.deepEqual(objectUtils.prune(object, ['age']), { name: 'Gammasoft' });
+
+            test.done();
+        },
+
+        'properly removes blacklisted properties from object inside an array': function(test) {
+
+            var array = [{
+                name: 'Renato',
+                age: 27
+            }, {
+                name: 'Ilson',
+                age: 22
+            }];
+
+            test.deepEqual(objectUtils.prune(array, ['age']), [{ name: 'Renato' }, { name: 'Ilson' }]);
+
+            test.done();
+        }
+
+    },
+
     'merge': {
         'can merge properly': function(test) {
             var dest = {
