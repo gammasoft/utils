@@ -7,6 +7,7 @@ module.exports = {
     controller: require('./lib/controllerUtils'),
     date: require('./lib/dateUtils'),
     error: require('./lib/errorUtils'),
+    env: require('./lib/envUtils'),
     timezone: require('./lib/timezoneUtils'),
     fs: require('./lib/fsUtils'),
     math: require('./lib/mathUtils'),

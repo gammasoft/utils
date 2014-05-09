@@ -1,6 +1,6 @@
 {
     "name": "gammautils",
-    "version": "0.0.44",
+    "version": "0.0.45",
     "description": "Lots of utilities for Node.js",
     "main": "index.js",
     "directories": {
@@ -39,6 +39,7 @@
         "grunt": "~0.4.1",
         "grunt-contrib-jshint": "~0.7.1",
         "grunt-contrib-nodeunit": "~0.2.2",
-        "semver": "~2.2.1"
+        "semver": "~2.2.1",
+        "rewire": "^2.0.0"
     }
 }
