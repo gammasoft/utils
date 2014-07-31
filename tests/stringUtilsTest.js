@@ -3,6 +3,101 @@
 var stringUtils = require('../lib/stringUtils');
 
 module.exports = {
+    'Line': {
+        '"add" property exposes defaults parsers': function(test) {
+            var line = new stringUtils.Line();
+
+            test.equal(typeof line.add.value, 'function');
+
+            test.done();
+        },
+
+        'Can pass custom parsers': function(test) {
+            var line = new stringUtils.Line({
+                numericValue: function(){}
+            });
+
+            test.equal(typeof line.add.numericValue, 'function');
+
+            test.done();
+        },
+
+        'Can add values and retrieve': function(test) {
+            var line = new stringUtils.Line();
+
+            line.add.value('this');
+            line.add.value('is');
+            line.add.value('a');
+            line.add.value('test');
+
+            test.equal(line.toString(), 'thisisatest');
+            test.done();
+        },
+
+        'Can add values and retrieve with separator': function(test) {
+            var line = new stringUtils.Line();
+
+            line.add.value('this');
+            line.add.value('is');
+            line.add.value('a');
+            line.add.value('test');
+
+            test.equal(line.toString(' '), 'this is a test');
+            test.done();
+        },
+
+        'Can pass size limiter for a line': function(test) {
+            var line = new stringUtils.Line(5);
+
+            test.throws(function() {
+                line.add.value('Gammasoft');
+            });
+
+            test.done();
+        },
+
+        'Verify that custom parsers works': function(test) {
+            var line = new stringUtils.Line({
+                number: function(value) {
+                    return 'NUMBER: ' + value;
+                },
+                string: function(value) {
+                    return 'STRING: ' + value;
+                }
+            });
+
+            line.add.number(42);
+            line.add.string('OK');
+
+            test.equal(line.toString(' - '), 'NUMBER: 42 - STRING: OK');
+            test.done();
+        },
+
+        'Verify that size limit is applied after value goes though the custom parsers': function(test) {
+            var line = new stringUtils.Line(3, {
+                number: function(value) {
+                    return 'NUMBER: ' + value;
+                }
+            });
+
+            test.throws(function() {
+                line.add.number(42);
+            });
+
+            test.done();
+        },
+
+        'Verify that can add a label to a value and can export it': function(test) {
+            var line = new stringUtils.Line();
+
+            line.add.value('Gammasoft').labeled('Company Name');
+            line.add.value(1).labeled('Number Of Employees');
+
+            test.equal(line.toString(';', true), 'Company Name;Number Of Employees\nGammasoft;1');
+            test.done();
+        }
+    },
+
     'truncate': {
         'Verifiy that words are keep intact if length is ok': function(test) {
             test.equal(stringUtils.truncate('Gammasoft', 100), 'Gammasoft');
