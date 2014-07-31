@@ -95,6 +95,24 @@ module.exports = {
 
             test.equal(line.toString(';', true), 'Company Name;Number Of Employees\nGammasoft;1');
             test.done();
+        },
+
+        'Verify that "parsers" object is not modified in a way they feed the same "records" array': function(test) {
+            var parsers = {
+                    lowerCaseString: function(value) {
+                        return value.toLowerCase();
+                    }
+                },
+                line1 = new stringUtils.Line(5, parsers),
+                line2 = new stringUtils.Line(5, parsers);
+
+            line1.add.lowerCaseString('Gamma');
+
+            test.doesNotThrow(function() {
+                line2.add.lowerCaseString('soft');
+            });
+
+            test.done();
         }
     },
 

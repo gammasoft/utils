@@ -1,14 +1,12 @@
-utils
+gammautils
 =====
 
 [![Build Status](https://drone.io/github.com/gammasoft/utils/status.png)](https://drone.io/github.com/gammasoft/utils/latest)
 [![Built with Grunt](https://camo.githubusercontent.com/02d9825a669fb5b9f53bfe2e5a3fa4a1081cdb6a/68747470733a2f2f63646e2e6772756e746a732e636f6d2f6275696c74776974682e706e67 "Built with Grunt")](http://gruntjs.com/)
 
-Every sort of utilities for Node.js  
+Every sort of utilities for Node.js
 
-**THIS IS A LIGHTWEIGHT MODULE: ZERO DEPENDENCIES**  
-
-*This module makes use of some algorithms found on underscore.string (MIT license), this is stated throughout the code when necessary. All credits to them*  
+**This module has zero dependencies**
 
 ### INSTALATION
 
