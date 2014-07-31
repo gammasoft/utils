@@ -18,6 +18,10 @@ Every sort of utilities for Node.js
 
 In the meanwhile you may take a look at the test folder while documentation aren't ready!
 
+### CONTRIBUTORS
+
+[Detailed list here...](contributors.md)
+
 ### LICENSE
 
 The MIT License (MIT)
