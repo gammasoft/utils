@@ -26,13 +26,13 @@ module.exports = {
 
         'Provides default message': function(test) {
             var error = new errorUtils.HttpClientError();
-            test.equals(error.message, 'Error caused by used behavior: no details given');
+            test.equals(error.message, 'Error caused by user behavior: no details given');
             test.done();
         },
 
         'Can specify custom error message keeping default status code of 400 ': function(test) {
             var error = new errorUtils.HttpClientError('Validation error');
-            test.equals(error.message, 'Error caused by used behavior: Validation error');
+            test.equals(error.message, 'Error caused by user behavior: Validation error');
             test.equals(error.messageToClient, 'Validation error');
             test.equals(error.statusCode, 400);
 
@@ -41,7 +41,7 @@ module.exports = {
 
         'Can specify custom error message and custom status code': function(test) {
             var error = new errorUtils.HttpClientError('You cant go further...', 403);
-            test.equals(error.message, 'Error caused by used behavior: You cant go further...');
+            test.equals(error.message, 'Error caused by user behavior: You cant go further...');
             test.equals(error.messageToClient, 'You cant go further...');
             test.equals(error.statusCode, 403);
 

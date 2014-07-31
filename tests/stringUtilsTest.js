@@ -3,6 +3,34 @@
 var stringUtils = require('../lib/stringUtils');
 
 module.exports = {
+    'truncate': {
+        'Verifiy that words are keep intact if length is ok': function(test) {
+            test.equal(stringUtils.truncate('Gammasoft', 100), 'Gammasoft');
+            test.equal(stringUtils.truncate('123', 5), '123');
+
+            test.done();
+        },
+
+        'Verifiy that words are properly truncated': function(test) {
+            test.equal(stringUtils.truncate('Gammasoft', 5), 'Gamma');
+            test.equal(stringUtils.truncate('12345', 1), '1');
+
+            test.done();
+        },
+
+        'Verifiy that length can be passed as a string': function(test) {
+            test.equal(stringUtils.truncate('Gammasoft', '5'), 'Gamma');
+
+            test.done();
+        },
+
+        'Verifiy that string can be passaed as a number': function(test) {
+            test.equal(stringUtils.truncate(12345, '2'), '12');
+
+            test.done();
+        }
+    },
+
     'slugify': {
         //Taken from underscore.string, all credits to them
         'Testing basic functionality': function(test) {

@@ -1,45 +1,61 @@
 {
-    "name": "gammautils",
-    "version": "0.0.45",
-    "description": "Lots of utilities for Node.js",
-    "main": "index.js",
-    "directories": {
-        "test": "tests"
+  "name": "gammautils",
+  "version": "0.0.46",
+  "description": "Lots of utilities for Node.js",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "grunt test --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gammasoft/utils"
+  },
+  "keywords": [
+    "util",
+    "utils",
+    "utilities",
+    "swiss",
+    "army",
+    "knife",
+    "string",
+    "array",
+    "number",
+    "format",
+    "date",
+    "crypto",
+    "cryptography",
+    "controller",
+    "fs",
+    "file system"
+  ],
+  "author": "Gammasoft Desenvolvimento de Software Ltda <contact@gammasoft.com.br>",
+  "license": "MIT",
+  "devDependencies": {
+    "nodeunit": "~0.8.0",
+    "alltested": "0.0.3",
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-nodeunit": "~0.2.2",
+    "semver": "~2.2.1",
+    "rewire": "^2.0.0"
+  },
+  "contributors": [
+    {
+      "name": "Ilson Nóbrega",
+      "email": "ilson@inobrega.com.br",
+      "url": "https://github.com/inobrega",
+      "contributions": 2,
+      "hireable": false
     },
-    "scripts": {
-        "test": "grunt test --verbose"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/gammasoft/utils"
-    },
-    "keywords": [
-        "util",
-        "utils",
-        "utilities",
-        "swiss",
-        "army",
-        "knife",
-        "string",
-        "array",
-        "number",
-        "format",
-        "date",
-        "crypto",
-        "cryptography",
-        "controller",
-        "fs",
-        "file system"
-    ],
-    "author": "Gammasoft Desenvolvimento de Software Ltda <contact@gammasoft.com.br>",
-    "license": "MIT",
-    "devDependencies": {
-        "nodeunit": "~0.8.0",
-        "alltested": "0.0.3",
-        "grunt": "~0.4.1",
-        "grunt-contrib-jshint": "~0.7.1",
-        "grunt-contrib-nodeunit": "~0.2.2",
-        "semver": "~2.2.1",
-        "rewire": "^2.0.0"
+    {
+      "name": "Renato Gama",
+      "email": "renatoargh@gmail.com",
+      "url": "https://github.com/renatoargh",
+      "contributions": 93,
+      "hireable": true
     }
+  ]
 }
