@@ -44,18 +44,18 @@
   },
   "contributors": [
     {
-      "name": "Ilson Nóbrega",
-      "email": "ilson@inobrega.com.br",
-      "url": "https://github.com/inobrega",
-      "contributions": 2,
-      "hireable": false
-    },
-    {
       "name": "Renato Gama",
       "email": "renatoargh@gmail.com",
       "url": "https://github.com/renatoargh",
       "contributions": 93,
       "hireable": true
+    },
+    {
+      "name": "Ilson Nóbrega",
+      "email": "ilson@inobrega.com.br",
+      "url": "https://github.com/inobrega",
+      "contributions": 2,
+      "hireable": false
     }
   ]
 }
