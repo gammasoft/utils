@@ -3,6 +3,27 @@
 var objectUtils = require('../lib/objectUtils');
 
 module.exports = {
+
+    'deepDelete': {
+        'Can delete deep properties': function(test) {
+            var a = { b: { c: {} } },
+                deleted = objectUtils.deepDelete(a, 'b.c');
+
+            test.ok(deleted);
+            test.deepEqual(a, { b: { } });
+            test.done();
+        },
+
+        'Won\'t throw error if property is undefined': function(test) {
+            var a = { b: { c: {} } },
+                deleted = objectUtils.deepDelete(a, 'b.d.e.f.g');
+
+            test.equal(deleted, false);
+            test.deepEqual(a, { b: { c: {} } });
+            test.done();
+        },
+    },
+
     'pick': {
 
         'if whitelist is undefined then returns an empty object': function(test){
