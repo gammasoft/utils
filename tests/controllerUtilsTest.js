@@ -23,6 +23,13 @@ function Mock() {
 }
 
 module.exports = {
+    loadAction: {
+        'hard to test': function(test) {
+            //hard to test
+            test.done();
+        },
+    },
+
     'acceptJson': {
         'Verify proper headers were set': function(test) {
             var mock = new Mock();

@@ -1,3 +1,5 @@
+//browserify index.js -s gammautils | uglifyjs > gammautils.min.js
+
 'use strict';
 
 module.exports = {

@@ -268,6 +268,23 @@ module.exports = {
 
             test.done();
         },
+
+        'wont throw an error if cant resolve the property': function(test) {
+            var object = {
+                company: {
+                    founder: {
+                        name: 'Renato',
+                    }
+                }
+            };
+
+            test.equal(objectUtils.resolveProperty(object, 'company.founder.name'), 'Renato');
+            test.equal(objectUtils.resolveProperty(object, 'company.founder.address'), null);
+            test.equal(objectUtils.resolveProperty(object, 'company.founder.address.street'), null);
+            test.equal(objectUtils.resolveProperty(object, 'company.founder.address.street.foo'), null);
+
+            test.done();
+        },
     },
 
     'values': {
