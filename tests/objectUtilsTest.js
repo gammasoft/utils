@@ -22,6 +22,15 @@ module.exports = {
             test.deepEqual(a, { b: { c: {} } });
             test.done();
         },
+
+        'Can delete properties 2': function(test) {
+            var person = { name: null },
+                deleted = objectUtils.deepDelete(person, ['name']);
+
+            test.ok(deleted);
+            test.deepEqual(person, {});
+            test.done();
+        },
     },
 
     'pick': {
