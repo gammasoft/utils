@@ -4,6 +4,126 @@ var objectUtils = require('../lib/objectUtils');
 
 module.exports = {
 
+    'flatten': {
+        'Tests basic case': function(test) {
+            test.deepEqual(objectUtils.flatten({}), {});
+            test.deepEqual(objectUtils.flatten(null), null);
+            test.deepEqual(objectUtils.flatten(undefined), undefined);
+            test.deepEqual(objectUtils.flatten('not an object'), 'not an object');
+            test.deepEqual(objectUtils.flatten(123), 123);
+            test.done();
+        },
+
+        'Can flat nested objects': function(test) {
+
+            var object = {
+                name: 'Gammasoft',
+                regexp: /Gammasoft/g,
+                foundation: new Date(2014, 3, 20),
+                location: {
+                    country: 'Brazil',
+                    city: 'Brasília'
+                },
+                employees: [{
+                    name: 'Renato',
+                    role: 'Developer',
+                    favoriteColors: [
+                        'red', 'blue', 'black'
+                    ]
+                }]
+            };
+
+            test.deepEqual(objectUtils.flatten(object), {
+                'name': 'Gammasoft',
+                'regexp': /Gammasoft/g,
+                'foundation': new Date(2014, 3, 20),
+                'location.country': 'Brazil',
+                'location.city': 'Brasília',
+                'employees.0.name': 'Renato',
+                'employees.0.role': 'Developer',
+                'employees.0.favoriteColors.0': 'red',
+                'employees.0.favoriteColors.1': 'blue',
+                'employees.0.favoriteColors.2': 'black',
+            });
+
+            test.done();
+        },
+
+        'Can pass custom join function': function(test) {
+            var object = {
+                name: 'Gammasoft',
+                regexp: /Gammasoft/g,
+                foundation: new Date(2014, 3, 20),
+                location: {
+                    country: 'Brazil',
+                    city: 'Brasília'
+                },
+                employees: [{
+                    name: 'Renato',
+                    role: 'Developer',
+                    favoriteColors: [
+                        'red', 'blue', 'black'
+                    ]
+                }]
+            };
+
+            test.deepEqual(objectUtils.flatten(object, function(a, b) {
+                if(!a) {
+                    return b;
+                }
+
+                return a + b.substr(0, 1).toUpperCase() + b.substr(1);
+            }), {
+                'name': 'Gammasoft',
+                'regexp': /Gammasoft/g,
+                'foundation': new Date(2014, 3, 20),
+                'locationCountry': 'Brazil',
+                'locationCity': 'Brasília',
+                'employees0Name': 'Renato',
+                'employees0Role': 'Developer',
+                'employees0FavoriteColors0': 'red',
+                'employees0FavoriteColors1': 'blue',
+                'employees0FavoriteColors2': 'black',
+            });
+
+            test.done();
+        },
+
+        'Can pass initial root': function(test) {
+            var object = {
+                name: 'Gammasoft',
+                regexp: /Gammasoft/g,
+                foundation: new Date(2014, 3, 20),
+                location: {
+                    country: 'Brazil',
+                    city: 'Brasília'
+                },
+                employees: [{
+                    name: 'Renato',
+                    role: 'Developer',
+                    favoriteColors: [
+                        'red', 'blue', 'black'
+                    ]
+                }]
+            };
+
+            test.deepEqual(objectUtils.flatten(object, 'myObject'), {
+                'myObject.name': 'Gammasoft',
+                'myObject.regexp': /Gammasoft/g,
+                'myObject.foundation': new Date(2014, 3, 20),
+                'myObject.location.country': 'Brazil',
+                'myObject.location.city': 'Brasília',
+                'myObject.employees.0.name': 'Renato',
+                'myObject.employees.0.role': 'Developer',
+                'myObject.employees.0.favoriteColors.0': 'red',
+                'myObject.employees.0.favoriteColors.1': 'blue',
+                'myObject.employees.0.favoriteColors.2': 'black',
+            });
+
+            test.done();
+        }
+    },
+
     'deepDelete': {
         'Can delete deep properties': function(test) {
             var a = { b: { c: {} } },

@@ -3,6 +3,20 @@
 var stringUtils = require('../lib/stringUtils');
 
 module.exports = {
+    'capitalize': {
+        'Test that it works': function(test) {
+            test.equal(stringUtils.capitalize('renato'), 'Renato');
+            test.equal(stringUtils.capitalize('gammasoft'), 'Gammasoft');
+            test.done();
+        },
+
+        'Wont throw any error if not string and value will pass': function(test) {
+            test.equal(stringUtils.capitalize(null), null);
+            test.equal(stringUtils.capitalize(undefined), undefined);
+            test.equal(stringUtils.capitalize(123), 123);
+            test.done();
+        },
+    },
     'Line': {
         '"add" property exposes defaults parsers': function(test) {
             var line = new stringUtils.Line();
