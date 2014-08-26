@@ -4,6 +4,95 @@ var objectUtils = require('../lib/objectUtils');
 
 module.exports = {
 
+    'deepMerge': {
+        'Can deep merge': function(test) {
+            var object = {
+                name: 'Gammasoft',
+                location: {
+                    country: 'Brazil',
+                    city: 'Brasilia'
+                },
+                people: [{
+                    name: 'Renato',
+                    age: 26,
+                    role: 'Software Developer'
+                }]
+            };
+
+            objectUtils.deepMerge(object, {
+                location: {
+                    country: 'Germany'
+                },
+                people: [{
+                    age: 27,
+                    role: 'Software Engineer'
+                }]
+            });
+
+            test.deepEqual(object, {
+                name: 'Gammasoft',
+                location: {
+                    country: 'Germany',
+                    city: 'Brasilia'
+                },
+                people: [{
+                    name: 'Renato',
+                    age: 27,
+                    role: 'Software Engineer'
+                }]
+            });
+            test.done();
+        },
+    },
+
+    'deepSet': {
+        'Can set deep property properly': function(test) {
+            var object = {
+                name: 'Gammasoft',
+                location: {
+                    country: 'Brazil',
+                    city: 'Brasilia'
+                }
+            };
+
+            test.ok(objectUtils.deepSet(object, 'location.country', 'Germany'));
+            test.equal(object.location.country, 'Germany');
+            test.done();
+        },
+
+        'Can set properties inside arrays': function(test) {
+            var object = {};
+
+            test.ok(objectUtils.deepSet(object, 'colors.0', 'red'));
+            test.ok(objectUtils.deepSet(object, 'colors.1', 'green'));
+            test.ok(objectUtils.deepSet(object, 'colors.2', 'blue'));
+            test.deepEqual(object, {
+                colors: ['red', 'green', 'blue']
+            });
+            test.ok(Array.isArray(object.colors));
+            test.done();
+        },
+
+        'Can set properties inside arrays 2': function(test) {
+            var object = {};
+
+            test.ok(objectUtils.deepSet(object, 'people.0.name', 'Foo'));
+            test.ok(objectUtils.deepSet(object, 'people.1.name', 'Bar'));
+            test.ok(objectUtils.deepSet(object, 'people.2.name', 'Alalao'));
+            test.deepEqual(object, {
+                people: [{
+                    name: 'Foo'
+                }, {
+                    name: 'Bar'
+                }, {
+                    name: 'Alalao'
+                }]
+            });
+            test.ok(Array.isArray(object.people));
+            test.done();
+        },
+    },
+
     'flatten': {
         'Tests basic case': function(test) {
             test.deepEqual(objectUtils.flatten({}), {});
