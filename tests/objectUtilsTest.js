@@ -4,6 +4,142 @@ var objectUtils = require('../lib/objectUtils');
 
 module.exports = {
 
+    'unflatten': {
+        'Works properly': function(test) {
+
+            var flat = {
+                'user.name': 'renato',
+                'user.age': 27,
+                'user.vehiacle.name': 'Fiat',
+                'user.vehiacle.color': 'Red',
+                'user.vehiacle.fines.0.description': 'Speed limit',
+                'user.vehiacle.fines.0.price': 300,
+                'user.vehiacle.fines.1.description': 'Traffic light',
+                'user.vehiacle.fines.1.price': 180,
+                'product.0.name': 'apple',
+                'product.0.price': 1.34,
+                'product.0.origin.country': 'Brazil',
+                'product.0.origin.state': 'Minas Gerais',
+                'product.0.importedWhen.0.date': '01/01/2014',
+                'product.0.importedWhen.0.freight': 230,
+                'product.0.importedWhen.1.date': '01/15/2014',
+                'product.0.importedWhen.1.freight': 233.23,
+                'product.1.name': 'orange',
+                'product.1.price': 2.08,
+                'product.1.origin.country': 'Argentina',
+                'product.1.origin.state': 'Mendoza',
+            };
+
+            test.deepEqual(objectUtils.unflatten(flat), {
+                user: {
+                    name: 'renato',
+                    age: 27,
+                    vehiacle: {
+                        name: 'Fiat',
+                        color: 'Red',
+                        fines: [{
+                            description: 'Speed limit',
+                            price: 300
+                        }, {
+                            description: 'Traffic light',
+                            price: 180
+                        }]
+                    }
+                },
+                product: [{
+                    name: 'apple',
+                    price: 1.34,
+                    origin: {
+                        country: 'Brazil',
+                        state: 'Minas Gerais'
+                    },
+                    importedWhen: [{
+                        date: '01/01/2014',
+                        freight: 230
+                    }, {
+                        date: '01/15/2014',
+                        freight: 233.23
+                    }]
+                }, {
+                    name: 'orange',
+                    price: 2.08,
+                    origin: {
+                        country: 'Argentina',
+                        state: 'Mendoza'
+                    }
+                }]
+            });
+            test.done();
+        },
+
+        'Can use different separator': function(test) {
+
+            var flat = {
+                'user-name': 'renato',
+                'user-age': 27,
+                'user-vehiacle-name': 'Fiat',
+                'user-vehiacle-color': 'Red',
+                'user-vehiacle-fines-0-description': 'Speed limit',
+                'user-vehiacle-fines-0-price': 300,
+                'user-vehiacle-fines-1-description': 'Traffic light',
+                'user-vehiacle-fines-1-price': 180,
+                'product-0-name': 'apple',
+                'product-0-price': 1.34,
+                'product-0-origin-country': 'Brazil',
+                'product-0-origin-state': 'Minas Gerais',
+                'product-0-importedWhen-0-date': '01/01/2014',
+                'product-0-importedWhen-0-freight': 230,
+                'product-0-importedWhen-1-date': '01/15/2014',
+                'product-0-importedWhen-1-freight': 233.23,
+                'product-1-name': 'orange',
+                'product-1-price': 2.08,
+                'product-1-origin-country': 'Argentina',
+                'product-1-origin-state': 'Mendoza',
+            };
+
+            test.deepEqual(objectUtils.unflatten(flat, '-'), {
+                user: {
+                    name: 'renato',
+                    age: 27,
+                    vehiacle: {
+                        name: 'Fiat',
+                        color: 'Red',
+                        fines: [{
+                            description: 'Speed limit',
+                            price: 300
+                        }, {
+                            description: 'Traffic light',
+                            price: 180
+                        }]
+                    }
+                },
+                product: [{
+                    name: 'apple',
+                    price: 1.34,
+                    origin: {
+                        country: 'Brazil',
+                        state: 'Minas Gerais'
+                    },
+                    importedWhen: [{
+                        date: '01/01/2014',
+                        freight: 230
+                    }, {
+                        date: '01/15/2014',
+                        freight: 233.23
+                    }]
+                }, {
+                    name: 'orange',
+                    price: 2.08,
+                    origin: {
+                        country: 'Argentina',
+                        state: 'Mendoza'
+                    }
+                }]
+            });
+            test.done();
+        },
+    },
+
     'deepMerge': {
         'Can deep merge': function(test) {
             var object = {
