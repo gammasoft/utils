@@ -8,7 +8,6 @@ function Mock() {
     this.res = {
         headerWasCalledWith: [],
         header: function(header, value) {
-            console.log(header);
             this.res.headerWasCalledWith.push({
                 header: header,
                 value: value
@@ -72,7 +71,7 @@ module.exports = {
 
             allowCORS(mock.req, mock.res, mock.next);
 
-            test.equal(mock.res.headerWasCalledWith.length, 3);
+            test.equal(mock.res.headerWasCalledWith.length, 4);
             test.deepEqual(mock.res.headerWasCalledWith[0], {
                 header: 'Access-Control-Allow-Origin',
                 value: '*'
@@ -84,6 +83,10 @@ module.exports = {
             test.deepEqual(mock.res.headerWasCalledWith[2], {
                 header: 'Access-Control-Allow-Headers',
                 value: 'Content-Type, Authorization, Content-Length, X-Requested-With'
+            });
+            test.deepEqual(mock.res.headerWasCalledWith[3], {
+                header: 'Access-Control-Expose-Headers',
+                value: ''
             });
             test.ok(mock.nextWasCalled);
             test.done();
@@ -97,7 +100,7 @@ module.exports = {
 
             allowCORS(mock.req, mock.res, mock.next);
 
-            test.equal(mock.res.headerWasCalledWith.length, 3);
+            test.equal(mock.res.headerWasCalledWith.length, 4);
             test.deepEqual(mock.res.headerWasCalledWith[0], {
                 header: 'Access-Control-Allow-Origin',
                 value: 'whatever I want'
@@ -109,6 +112,10 @@ module.exports = {
             test.deepEqual(mock.res.headerWasCalledWith[2], {
                 header: 'Access-Control-Allow-Headers',
                 value: 'Content-Type, Authorization, Content-Length, X-Requested-With'
+            });
+            test.deepEqual(mock.res.headerWasCalledWith[3], {
+                header: 'Access-Control-Expose-Headers',
+                value: ''
             });
             test.ok(mock.nextWasCalled);
             test.done();
@@ -122,7 +129,7 @@ module.exports = {
 
             allowCORS(mock.req, mock.res, mock.next);
 
-            test.equal(mock.res.headerWasCalledWith.length, 3);
+            test.equal(mock.res.headerWasCalledWith.length, 4);
             test.deepEqual(mock.res.headerWasCalledWith[0], {
                 header: 'Access-Control-Allow-Origin',
                 value: '*'
@@ -134,6 +141,10 @@ module.exports = {
             test.deepEqual(mock.res.headerWasCalledWith[2], {
                 header: 'Access-Control-Allow-Headers',
                 value: 'Content-Type, Authorization, Content-Length, X-Requested-With'
+            });
+            test.deepEqual(mock.res.headerWasCalledWith[3], {
+                header: 'Access-Control-Expose-Headers',
+                value: ''
             });
             test.ok(mock.nextWasCalled);
             test.done();
@@ -147,7 +158,7 @@ module.exports = {
 
             allowCORS(mock.req, mock.res, mock.next);
 
-            test.equal(mock.res.headerWasCalledWith.length, 3);
+            test.equal(mock.res.headerWasCalledWith.length, 4);
             test.deepEqual(mock.res.headerWasCalledWith[0], {
                 header: 'Access-Control-Allow-Origin',
                 value: '*'
@@ -160,6 +171,39 @@ module.exports = {
                 header: 'Access-Control-Allow-Headers',
                 value: 'whatever I want'
             });
+            test.deepEqual(mock.res.headerWasCalledWith[3], {
+                header: 'Access-Control-Expose-Headers',
+                value: ''
+            });
+            test.ok(mock.nextWasCalled);
+            test.done();
+        },
+
+        'Verify that parameters are applied while keep defaults for non-supplied parameters 4': function(test) {
+            var mock = new Mock();
+            var allowCORS = controllerUtils.allowCORS({
+                exposeHeaders: 'Location'
+            });
+
+            allowCORS(mock.req, mock.res, mock.next);
+
+            test.equal(mock.res.headerWasCalledWith.length, 4);
+            test.deepEqual(mock.res.headerWasCalledWith[0], {
+                header: 'Access-Control-Allow-Origin',
+                value: '*'
+            });
+            test.deepEqual(mock.res.headerWasCalledWith[1], {
+                header: 'Access-Control-Allow-Methods',
+                value: 'GET,PUT,POST,DELETE,HEAD,OPTIONS'
+            });
+            test.deepEqual(mock.res.headerWasCalledWith[2], {
+                header: 'Access-Control-Allow-Headers',
+                value: 'Content-Type, Authorization, Content-Length, X-Requested-With'
+            });
+            test.deepEqual(mock.res.headerWasCalledWith[3], {
+                header: 'Access-Control-Expose-Headers',
+                value: 'Location'
+            });
             test.ok(mock.nextWasCalled);
             test.done();
         },
@@ -169,12 +213,13 @@ module.exports = {
             var allowCORS = controllerUtils.allowCORS({
                 allowHeaders: 'foo',
                 allowMethods: 'bar',
-                allowOrigin: '42'
+                allowOrigin: '42',
+                exposeHeaders: 'alalao'
             });
 
             allowCORS(mock.req, mock.res, mock.next);
 
-            test.equal(mock.res.headerWasCalledWith.length, 3);
+            test.equal(mock.res.headerWasCalledWith.length, 4);
             test.deepEqual(mock.res.headerWasCalledWith[0], {
                 header: 'Access-Control-Allow-Origin',
                 value: '42'
@@ -186,6 +231,10 @@ module.exports = {
             test.deepEqual(mock.res.headerWasCalledWith[2], {
                 header: 'Access-Control-Allow-Headers',
                 value: 'foo'
+            });
+            test.deepEqual(mock.res.headerWasCalledWith[3], {
+                header: 'Access-Control-Expose-Headers',
+                value: 'alalao'
             });
             test.ok(mock.nextWasCalled);
             test.done();

@@ -3,6 +3,20 @@
 var stringUtils = require('../lib/stringUtils');
 
 module.exports = {
+    'decapitalize': {
+        'Test that it works': function(test) {
+            test.equal(stringUtils.decapitalize('RENATO'), 'rENATO');
+            test.equal(stringUtils.decapitalize('GAMMASOFT'), 'gAMMASOFT');
+            test.done();
+        },
+
+        'Wont throw any error if not string and value will pass': function(test) {
+            test.equal(stringUtils.decapitalize(null), null);
+            test.equal(stringUtils.decapitalize(undefined), undefined);
+            test.equal(stringUtils.decapitalize(123), 123);
+            test.done();
+        }
+    },
     'capitalize': {
         'Test that it works': function(test) {
             test.equal(stringUtils.capitalize('renato'), 'Renato');
@@ -15,7 +29,7 @@ module.exports = {
             test.equal(stringUtils.capitalize(undefined), undefined);
             test.equal(stringUtils.capitalize(123), 123);
             test.done();
-        },
+        }
     },
     'Line': {
         '"add" property exposes defaults parsers': function(test) {

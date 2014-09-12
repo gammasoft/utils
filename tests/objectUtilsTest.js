@@ -820,6 +820,18 @@ module.exports = {
     },
 
     'forEachOwnProperty': {
+        'Knows if there is more properties to iterate': function(test) {
+            test.expect(2);
+
+            objectUtils.forEachOwnProperty({a: 1, b: 'foo', c: /regexp/i}, function(property, value, hasNext){
+                if(hasNext) {
+                    test.ok(true);
+                }
+            });
+
+            test.done();
+        },
+
         'Iterates through every own property': function(test){
             test.expect(3);
             objectUtils.forEachOwnProperty({a: 1, b: 'foo', c: /regexp/i}, function(property){
