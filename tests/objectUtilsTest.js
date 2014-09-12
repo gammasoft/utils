@@ -820,6 +820,16 @@ module.exports = {
     },
 
     'forEachOwnProperty': {
+        'Wont throw errors if object is null': function(test) {
+            test.doesNotThrow(function() {
+                objectUtils.forEachOwnProperty(null);
+                objectUtils.forEachOwnProperty(null, function() {
+                    test.ok(false); //should not come here!
+                });
+            });
+
+            test.done();
+        },
         'Knows if there is more properties to iterate': function(test) {
             test.expect(2);
 
