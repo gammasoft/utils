@@ -3,6 +3,17 @@
 var stringUtils = require('../lib/stringUtils');
 
 module.exports = {
+    'count': {
+        'Return right count': function(test) {
+            test.equal(stringUtils.count('Gamma foo Gamma bar Gamma alalao', /Gamma/g), 3);
+            test.done();
+        },
+
+        'Can receive string': function(test) {
+            test.equal(stringUtils.count('Gamma foo Gamma bar Gamma alalao foo', 'foo'), 2);
+            test.done();
+        },
+    },
     'decapitalize': {
         'Test that it works': function(test) {
             test.equal(stringUtils.decapitalize('RENATO'), 'rENATO');
