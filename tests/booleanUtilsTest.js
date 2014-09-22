@@ -3,6 +3,8 @@
 var booleanUtils = require('../lib/booleanUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'isTrue': {
         'Check if return expected results': function(test) {
             test.ok(booleanUtils.isTrue('true'));

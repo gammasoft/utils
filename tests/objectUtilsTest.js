@@ -3,7 +3,8 @@
 var objectUtils = require('../lib/objectUtils');
 
 module.exports = {
-
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'unflatten': {
         'Works properly': function(test) {
 

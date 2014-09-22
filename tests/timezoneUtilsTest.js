@@ -3,6 +3,8 @@
 var timezoneUtils = require('../lib/timezoneUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     africa: {
         'Is array and has correct amount of timezones': function(test) {
             test.ok(Array.isArray(timezoneUtils.africa));

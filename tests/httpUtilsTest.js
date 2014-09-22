@@ -3,6 +3,8 @@
 var httpUtils = require('../lib/httpUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'methods': {
         'Check that correct amount of methods are available': function(test) {
             test.equals(httpUtils.methods.length, 24);

@@ -4,6 +4,8 @@ var util = require('util'),
     mathUtils = require('../lib/mathUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'smaller': function(test) {
         test.equal(mathUtils.smaller(1, 3), 1);
         test.equal(mathUtils.smaller(10, 200), 10);

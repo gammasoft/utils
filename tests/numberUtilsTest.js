@@ -3,6 +3,8 @@
 var numberUtils = require('../lib/numberUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'getRandomInteger': {
         'Check that number is between given range': function(test){
             var random = numberUtils.getRandomInteger(0, 10);

@@ -4,6 +4,8 @@ var rewire = require('rewire'),
     envUtils = rewire('../lib/envUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'is': {
         'detects proper environments': function(test) {
             envUtils.__set__('NODE_ENV', 'development');

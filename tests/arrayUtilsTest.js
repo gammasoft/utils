@@ -4,6 +4,8 @@ var util = require('util'),
     arrayUtils = require('../lib/arrayUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'sort': {
         'default sorting is ascending': function(test) {
             var array = [2, 3, 5, 1, 6];

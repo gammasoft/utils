@@ -61,6 +61,8 @@ var recomendationUtils = require('../lib/recomendationUtils'),
     };
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'similarityByPearsonCoefficient': {
         'Return expected results: ': function(test){
             test.equal(recomendationUtils.similarityByPearsonCoefficient(critics['Lisa Rose'], critics['Gene Seymor']), 0.39605901719066977);

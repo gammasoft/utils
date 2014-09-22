@@ -16,6 +16,9 @@ results
 .project
 .c9revisions
 node_modules
+bower_components
 npm-debug.log
 env.js 
 .package.json
+
+docs/index.html

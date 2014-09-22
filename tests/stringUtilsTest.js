@@ -3,6 +3,8 @@
 var stringUtils = require('../lib/stringUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'count': {
         'Return right count': function(test) {
             test.equal(stringUtils.count('Gamma foo Gamma bar Gamma alalao', /Gamma/g), 3);

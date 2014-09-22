@@ -4,6 +4,8 @@ var //util = require('util'),
     errorUtils = require('../lib/errorUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'HttpClientError': {
         'Check that object is error': function(test) {
             //var error = new errorUtils.HttpClientError();

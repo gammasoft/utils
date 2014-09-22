@@ -22,6 +22,8 @@ function Mock() {
 }
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     loadAction: {
         'hard to test': function(test) {
             //hard to test

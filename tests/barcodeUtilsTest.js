@@ -3,6 +3,8 @@
 var barcodeUtils = require('../lib/barcodeUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'barcode128c': function(test){
 
         test.throws(function(){

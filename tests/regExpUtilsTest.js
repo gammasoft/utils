@@ -4,6 +4,8 @@ var util = require('util'),
     regExpUtils = require('../lib/regExpUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'escape': {
         'Escape special characters and returns RegExp': function(test) {
             var regExp = regExpUtils.escape('this*is*a[test]');

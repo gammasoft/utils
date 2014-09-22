@@ -1,5 +1,11 @@
 'use strict';
 
+var _ = require('underscore'),
+    fs = require('fs'),
+    //utils = require('./index'),
+    glob = require('glob'),
+    pack = require('./package.json');
+
 module.exports = function(grunt) {
 
     grunt.initConfig({
@@ -47,4 +53,33 @@ module.exports = function(grunt) {
         'jshint',
         'nodeunit'
     ]);
+
+    grunt.registerTask('docs', function() {
+        var allTogetherTemplate = _.template(fs.readFileSync('./docs/allTogetherTemplate.html').toString()),
+            moduleTemplate = _.template(fs.readFileSync('./docs/moduleTemplate.html').toString()),
+            sidebarTemplate = _.template(fs.readFileSync('./docs/sidebarTemplate.html').toString()),
+            //index = '',
+            body = '',
+            sidebar = '';
+
+        glob.sync(__dirname + '/lib/*Utils.js').forEach(function(modulePath) {
+            var module = require(modulePath);
+
+            sidebar += sidebarTemplate({
+                name: module.__name,
+                description: module.__description || ''
+            });
+
+            body += moduleTemplate({
+                name: module.__name,
+                description: module.__description || ''
+            });
+        });
+
+        fs.writeFileSync('./docs/index.html', allTogetherTemplate({
+            pack: pack,
+            sidebar: sidebar,
+            body: body
+        }));
+    });
 };

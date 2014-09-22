@@ -3,6 +3,8 @@
 var mathUtils = require('../lib/mathUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'solve': {
         'Solves simple equations': function(test){
             //Available functions in `Math`

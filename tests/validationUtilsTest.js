@@ -3,6 +3,8 @@
 var validationUtils = require('../lib/validationUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'areValidGeoCoordinates': {
         'can pass values as numbers': function(test) {
             test.ok(validationUtils.areValidGeoCoordinates(0, 0));

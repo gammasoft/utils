@@ -13,6 +13,8 @@ function testForCipherAndDecipher(test){
 }
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'hmac': {
         //too random to test
     },

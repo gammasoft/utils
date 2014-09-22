@@ -3,6 +3,8 @@
 var urlUtils = require('../lib/urlUtils');
 
 module.exports = {
+    '__name': { '': function(test) { test.done(); } },
+    '__description': { '': function(test) { test.done(); } },
     'sortRoutes': {
         'Can sort routes in array of strings': function(test) {
             var routes = ['/user/:id', '/user/:id/preferences', '/', '/users', '/users/:group'],
