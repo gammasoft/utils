@@ -8,6 +8,15 @@
 			<h1>Gammautils v<%= pack.version %></h1>
 			<p class="lead"><%= pack.description %></p>
 			<%= body %>
+			<hr />
+			<h3>Contributors:</h3>
+			<ul>
+				<% pack.contributors.forEach(function(contributor) { %>
+					<li>
+						<a href="<%= contributor.url %>"><%= contributor.name %></a> - <%= contributor.contributions %> Commits
+					</li>
+				<% }); %>
+			</ul>
 		</div>
 	</body>
 </html>
