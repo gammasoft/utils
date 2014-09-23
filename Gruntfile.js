@@ -9,6 +9,18 @@ var _ = require('underscore'),
 module.exports = function(grunt) {
 
     grunt.initConfig({
+        htmlmin: {
+            html: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: {
+                    'docs/index.html': 'docs/index.html'
+                }
+            }
+        },
+
         nodeunit : {
             all : ['tests/*.js']
         },
@@ -48,13 +60,14 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
     grunt.registerTask('test', [
         'jshint',
         'nodeunit'
     ]);
 
-    grunt.registerTask('docs', function() {
+    grunt.registerTask('generateDocs', function() {
         var allTogetherTemplate = _.template(fs.readFileSync('./docs/allTogetherTemplate.html').toString()),
             moduleTemplate = _.template(fs.readFileSync('./docs/moduleTemplate.html').toString()),
             sidebarTemplate = _.template(fs.readFileSync('./docs/sidebarTemplate.html').toString()),
@@ -82,4 +95,9 @@ module.exports = function(grunt) {
             body: body
         }));
     });
+
+    grunt.registerTask('docs', [
+        'generateDocs',
+        'htmlmin'
+    ]);
 };
