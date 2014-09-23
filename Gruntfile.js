@@ -2,8 +2,9 @@
 
 var _ = require('underscore'),
     fs = require('fs'),
-    //utils = require('./index'),
+    utils = require('./index'),
     glob = require('glob'),
+    marked = require('marked'),
     pack = require('./package.json');
 
 module.exports = function(grunt) {
@@ -89,10 +90,30 @@ module.exports = function(grunt) {
             });
         });
 
+        pack.contributors = pack.contributors.map(function(contributor) {
+            contributor.avatar = [
+                'http://gravatar.com/avatar/',
+                utils.crypto.md5(contributor.email),
+                '?s=40&d=identicon'
+            ].join('');
+
+            return contributor;
+        }).sort(function(a, b) {
+            return a.contributions < b.contributions;
+        });
+
+        pack.author = utils.string.parseFormattedEmailAddress(pack.author);
+        pack.author.avatar = [
+            'http://gravatar.com/avatar/',
+            utils.crypto.md5(pack.author.email),
+            '?s=15&d=identicon'
+        ].join('');
+
         fs.writeFileSync('./docs/index.html', allTogetherTemplate({
             pack: pack,
             sidebar: sidebar,
-            body: body
+            body: body,
+            license: marked(fs.readFileSync('./LICENSE.md').toString())
         }));
     });
 

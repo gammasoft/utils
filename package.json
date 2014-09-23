@@ -40,6 +40,7 @@
     "grunt-contrib-htmlmin": "^0.3.0",
     "grunt-contrib-jshint": "~0.7.1",
     "grunt-contrib-nodeunit": "~0.2.2",
+    "marked": "^0.3.2",
     "nodeunit": "~0.8.0",
     "rewire": "^2.0.0",
     "semver": "~2.2.1",

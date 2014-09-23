@@ -1,7 +1,6 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/docs.css">
 	</head>
 	<body>
 		<div class="container">
@@ -10,13 +9,22 @@
 			<%= body %>
 			<hr />
 			<h3>Contributors:</h3>
+			<p>
+				<img src="<%= pack.author.avatar %>" alt="<%= pack.author.name %> Avatar">
+				<a href="mailto:<%= pack.author.email %>"><%= pack.author.name %></a>
+			</p>
 			<ul>
 				<% pack.contributors.forEach(function(contributor) { %>
-					<li>
+					<li style="margin-bottom: 5px;">
+						<img class="img-rounded" src="<%= contributor.avatar %>" alt="<%= contributor.name %> Avatar">
 						<a href="<%= contributor.url %>"><%= contributor.name %></a> - <%= contributor.contributions %> Commits
 					</li>
 				<% }); %>
 			</ul>
+			<h3>License</h3>
+			<span class="text-justify">
+				<%= license %>
+			</span>
 		</div>
 	</body>
 </html>
