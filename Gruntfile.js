@@ -5,6 +5,8 @@ var _ = require('underscore'),
     utils = require('./index'),
     glob = require('glob'),
     marked = require('marked'),
+    hl = require('highlight.js'),
+    beautify = require('js-beautify').js_beautify,
     pack = require('./package.json');
 
 module.exports = function(grunt) {
@@ -107,6 +109,8 @@ module.exports = function(grunt) {
             body += moduleTemplate({
                 name: module.__name,
                 description: module.__description || '',
+                hl: hl.highlight,
+                beautify: beautify,
                 tests: tests
             });
         });

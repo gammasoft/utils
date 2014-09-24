@@ -4,8 +4,10 @@
 	<% Object.keys(tests).forEach(function(functionName) { %>
 		<h4><%= functionName %></h4>
 
-		<% Object.keys(tests[functionName]).forEach(function(testName) {%>
+		<% Object.keys(tests[functionName]).forEach(function(testName) { %>
 			<p><%= testName %></p>
+			<% var code = beautify(tests[functionName][testName].toString()); %>
+			<pre><code class="hljs"><%= hl('js', code).value %></code></pre>
 		<% });%>
 	<% }); %>
 </div>
