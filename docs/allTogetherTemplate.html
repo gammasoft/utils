@@ -5,31 +5,62 @@
 	</head>
 	<body>
 		<div class="container">
-			<h1>Gammautils v<%= pack.version %></h1>
-			<p class="lead"><%= pack.description %></p>
-			<%= body %>
+			<div class="row">
+				<div class="col-xs-12">
+					<h1>Gammautils v<%= pack.version %></h1>
+					<p class="lead"><%= pack.description %></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<% index.forEach(function(entry) { %>
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"><%= entry %></div>
+				<% }) %>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+					<h3>Instalation</h3>
+					<pre>npm install <%= pack.name %> --save</pre>
+				</div>
+			</div>
+
+			<div class="row">
+				<%= body %>
+			</div>
+
 			<hr />
-			<h3>Contributors</h3>
-			<p>
-				<img src="<%= pack.author.avatar %>" alt="<%= pack.author.name %> Avatar">
-				<a href="mailto:<%= pack.author.email %>"><%= pack.author.name %></a>
-			</p>
-			<ul style="list-style-type: none;">
+
+			<div class="row">
+				<div class="col-xs-12">
+					<h3><%= pack.contributors.length %> Contributors</h3>
+					<p><a href="mailto:<%= pack.author.email %>"><%= pack.author.name %></a></p>
+				</div>
+			</div>
+
+			<div class="row">
 				<% pack.contributors.forEach(function(contributor) { %>
-					<li style="margin-bottom: 5px;">
-						<img class="img-rounded" src="<%= contributor.avatar %>" alt="<%= contributor.name %> Avatar" style="display: inline-block; vertical-align: top; margin-right: 5px;">
-						<div style="display: inline-block;">
-							<a href="<%= contributor.url %>"><%= contributor.name %></a>
-							<br />
-							<span class="text-muted"><%= contributor.contributions %> commits</span>
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2" style="margin-bottom: 5px;">
+						<div class="bg-info" style="border-radius: 6px; padding-left: 0px; padding-right: 0px;">
+							<img width="40px" height="40px" class="img-rounded" src="<%= contributor.avatar %>" alt="<%= contributor.name %> Avatar" style="display: inline-block; vertical-align: top; margin-right: 5px;">
+							<div style="display: inline-block;">
+								<a href="<%= contributor.url %>"><%= contributor.name %></a>
+								<br />
+								<span class="text-muted"><%= contributor.contributions %> commits</span>
+							</div>
 						</div>
-					</li>
+					</div>
 				<% }); %>
-			</ul>
-			<h3>License</h3>
-			<span class="text-justify">
-				<%= license %>
-			</span>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>License</h3>
+					<span class="text-justify">
+						<%= license %>
+					</span>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

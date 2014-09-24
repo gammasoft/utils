@@ -1,2 +1,11 @@
-<h3><%= name %>&nbsp;<small><%= description %></small></h3>
+<div class="col-xs-12">
+	<h3 id="<%= name %>"><%= name %>&nbsp;<small><%= description %></small></h3>
 
+	<% Object.keys(tests).forEach(function(functionName) { %>
+		<h4><%= functionName %></h4>
+
+		<% Object.keys(tests[functionName]).forEach(function(testName) {%>
+			<p><%= testName %></p>
+		<% });%>
+	<% }); %>
+</div>

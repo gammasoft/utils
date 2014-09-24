@@ -72,21 +72,42 @@ module.exports = function(grunt) {
         var allTogetherTemplate = _.template(fs.readFileSync('./docs/allTogetherTemplate.html').toString()),
             moduleTemplate = _.template(fs.readFileSync('./docs/moduleTemplate.html').toString()),
             sidebarTemplate = _.template(fs.readFileSync('./docs/sidebarTemplate.html').toString()),
-            //index = '',
-            body = '',
-            sidebar = '';
+            index = [],
+            body = '';
 
         glob.sync(__dirname + '/lib/*Utils.js').forEach(function(modulePath) {
-            var module = require(modulePath);
+            var module = require(modulePath),
+                tests = require(modulePath.replace('/lib/', '/tests/').replace('.js', 'Test.js'));
 
-            sidebar += sidebarTemplate({
-                name: module.__name,
-                description: module.__description || ''
-            });
+            delete tests.__name;
+            delete tests.__description;
+
+            var lengthOfFunctions = Object.keys(tests).length,
+                functionPluralization = lengthOfFunctions === 1 ? 'function' : 'functions';
+
+            if(lengthOfFunctions === 0) {
+                return;
+            }
+
+            index.push([
+                '<a href="#',
+                    module.__name,
+                    '" title="',
+                    module.__description || '',
+                '">',
+                    module.__name,
+                    ' (',
+                    lengthOfFunctions,
+                    '<span class="hidden-xs">&nbsp;',
+                        functionPluralization,
+                    '</span>)',
+                '</a>'
+            ].join(''));
 
             body += moduleTemplate({
                 name: module.__name,
-                description: module.__description || ''
+                description: module.__description || '',
+                tests: tests
             });
         });
 
@@ -111,7 +132,7 @@ module.exports = function(grunt) {
 
         fs.writeFileSync('./docs/index.html', allTogetherTemplate({
             pack: pack,
-            sidebar: sidebar,
+            index: index,
             body: body,
             license: marked(fs.readFileSync('./LICENSE.md').toString())
         }));
