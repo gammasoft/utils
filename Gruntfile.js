@@ -71,7 +71,7 @@ module.exports = function(grunt) {
     grunt.registerTask('generateDocs', function() {
         var allTogetherTemplate = _.template(fs.readFileSync('./docs/allTogetherTemplate.html').toString()),
             moduleTemplate = _.template(fs.readFileSync('./docs/moduleTemplate.html').toString()),
-            sidebarTemplate = _.template(fs.readFileSync('./docs/sidebarTemplate.html').toString()),
+            //sidebarTemplate = _.template(fs.readFileSync('./docs/sidebarTemplate.html').toString()),
             index = [],
             body = '';
 
@@ -91,16 +91,16 @@ module.exports = function(grunt) {
 
             index.push([
                 '<a href="#',
-                    module.__name,
-                    '" title="',
-                    module.__description || '',
+                module.__name,
+                '" title="',
+                module.__description || '',
                 '">',
-                    module.__name,
-                    ' (',
-                    lengthOfFunctions,
-                    '<span class="hidden-xs">&nbsp;',
-                        functionPluralization,
-                    '</span>)',
+                module.__name,
+                ' (',
+                lengthOfFunctions,
+                '<span class="hidden-xs">&nbsp;',
+                functionPluralization,
+                '</span>)',
                 '</a>'
             ].join(''));
 
