@@ -3,6 +3,7 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="http://yandex.st/highlightjs/8.2/styles/default.min.css">
+		<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<title>Gammautils v<%= pack.version %></title>
 
 		<style type="text/css">
@@ -19,13 +20,13 @@
 	<body>
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-xs-12 jumbotron" style="margin-top: 15px;">
 					<h1>Gammautils v<%= pack.version %></h1>
 					<p class="lead"><%= pack.description %></p>
 				</div>
 			</div>
 
-			<div class="row">
+			<div id="index" class="row">
 				<% index.forEach(function(entry) { %>
 					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"><%= entry %></div>
 				<% }) %>
@@ -75,5 +76,14 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript">
+			$('.menuItem').bind('mouseover', function() {
+				$(this).find('.submenu').show();
+			});
+
+			$('.menuItem').bind('mouseout', function() {
+				$(this).find('.submenu').hide();
+			});
+		</script>
 	</body>
 </html>

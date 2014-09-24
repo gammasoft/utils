@@ -96,6 +96,7 @@ module.exports = function(grunt) {
             }
 
             index.push([
+                '<div class="menuItem">',
                 '<a href="#',
                 module.__name,
                 '" title="',
@@ -104,10 +105,17 @@ module.exports = function(grunt) {
                 module.__name,
                 ' (',
                 lengthOfFunctions,
-                '<span class="hidden-xs">&nbsp;',
-                functionPluralization,
-                '</span>)',
-                '</a>'
+                // '<span class="hidden-xs">&nbsp;',
+                // functionPluralization,
+                // '</span>',
+                ')',
+                '</a>',
+                '<div class="submenu" style="display: none;">',
+                Object.keys(tests).reduce(function(submenu, current) {
+                    return submenu + '<small>&nbsp;&nbsp;<a href="#' + module.__name + current + '">' + current + '</a></small><br />';
+                }, ''),
+                '</div>',
+                '</div>'
             ].join(''));
 
             body += moduleTemplate({

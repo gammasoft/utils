@@ -1,8 +1,8 @@
 <div class="col-xs-12">
-	<h3 id="<%= name %>"><%= name %>&nbsp;<small><%= description %></small></h3>
+	<h3 id="<%= name %>"><%= name %>&nbsp;<small><a href="#index" class="small">Go back to index</a></small></h3>
 
 	<% Object.keys(tests).forEach(function(functionName) { %>
-		<h4><%= functionName %></h4>
+		<h4 id="<%= name %><%= functionName %>"><%= functionName %>&nbsp;<small><a href="#index" class="small">Go back to index</a></small></h4>
 
 		<% Object.keys(tests[functionName]).forEach(function(testName) { %>
 			<p><%= testName %></p>
