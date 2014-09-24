@@ -88,8 +88,8 @@ module.exports = function(grunt) {
             delete tests.__name;
             delete tests.__description;
 
-            var lengthOfFunctions = Object.keys(tests).length,
-                functionPluralization = lengthOfFunctions === 1 ? 'function' : 'functions';
+            var lengthOfFunctions = Object.keys(tests).length;
+                //functionPluralization = lengthOfFunctions === 1 ? 'function' : 'functions';
 
             if(lengthOfFunctions === 0) {
                 return;
