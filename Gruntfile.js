@@ -6,8 +6,12 @@ var _ = require('underscore'),
     glob = require('glob'),
     marked = require('marked'),
     hl = require('highlight.js'),
-    beautify = require('js-beautify').js_beautify,
+    beautify = require('js-beautify'),
     pack = require('./package.json');
+
+/* jshint ignore:start */
+beautify = beautify.js_beautify
+/* jshint ignore:end */
 
 module.exports = function(grunt) {
 
