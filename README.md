@@ -2,7 +2,7 @@ gammautils
 =====
 
 [![Build Status](https://drone.io/github.com/gammasoft/utils/status.png)](https://drone.io/github.com/gammasoft/utils/latest)
-[![Built with Grunt](https://camo.githubusercontent.com/02d9825a669fb5b9f53bfe2e5a3fa4a1081cdb6a/68747470733a2f2f63646e2e6772756e746a732e636f6d2f6275696c74776974682e706e67 "Built with Grunt")](http://gruntjs.com/)
+[![Built with Grunt](https://camo.githubusercontent.com/02d9825a669fb5b9f53bfe2e5a3fa4a1081cdb6a/68747470733a2f2f63646e2e6772756e746a732e636f6d2f6275696c74776974682e706e67 "Built with Grunt")](http://gruntjs.com/) ![http://img.shields.io/npm/dm/gammautils.svg](http://img.shields.io/npm/dm/gammautils.svg)
 
 Every sort of utilities for Node.js
 
