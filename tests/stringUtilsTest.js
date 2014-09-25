@@ -17,46 +17,46 @@ with(stringUtils) {
 
         'count': {
             'Return right count': function(test) {
-                test.equal(stringUtils.count('Gamma foo Gamma bar Gamma alalao', /Gamma/g), 3);
+                test.equal(count('Gamma foo Gamma bar Gamma alalao', /Gamma/g), 3);
                 test.done();
             },
 
             'Can receive string': function(test) {
-                test.equal(stringUtils.count('Gamma foo Gamma bar Gamma alalao foo', 'foo'), 2);
+                test.equal(count('Gamma foo Gamma bar Gamma alalao foo', 'foo'), 2);
                 test.done();
             },
         },
         'decapitalize': {
             'Test that it works': function(test) {
-                test.equal(stringUtils.decapitalize('RENATO'), 'rENATO');
-                test.equal(stringUtils.decapitalize('GAMMASOFT'), 'gAMMASOFT');
+                test.equal(decapitalize('RENATO'), 'rENATO');
+                test.equal(decapitalize('GAMMASOFT'), 'gAMMASOFT');
                 test.done();
             },
 
             'Wont throw any error if not string and value will pass': function(test) {
-                test.equal(stringUtils.decapitalize(null), null);
-                test.equal(stringUtils.decapitalize(undefined), undefined);
-                test.equal(stringUtils.decapitalize(123), 123);
+                test.equal(decapitalize(null), null);
+                test.equal(decapitalize(undefined), undefined);
+                test.equal(decapitalize(123), 123);
                 test.done();
             }
         },
         'capitalize': {
             'Test that it works': function(test) {
-                test.equal(stringUtils.capitalize('renato'), 'Renato');
-                test.equal(stringUtils.capitalize('gammasoft'), 'Gammasoft');
+                test.equal(capitalize('renato'), 'Renato');
+                test.equal(capitalize('gammasoft'), 'Gammasoft');
                 test.done();
             },
 
             'Wont throw any error if not string and value will pass': function(test) {
-                test.equal(stringUtils.capitalize(null), null);
-                test.equal(stringUtils.capitalize(undefined), undefined);
-                test.equal(stringUtils.capitalize(123), 123);
+                test.equal(capitalize(null), null);
+                test.equal(capitalize(undefined), undefined);
+                test.equal(capitalize(123), 123);
                 test.done();
             }
         },
         'Line': {
             '"add" property exposes defaults parsers': function(test) {
-                var line = new stringUtils.Line();
+                var line = new Line();
 
                 test.equal(typeof line.add.value, 'function');
 
@@ -64,7 +64,7 @@ with(stringUtils) {
             },
 
             'Can pass custom parsers': function(test) {
-                var line = new stringUtils.Line({
+                var line = new Line({
                     numericValue: function(){}
                 });
 
@@ -74,7 +74,7 @@ with(stringUtils) {
             },
 
             'Can add values and retrieve': function(test) {
-                var line = new stringUtils.Line();
+                var line = new Line();
 
                 line.add.value('this');
                 line.add.value('is');
@@ -86,7 +86,7 @@ with(stringUtils) {
             },
 
             'Can add values and retrieve with separator': function(test) {
-                var line = new stringUtils.Line();
+                var line = new Line();
 
                 line.add.value('this');
                 line.add.value('is');
@@ -98,7 +98,7 @@ with(stringUtils) {
             },
 
             'Can pass size limiter for a line': function(test) {
-                var line = new stringUtils.Line(5);
+                var line = new Line(5);
 
                 test.throws(function() {
                     line.add.value('Gammasoft');
@@ -108,7 +108,7 @@ with(stringUtils) {
             },
 
             'Verify that custom parsers works': function(test) {
-                var line = new stringUtils.Line({
+                var line = new Line({
                     number: function(value) {
                         return 'NUMBER: ' + value;
                     },
@@ -125,7 +125,7 @@ with(stringUtils) {
             },
 
             'Verify that size limit is applied after value goes though the custom parsers': function(test) {
-                var line = new stringUtils.Line(3, {
+                var line = new Line(3, {
                     number: function(value) {
                         return 'NUMBER: ' + value;
                     }
@@ -139,7 +139,7 @@ with(stringUtils) {
             },
 
             'Verify that can add a label to a value and can export it': function(test) {
-                var line = new stringUtils.Line();
+                var line = new Line();
 
                 line.add.value('Gammasoft').labeled('Company Name');
                 line.add.value(1).labeled('Number Of Employees');
@@ -154,8 +154,8 @@ with(stringUtils) {
                             return value.toLowerCase();
                         }
                     },
-                    line1 = new stringUtils.Line(5, parsers),
-                    line2 = new stringUtils.Line(5, parsers);
+                    line1 = new Line(5, parsers),
+                    line2 = new Line(5, parsers);
 
                 line1.add.lowerCaseString('Gamma');
 
@@ -169,27 +169,27 @@ with(stringUtils) {
 
         'truncate': {
             'Verifiy that words are keep intact if length is ok': function(test) {
-                test.equal(stringUtils.truncate('Gammasoft', 100), 'Gammasoft');
-                test.equal(stringUtils.truncate('123', 5), '123');
+                test.equal(truncate('Gammasoft', 100), 'Gammasoft');
+                test.equal(truncate('123', 5), '123');
 
                 test.done();
             },
 
             'Verifiy that words are properly truncated': function(test) {
-                test.equal(stringUtils.truncate('Gammasoft', 5), 'Gamma');
-                test.equal(stringUtils.truncate('12345', 1), '1');
+                test.equal(truncate('Gammasoft', 5), 'Gamma');
+                test.equal(truncate('12345', 1), '1');
 
                 test.done();
             },
 
             'Verifiy that length can be passed as a string': function(test) {
-                test.equal(stringUtils.truncate('Gammasoft', '5'), 'Gamma');
+                test.equal(truncate('Gammasoft', '5'), 'Gamma');
 
                 test.done();
             },
 
             'Verifiy that string can be passaed as a number': function(test) {
-                test.equal(stringUtils.truncate(12345, '2'), '12');
+                test.equal(truncate(12345, '2'), '12');
 
                 test.done();
             }
@@ -198,13 +198,13 @@ with(stringUtils) {
         'slugify': {
             //Taken from underscore.string, all credits to them
             'Testing basic functionality': function(test) {
-                test.equal(stringUtils.slugify('Jack & Jill like numbers 1,2,3 and 4 and silly characters ?%.$!/'), 'jack-jill-like-numbers-123-and-4-and-silly-characters');
-                test.equal(stringUtils.slugify('Un éléphant à l\'orée du bois'), 'un-elephant-a-loree-du-bois');
-                test.equal(stringUtils.slugify('I know latin characters: á í ó ú ç ã õ ñ ü ă ș ț'), 'i-know-latin-characters-a-i-o-u-c-a-o-n-u-a-s-t');
-                test.equal(stringUtils.slugify('I am a word too, even though I am but a single letter: i!'), 'i-am-a-word-too-even-though-i-am-but-a-single-letter-i');
-                test.equal(stringUtils.slugify(''), '');
-                test.equal(stringUtils.slugify(null), '');
-                test.equal(stringUtils.slugify(undefined), '');
+                test.equal(slugify('Jack & Jill like numbers 1,2,3 and 4 and silly characters ?%.$!/'), 'jack-jill-like-numbers-123-and-4-and-silly-characters');
+                test.equal(slugify('Un éléphant à l\'orée du bois'), 'un-elephant-a-loree-du-bois');
+                test.equal(slugify('I know latin characters: á í ó ú ç ã õ ñ ü ă ș ț'), 'i-know-latin-characters-a-i-o-u-c-a-o-n-u-a-s-t');
+                test.equal(slugify('I am a word too, even though I am but a single letter: i!'), 'i-am-a-word-too-even-though-i-am-but-a-single-letter-i');
+                test.equal(slugify(''), '');
+                test.equal(slugify(null), '');
+                test.equal(slugify(undefined), '');
                 test.done();
             }
         },
@@ -212,20 +212,20 @@ with(stringUtils) {
         'dasherize': {
             //Taken from underscore.string, all credits to them
             'Testing basic functionality': function(test) {
-                test.equal(stringUtils.dasherize('the_dasherize_string_method'), 'the-dasherize-string-method');
-                test.equal(stringUtils.dasherize('TheDasherizeStringMethod'), '-the-dasherize-string-method');
-                test.equal(stringUtils.dasherize('thisIsATest'), 'this-is-a-test');
-                test.equal(stringUtils.dasherize('this Is A Test'), 'this-is-a-test');
-                test.equal(stringUtils.dasherize('thisIsATest123'), 'this-is-a-test123');
-                test.equal(stringUtils.dasherize('123thisIsATest'), '123this-is-a-test');
-                test.equal(stringUtils.dasherize('the dasherize string method'), 'the-dasherize-string-method');
-                test.equal(stringUtils.dasherize('the  dasherize string method  '), 'the-dasherize-string-method');
-                test.equal(stringUtils.dasherize('téléphone'), 'téléphone');
-                test.equal(stringUtils.dasherize('foo$bar'), 'foo$bar');
-                test.equal(stringUtils.dasherize(''), '');
-                test.equal(stringUtils.dasherize(null), '');
-                test.equal(stringUtils.dasherize(undefined), '');
-                test.equal(stringUtils.dasherize(123), '123');
+                test.equal(dasherize('the_dasherize_string_method'), 'the-dasherize-string-method');
+                test.equal(dasherize('TheDasherizeStringMethod'), '-the-dasherize-string-method');
+                test.equal(dasherize('thisIsATest'), 'this-is-a-test');
+                test.equal(dasherize('this Is A Test'), 'this-is-a-test');
+                test.equal(dasherize('thisIsATest123'), 'this-is-a-test123');
+                test.equal(dasherize('123thisIsATest'), '123this-is-a-test');
+                test.equal(dasherize('the dasherize string method'), 'the-dasherize-string-method');
+                test.equal(dasherize('the  dasherize string method  '), 'the-dasherize-string-method');
+                test.equal(dasherize('téléphone'), 'téléphone');
+                test.equal(dasherize('foo$bar'), 'foo$bar');
+                test.equal(dasherize(''), '');
+                test.equal(dasherize(null), '');
+                test.equal(dasherize(undefined), '');
+                test.equal(dasherize(123), '123');
                 test.done();
             }
         },
@@ -233,7 +233,7 @@ with(stringUtils) {
         'parseFormattedEmailAddress': {
             'Check that parses correctly': function(test) {
                 var email = 'Renato Gama <renatogama@example.com>',
-                    data = stringUtils.parseFormattedEmailAddress(email);
+                    data = parseFormattedEmailAddress(email);
 
                 test.equal(data.name, 'Renato Gama');
                 test.equal(data.email, 'renatogama@example.com');
@@ -241,17 +241,17 @@ with(stringUtils) {
             },
 
             'Return same thing if no formatted email detected': function(test) {
-                test.equal(stringUtils.parseFormattedEmailAddress(42), 42);
-                test.equal(stringUtils.parseFormattedEmailAddress(undefined), undefined);
-                test.equal(stringUtils.parseFormattedEmailAddress('Not a formatted email address'), 'Not a formatted email address');
+                test.equal(parseFormattedEmailAddress(42), 42);
+                test.equal(parseFormattedEmailAddress(undefined), undefined);
+                test.equal(parseFormattedEmailAddress('Not a formatted email address'), 'Not a formatted email address');
 
                 test.done();
             }
         },
         'getSearchString': {
             'Check that search string is generated properly': function(test) {
-                test.equal(stringUtils.getSearchString('São Paulo'), 'saopaulo');
-                test.equal(stringUtils.getSearchString(' São-Paulo. Rio-de-Janeiro.'), 'saopauloriodejaneiro');
+                test.equal(getSearchString('São Paulo'), 'saopaulo');
+                test.equal(getSearchString(' São-Paulo. Rio-de-Janeiro.'), 'saopauloriodejaneiro');
 
                 test.done();
             }
@@ -263,10 +263,10 @@ with(stringUtils) {
 
         'pad': {
             'Check that pads left/right/both positions': function(test){
-                test.equal(stringUtils.pad('1', 5, '0'), '00001');
-                test.equal(stringUtils.pad('1', 5, '0', 'left'), '00001');
-                test.equal(stringUtils.pad('1', 5, '0', 'right'), '10000');
-                test.equal(stringUtils.pad('1', 5, '0', 'both'), '00100');
+                test.equal(pad('1', 5, '0'), '00001');
+                test.equal(pad('1', 5, '0', 'left'), '00001');
+                test.equal(pad('1', 5, '0', 'right'), '10000');
+                test.equal(pad('1', 5, '0', 'both'), '00100');
 
                 test.done();
             }
@@ -274,14 +274,14 @@ with(stringUtils) {
 
         'removeDiacritics': {
             'Can remove most commom diacritics': function(test){
-                test.equal(stringUtils.removeDiacritics('áâàãÁÂÀÃéêèÉÊÈíîìÍÎÌóôòõÓÔÒÕúûùÚÛÙ'), 'aaaaAAAAeeeEEEiiiIIIooooOOOOuuuUUU');
+                test.equal(removeDiacritics('áâàãÁÂÀÃéêèÉÊÈíîìÍÎÌóôòõÓÔÒÕúûùÚÛÙ'), 'aaaaAAAAeeeEEEiiiIIIooooOOOOuuuUUU');
                 test.done();
             }
         },
 
         'reverseString': {
             'Can reverse a string': function(test){
-                test.equal(stringUtils.reverseString('Gammasoft Desenvolvimento de Software Ltda'), 'adtL erawtfoS ed otnemivlovneseD tfosammaG');
+                test.equal(reverseString('Gammasoft Desenvolvimento de Software Ltda'), 'adtL erawtfoS ed otnemivlovneseD tfosammaG');
                 test.done();
             }
         },
@@ -296,7 +296,7 @@ with(stringUtils) {
                         'Metallica - ...And Justice For All - Uploaded by John Doe',
                     ];
 
-                test.equal(stringUtils.findSuffix(data), ' - Uploaded by John Doe');
+                test.equal(findSuffix(data), ' - Uploaded by John Doe');
 
                 data = [
                         '12346',
@@ -304,7 +304,7 @@ with(stringUtils) {
                         '1246',
                     ];
 
-                test.equal(stringUtils.findSuffix(data), '46');
+                test.equal(findSuffix(data), '46');
 
                 test.done();
             }
@@ -320,7 +320,7 @@ with(stringUtils) {
                         'Metallica - ...And Justice For All',
                     ];
 
-                test.equal(stringUtils.findPrefix(data), 'Metallica - ');
+                test.equal(findPrefix(data), 'Metallica - ');
 
                 data = [
                         '1234',
@@ -328,7 +328,7 @@ with(stringUtils) {
                         '12',
                     ];
 
-                test.equal(stringUtils.findPrefix(data), '12');
+                test.equal(findPrefix(data), '12');
 
                 test.done();
             }
@@ -344,7 +344,7 @@ with(stringUtils) {
                         'Metallica - ...And Justice For All'
                     ];
 
-                test.deepEqual(stringUtils.removePrefix(data), [
+                test.deepEqual(removePrefix(data), [
                     'Ride The Lightning',
                     'Master Of Puppets',
                     '...And Justice For All'
@@ -356,7 +356,7 @@ with(stringUtils) {
                         '12',
                     ];
 
-                test.deepEqual(stringUtils.removePrefix(data), ['34', '35', '']);
+                test.deepEqual(removePrefix(data), ['34', '35', '']);
 
                 test.done();
             }
@@ -364,7 +364,7 @@ with(stringUtils) {
 
         'startsWith': {
             'Returns expected results': function(test){
-                test.ok(stringUtils.startsWith('startsWith', 'starts'));
+                test.ok(startsWith('startsWith', 'starts'));
                 test.done();
             }
         },
@@ -372,24 +372,24 @@ with(stringUtils) {
 
         'endsWith': {
             'Returns expected results': function(test){
-                test.ok(stringUtils.endsWith('endsWith', 'With'));
+                test.ok(endsWith('endsWith', 'With'));
                 test.done();
             }
         },
 
         'isIp': {
             'Check some correct IPs': function(test){
-                test.ok(stringUtils.isIp('192.168.0.1'));
-                test.ok(stringUtils.isIp('192.168.1.100'));
-                test.ok(stringUtils.isIp('187.104.237.90'));
+                test.ok(isIp('192.168.0.1'));
+                test.ok(isIp('192.168.1.100'));
+                test.ok(isIp('187.104.237.90'));
 
                 test.done();
             },
 
             'Not IPs': function(test){
-                test.ok(!stringUtils.isIp('foobar'));
-                test.ok(!stringUtils.isIp('192.1681.100'));
-                test.ok(!stringUtils.isIp('187.a.237.90'));
+                test.ok(!isIp('foobar'));
+                test.ok(!isIp('192.1681.100'));
+                test.ok(!isIp('187.a.237.90'));
 
                 test.done();
             },
@@ -397,7 +397,7 @@ with(stringUtils) {
 
         'getUrlSubpaths': {
             'Returns expected results': function(test){
-                test.deepEqual(stringUtils.getUrlSubpaths('/this/is/a/good/test/'), [
+                test.deepEqual(getUrlSubpaths('/this/is/a/good/test/'), [
                     'this',
                     'this/is',
                     'this/is/a',
@@ -411,33 +411,33 @@ with(stringUtils) {
 
         'joinUrls': { //move to urlUtils
             'Returns expected results': function(test){
-                test.equal(stringUtils.joinUrls('', '/is/good'), '/is/good');
-                test.equal(stringUtils.joinUrls('/testing', ''), '/testing');
-                test.equal(stringUtils.joinUrls('/testing', '/is/good'), '/testing/is/good');
-                test.equal(stringUtils.joinUrls('/testing/', '/is/good'), '/testing/is/good');
-                test.equal(stringUtils.joinUrls('/testing/', 'is/good'), '/testing/is/good');
-                test.equal(stringUtils.joinUrls('/testing', 'is/good'), '/testing/is/good');
+                test.equal(joinUrls('', '/is/good'), '/is/good');
+                test.equal(joinUrls('/testing', ''), '/testing');
+                test.equal(joinUrls('/testing', '/is/good'), '/testing/is/good');
+                test.equal(joinUrls('/testing/', '/is/good'), '/testing/is/good');
+                test.equal(joinUrls('/testing/', 'is/good'), '/testing/is/good');
+                test.equal(joinUrls('/testing', 'is/good'), '/testing/is/good');
                 test.done();
             }
         },
 
         'nextSizeType': {
             'Returns expected results': function(test){
-                test.equal(stringUtils.nextSizeType('b'), 'Kb');
-                test.equal(stringUtils.nextSizeType('Kb'), 'Mb');
-                test.equal(stringUtils.nextSizeType('Mb'), 'Gb');
-                test.equal(stringUtils.nextSizeType('Gb'), 'Tb');
-                test.equal(stringUtils.nextSizeType('Tb'), 'Pb');
-                test.equal(stringUtils.nextSizeType('Pb'), 'Pb');
+                test.equal(nextSizeType('b'), 'Kb');
+                test.equal(nextSizeType('Kb'), 'Mb');
+                test.equal(nextSizeType('Mb'), 'Gb');
+                test.equal(nextSizeType('Gb'), 'Tb');
+                test.equal(nextSizeType('Tb'), 'Pb');
+                test.equal(nextSizeType('Pb'), 'Pb');
 
                 test.done();
             },
 
             'Returns null if not expected value is passed': function(test){
-                test.equal(stringUtils.nextSizeType('thisIsNotValid'), null);
-                test.equal(stringUtils.nextSizeType('fooBar'), null);
-                test.equal(stringUtils.nextSizeType('123'), null);
-                test.equal(stringUtils.nextSizeType('asdfg'), null);
+                test.equal(nextSizeType('thisIsNotValid'), null);
+                test.equal(nextSizeType('fooBar'), null);
+                test.equal(nextSizeType('123'), null);
+                test.equal(nextSizeType('asdfg'), null);
 
                 test.done();
             }
@@ -445,16 +445,16 @@ with(stringUtils) {
 
         'formatFileSize': {
             'Formats as expected': function(test){
-                test.equal(stringUtils.formatFileSize(0, 'b'), '0.00b');
-                test.equal(stringUtils.formatFileSize(500, 'b'), '500.00b');
-                test.equal(stringUtils.formatFileSize(500, 'b', 0), '500b');
-                test.equal(stringUtils.formatFileSize(1024, 'b', 2), '1.00Kb');
-                test.equal(stringUtils.formatFileSize(1024, 'b'), '1.00Kb');
-                test.equal(stringUtils.formatFileSize(2048, 'b', 3), '2.000Kb');
-                test.equal(stringUtils.formatFileSize(2013, 'Mb', 4), '1.9658Gb');
-                test.equal(stringUtils.formatFileSize(2912, 'Gb', 5), '2.84375Tb');
-                test.equal(stringUtils.formatFileSize(1025, 'Tb', 1), '1.0Pb');
-                test.equal(stringUtils.formatFileSize(2048, 'Pb', 0), '2048Pb');
+                test.equal(formatFileSize(0, 'b'), '0.00b');
+                test.equal(formatFileSize(500, 'b'), '500.00b');
+                test.equal(formatFileSize(500, 'b', 0), '500b');
+                test.equal(formatFileSize(1024, 'b', 2), '1.00Kb');
+                test.equal(formatFileSize(1024, 'b'), '1.00Kb');
+                test.equal(formatFileSize(2048, 'b', 3), '2.000Kb');
+                test.equal(formatFileSize(2013, 'Mb', 4), '1.9658Gb');
+                test.equal(formatFileSize(2912, 'Gb', 5), '2.84375Tb');
+                test.equal(formatFileSize(1025, 'Tb', 1), '1.0Pb');
+                test.equal(formatFileSize(2048, 'Pb', 0), '2048Pb');
                 test.done();
             }
         },
@@ -473,7 +473,7 @@ with(stringUtils) {
                         'DV': 1
                     };
 
-                stringUtils.parseSequence('NFe52110200132781000178550010000005480000005481', sd);
+                parseSequence('NFe52110200132781000178550010000005480000005481', sd);
 
                 test.equal(sd['Valor Fixo'], 'NFe');
                 test.equal(sd['Codigo da Uf'], '52');
@@ -490,29 +490,29 @@ with(stringUtils) {
 
         'onlyLettersAndNumbers': {
             'Check that only contains letters and numbers': function(test){
-                test.ok(stringUtils.onlyLettersAndNumbers('AaBbCc1872817873aodsiufh'));
-                test.ok(stringUtils.onlyLettersAndNumbers('AOIUHAoiuhi3429876492iuyegfwuadiu'));
+                test.ok(onlyLettersAndNumbers('AaBbCc1872817873aodsiufh'));
+                test.ok(onlyLettersAndNumbers('AOIUHAoiuhi3429876492iuyegfwuadiu'));
 
-                test.equal(stringUtils.onlyLettersAndNumbers('abcdefgh_32234'), false);
-                test.equal(stringUtils.onlyLettersAndNumbers('!@#$%ˆ&*()'), false);
-                test.equal(stringUtils.onlyLettersAndNumbers('{}|{}|\':A\': çdc'), false);
+                test.equal(onlyLettersAndNumbers('abcdefgh_32234'), false);
+                test.equal(onlyLettersAndNumbers('!@#$%ˆ&*()'), false);
+                test.equal(onlyLettersAndNumbers('{}|{}|\':A\': çdc'), false);
 
                 test.done();
             },
 
             'Check that only contains letters and numbers of a given size': function(test){
-                test.ok(stringUtils.onlyLettersAndNumbers('abc123', '6'));
-                test.ok(stringUtils.onlyLettersAndNumbers('abc123', 6));
-                test.ok(stringUtils.onlyLettersAndNumbers('abcedfghi', '9'));
-                test.ok(stringUtils.onlyLettersAndNumbers('abcedfghi', 9));
-                test.ok(stringUtils.onlyLettersAndNumbers('', '*'));
-                test.ok(stringUtils.onlyLettersAndNumbers('1', '+'));
-                test.ok(stringUtils.onlyLettersAndNumbers('a', '+'));
-                test.ok(stringUtils.onlyLettersAndNumbers('1324wef234efwga', '+'));
+                test.ok(onlyLettersAndNumbers('abc123', '6'));
+                test.ok(onlyLettersAndNumbers('abc123', 6));
+                test.ok(onlyLettersAndNumbers('abcedfghi', '9'));
+                test.ok(onlyLettersAndNumbers('abcedfghi', 9));
+                test.ok(onlyLettersAndNumbers('', '*'));
+                test.ok(onlyLettersAndNumbers('1', '+'));
+                test.ok(onlyLettersAndNumbers('a', '+'));
+                test.ok(onlyLettersAndNumbers('1324wef234efwga', '+'));
 
-                test.equal(stringUtils.onlyLettersAndNumbers('', '+'), false);
-                test.equal(stringUtils.onlyLettersAndNumbers('123asd', '1'), false);
-                test.equal(stringUtils.onlyLettersAndNumbers('{}|{}|\':A\': çdc', '5'), false);
+                test.equal(onlyLettersAndNumbers('', '+'), false);
+                test.equal(onlyLettersAndNumbers('123asd', '1'), false);
+                test.equal(onlyLettersAndNumbers('{}|{}|\':A\': çdc', '5'), false);
 
                 test.done();
             }
@@ -520,22 +520,22 @@ with(stringUtils) {
 
         'getRandomString': {
             'Check length of string': function(test){
-                test.ok(stringUtils.getRandomString(10).length === 10);
-                test.ok(stringUtils.getRandomString(5).length === 5);
+                test.ok(getRandomString(10).length === 10);
+                test.ok(getRandomString(5).length === 5);
                 test.done();
             },
 
             'Check that string contains only numbers': function(test){
-                test.ok(/^\d+$/.test(stringUtils.getRandomString(5, '1234567890')));
-                test.ok(/^\d+$/.test(stringUtils.getRandomString(5, '1234567890')));
-                test.ok(/^\d+$/.test(stringUtils.getRandomString(5, '1234567890')));
-                test.ok(/^\d+$/.test(stringUtils.getRandomString(5, '1234567890')));
-                test.ok(/^\d+$/.test(stringUtils.getRandomString(5, '1234567890')));
-                test.ok(/^\d+$/.test(stringUtils.getRandomString(5, '1234567890')));
-                test.ok(/^\d+$/.test(stringUtils.getRandomString(5, '1234567890')));
-                test.ok(/^\d+$/.test(stringUtils.getRandomString(5, '1234567890')));
-                test.ok(/^\d+$/.test(stringUtils.getRandomString(5, '1234567890')));
-                test.ok(/^\d+$/.test(stringUtils.getRandomString(5, '1234567890')));
+                test.ok(/^\d+$/.test(getRandomString(5, '1234567890')));
+                test.ok(/^\d+$/.test(getRandomString(5, '1234567890')));
+                test.ok(/^\d+$/.test(getRandomString(5, '1234567890')));
+                test.ok(/^\d+$/.test(getRandomString(5, '1234567890')));
+                test.ok(/^\d+$/.test(getRandomString(5, '1234567890')));
+                test.ok(/^\d+$/.test(getRandomString(5, '1234567890')));
+                test.ok(/^\d+$/.test(getRandomString(5, '1234567890')));
+                test.ok(/^\d+$/.test(getRandomString(5, '1234567890')));
+                test.ok(/^\d+$/.test(getRandomString(5, '1234567890')));
+                test.ok(/^\d+$/.test(getRandomString(5, '1234567890')));
 
                 test.done();
             }
@@ -543,23 +543,23 @@ with(stringUtils) {
 
         'shortenName': {
             'Check that names are properly shortened with level 0': function(test){
-                test.equal('Elizabeth C. Finnegan', stringUtils.shortenName('Elizabeth Claire Finnegan'));
-                test.equal('Hannah J. Whittaker', stringUtils.shortenName('Hannah Jocelyn Whittaker'));
-                test.equal('Madeline Eve Cooper', stringUtils.shortenName('Madeline Eve Cooper'));
-                test.equal('Alyssa Marie', stringUtils.shortenName('Alyssa Marie'));
-                test.equal('Catherine F. M. C. Galon', stringUtils.shortenName('Catherine Françoise Marie Christine Galon'));
-                test.equal('Armand-Jean Du Plessis', stringUtils.shortenName('Armand-Jean Du Plessis'));
+                test.equal('Elizabeth C. Finnegan', shortenName('Elizabeth Claire Finnegan'));
+                test.equal('Hannah J. Whittaker', shortenName('Hannah Jocelyn Whittaker'));
+                test.equal('Madeline Eve Cooper', shortenName('Madeline Eve Cooper'));
+                test.equal('Alyssa Marie', shortenName('Alyssa Marie'));
+                test.equal('Catherine F. M. C. Galon', shortenName('Catherine Françoise Marie Christine Galon'));
+                test.equal('Armand-Jean Du Plessis', shortenName('Armand-Jean Du Plessis'));
 
                 test.done();
             },
 
             'shortenName: Check that names are properly shortened with level 1': function(test){
-                test.equal('Elizabeth Finnegan', stringUtils.shortenName('Elizabeth Claire Finnegan', 1));
-                test.equal('Hannah Whittaker', stringUtils.shortenName('Hannah Jocelyn Whittaker', 1));
-                test.equal('Madeline Cooper', stringUtils.shortenName('Madeline Eve Cooper', 1));
-                test.equal('Alyssa Marie', stringUtils.shortenName('Alyssa Marie', 1));
-                test.equal('Catherine Galon', stringUtils.shortenName('Catherine Françoise Marie Christine Galon', 1));
-                test.equal('Armand-Jean Plessis', stringUtils.shortenName('Armand-Jean Du Plessis', 1));
+                test.equal('Elizabeth Finnegan', shortenName('Elizabeth Claire Finnegan', 1));
+                test.equal('Hannah Whittaker', shortenName('Hannah Jocelyn Whittaker', 1));
+                test.equal('Madeline Cooper', shortenName('Madeline Eve Cooper', 1));
+                test.equal('Alyssa Marie', shortenName('Alyssa Marie', 1));
+                test.equal('Catherine Galon', shortenName('Catherine Françoise Marie Christine Galon', 1));
+                test.equal('Armand-Jean Plessis', shortenName('Armand-Jean Du Plessis', 1));
 
                 test.done();
             }
@@ -567,7 +567,7 @@ with(stringUtils) {
 
         'splitWords': {
             'Check no whitespace characters are included': function(test){
-                test.deepEqual(['This', 'is', 'the', 'expected', 'result'], stringUtils.splitWords(' This   is the    expected        result    '));
+                test.deepEqual(['This', 'is', 'the', 'expected', 'result'], splitWords(' This   is the    expected        result    '));
 
                 test.done();
             }
@@ -575,19 +575,19 @@ with(stringUtils) {
 
         'getLink': {
             'Generates a proper link': function(test){
-                test.equal('<a href="/test.html">test</a>', stringUtils.getLink('test', {href: '/test.html'}));
+                test.equal('<a href="/test.html">test</a>', getLink('test', {href: '/test.html'}));
 
-                test.equal('<a title="The Title" href="/test.html">test</a>', stringUtils.getLink('test', {
+                test.equal('<a title="The Title" href="/test.html">test</a>', getLink('test', {
                     href: '/test.html',
                     title: 'The Title'
                 }));
 
-                test.equal('<a target="_blank" href="/test.html">test</a>', stringUtils.getLink('test', {
+                test.equal('<a target="_blank" href="/test.html">test</a>', getLink('test', {
                     href: '/test.html',
                     target: '_blank'
                 }));
 
-                test.equal('<a title="The Title" target="_blank" href="/test.html">test</a>', stringUtils.getLink('test', {
+                test.equal('<a title="The Title" target="_blank" href="/test.html">test</a>', getLink('test', {
                     href: '/test.html',
                     title: 'The Title',
                     target: '_blank'
