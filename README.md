@@ -14,7 +14,7 @@ Every sort of utilities for Node.js
 
 ### USAGE
 
-In the meanwhile you may take a look at the test folder while documentation aren't ready!
+Documentation is available here: http://utils.gammasoft.com.br/
 
 ### CONTRIBUTORS
 
