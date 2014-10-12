@@ -434,6 +434,14 @@ module.exports = {
         }
     },
 
+    'modReduce': {
+        'Check that it calculates the right values': function(test){
+            test.equal(mathUtils.modReduce('036532', [2, 3, 4, 5, 6, 7]), 2);
+            test.equal(mathUtils.modReduce('347389', [2, 3, 4, 5, 6, 7]), 7);
+            test.done();
+        }
+    },
+
     'convolve': {
         'Check that convolves properly': function(test){
             test.deepEqual(mathUtils.convolve([1, 1, 1], [0.5, 2, 2.5, 1]), [0.5, 2.5, 5, 5.5, 3.5, 1]);
