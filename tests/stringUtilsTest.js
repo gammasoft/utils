@@ -7,6 +7,14 @@ with(stringUtils) {
         '__name': { '': function(test) { test.done(); } },
         '__description': { '': function(test) { test.done(); } },
 
+        'reduceWhiteSpaces': {
+            'Replaces two or more consecutive whitespaces with a single one and trims the result': function(test) {
+                test.equal(reduceWhiteSpaces('    this    is   \t a    test\t      '), 'this is a test');
+
+                test.done();
+            }
+        },
+
         'camelCaseJoin': {
             'Joins two strings making sure the first starts with lower case and the second with upper case': function(test) {
                 test.equal(camelCaseJoin('Camel', 'case'), 'camelCase');
