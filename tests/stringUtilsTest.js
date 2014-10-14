@@ -464,6 +464,12 @@ with(stringUtils) {
                 test.equal(formatFileSize(1025, 'Tb', 1), '1.0Pb');
                 test.equal(formatFileSize(2048, 'Pb', 0), '2048Pb');
                 test.done();
+            },
+
+            'You can provide your custom decimal separator': function(test) {
+                test.equal(formatFileSize(1024, 'b', 2, ','), '1,00Kb');
+                test.equal(formatFileSize(2912, 'Gb', 5, ','), '2,84375Tb');
+                test.done();
             }
         },
 
