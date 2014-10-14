@@ -61,7 +61,11 @@
 							<div style="display: inline-block;">
 								<a href="<%= contributor.url %>"><%= contributor.name %></a>
 								<br />
-								<span class="text-muted"><%= contributor.contributions %> commits</span>
+								<% if(contributor.username) { %>
+									<a href="https://github.com/gammasoft/utils/commits/master?author=<%=contributor.username%>"><%= contributor.contributions %> commits</a>
+								<% } else { %>
+									<span class="text-muted"><%= contributor.contributions %> commits</span>
+								<% } %>
 							</div>
 						</div>
 					</div>

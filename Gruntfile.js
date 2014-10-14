@@ -130,9 +130,15 @@ module.exports = function(grunt) {
         pack.contributors = pack.contributors.map(function(contributor) {
             contributor.avatar = [
                 'http://gravatar.com/avatar/',
-                utils.crypto.md5(contributor.email),
+                utils.crypto.md5(contributor.email || contributor.url),
                 '?s=40&d=identicon'
             ].join('');
+
+            var match = contributor.url && contributor.url.match(/^https:\/\/github.com\/(.*)$/);
+
+            if(match) {
+                contributor.username = match[1];
+            }
 
             return contributor;
         }).sort(function(a, b) {
@@ -140,6 +146,7 @@ module.exports = function(grunt) {
         });
 
         pack.author = utils.string.parseFormattedEmailAddress(pack.author);
+
         pack.author.avatar = [
             'http://gravatar.com/avatar/',
             utils.crypto.md5(pack.author.email),
