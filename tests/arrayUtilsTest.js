@@ -915,7 +915,7 @@ module.exports = {
     },
 
     'intersection': {
-        'Check that results are correct': function(test){
+        'This function allows you to filter content that are in both arrays at the same time': function(test){
             var a = [1, 2, 3, 4];
             var b = [2, 3, 4, 5];
 
@@ -923,11 +923,56 @@ module.exports = {
             test.done();
         },
 
-        'Check that results are the same no matter the order of the parameters': function(test){
+        'Results are the same no matter the order of the parameters': function(test){
             var a = [1, 2, 3, 4];
             var b = [2, 3, 4, 5];
 
             test.deepEqual(arrayUtils.intersection(a, b), arrayUtils.intersection(b, a));
+            test.done();
+        },
+
+        'You can pass a custom filtering function': function(test) {
+            var allowedRoles = [{
+                name: 'admin'
+            }, {
+                name: 'visitor'
+            }];
+
+            var userRoles = [{
+                role: 'admin'
+            }]
+
+            function customFilter(allowedRole, userRole) {
+                return allowedRole.name === userRole.role;
+            }
+
+            test.deepEqual(arrayUtils.intersection(allowedRoles, userRoles, customFilter), [{
+                name: 'admin'
+            }]);
+
+            test.done();
+        },
+
+        'When you pass a custom comparator then the order matters. It will return the the element from the first array.': function(test) {
+            var allowedRoles = [{
+                name: 'admin'
+            }, {
+                name: 'visitor'
+            }];
+
+            var userRoles = [{
+                role: 'admin'
+            }]
+
+            function customFilter(userRole, allowedRole) {
+                return userRole.role === allowedRole.name;
+            }
+
+            //Compare to the example above
+            test.deepEqual(arrayUtils.intersection(userRoles, allowedRoles, customFilter), [{
+                role: 'admin'
+            }]);
+
             test.done();
         },
     },

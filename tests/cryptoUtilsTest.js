@@ -17,6 +17,8 @@ module.exports = {
     '__description': { '': function(test) { test.done(); } },
     'hmac': {
         //too random to test
+        //
+        //It's return value is already in base64
     },
 
     'sha1': {
