@@ -2,16 +2,6 @@
 
 var cryptoUtils = require('../lib/cryptoUtils');
 
-function testForCipherAndDecipher(test){
-    var value = 'gammautils';
-    var password = 'password';
-
-    var cipher = cryptoUtils.cipher(value, password);
-
-    test.equal(value, cryptoUtils.decipher(cipher, password));
-    test.done();
-}
-
 module.exports = {
     '__name': { '': function(test) { test.done(); } },
     '__description': { '': function(test) { test.done(); } },
@@ -38,14 +28,35 @@ module.exports = {
     },
 
     'cipher': {
-        'Check that can cipher and decipher properly': function(test) {
-            testForCipherAndDecipher(test);
+        'This function allows you to cipher any text': function(test) {
+            var value = 'gammautils',
+                password = 'password',
+                cipher = cryptoUtils.cipher(value, password);
+
+            test.equal(value, cryptoUtils.decipher(cipher, password));
+            test.done();
+        },
+
+        'Will produce different ciphers for the same text being encoded': function(test) {
+            var value = 'gammautils',
+                password = 'password';
+
+            var cipher1 = cryptoUtils.cipher(value, password),
+                cipher2 = cryptoUtils.cipher(value, password);
+
+            test.notEqual(cipher1, cipher2);
+            test.done();
         }
     },
 
     'decipher': {
-        'Check that can cipher and decipher properly': function(test) {
-            testForCipherAndDecipher(test);
+        'This function allows you to decipher any text since you know the key and the algorithm used': function(test) {
+            var value = 'gammautils',
+                password = 'password',
+                cipher = cryptoUtils.cipher(value, password);
+
+            test.equal(value, cryptoUtils.decipher(cipher, password));
+            test.done();
         }
     }
 };
