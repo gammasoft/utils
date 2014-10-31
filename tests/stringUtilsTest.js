@@ -7,6 +7,19 @@ with(stringUtils) {
         '__name': { '': function(test) { test.done(); } },
         '__description': { '': function(test) { test.done(); } },
 
+        'insert': {
+            'Use this function to insert a string at a given index of another string': function(test) {
+                var original = 'GMMSFT';
+
+                original = insert(original, 1, 'A');
+                original = insert(original, 4, 'A');
+                original = insert(original, 6, 'O');
+
+                test.equal(original, 'GAMMASOFT');
+                test.done();
+            }
+        },
+
         'reduceWhiteSpaces': {
             'Replaces two or more consecutive whitespaces with a single one and trims the result': function(test) {
                 test.equal(reduceWhiteSpaces('    this    is   \t a    test\t      '), 'this is a test');
