@@ -50,6 +50,13 @@
   },
   "contributors": [
     {
+      "name": "Renato Gama",
+      "email": "renatoargh@gmail.com",
+      "url": "https://github.com/renatoargh",
+      "contributions": 139,
+      "hireable": false
+    },
+    {
       "name": "Danilo Sampaio",
       "email": "",
       "url": "https://github.com/danilosampaio",
@@ -62,13 +69,6 @@
       "url": "https://github.com/inobrega",
       "contributions": 2,
       "hireable": true
-    },
-    {
-      "name": "Renato Gama",
-      "email": "renatoargh@gmail.com",
-      "url": "https://github.com/renatoargh",
-      "contributions": 138,
-      "hireable": false
     }
   ]
 }

@@ -21,6 +21,20 @@ module.exports = {
 
         test.done();
     },
+    'sum': {
+        //Intended to be used with [].reduce
+        'Can sum properly': function(test) {
+            test.equal(2, mathUtils.sum(1, 1));
+            test.done();
+        }
+    },
+    'subtract': {
+        //Intended to be used with [].reduce
+        'Can subtract properly': function(test) {
+            test.equal(0, mathUtils.subtract(1, 1));
+            test.done();
+        }
+    },
     'Maximum': {
         'Tests basic functionality': function(test) {
             var maximum = new mathUtils.Maximum();
@@ -436,6 +450,60 @@ module.exports = {
         'Can start from the left side (index 0)': function(test){
             test.equal(mathUtils.mod('036532', [2, 3, 4, 5, 6, 7], 11, 'leftToRight'), 2);
             test.equal(mathUtils.mod('347389', [2, 3, 4, 5, 6, 7], 11, 'leftToRight'), 7);
+            test.done();
+        },
+
+        'You can pass parameters as a hash': function(test) {
+            test.equal(mathUtils.mod({
+                value: '036532',
+                factors: [2, 3, 4, 5, 6, 7]
+            }), 4);
+
+            test.equal(mathUtils.mod({
+                value: '347389',
+                factors: [2, 3, 4, 5, 6, 7]
+            }), 2);
+
+            test.equal(mathUtils.mod({
+                value: '036532',
+                factors: [2, 3, 4, 5, 6, 7],
+                divider: 11,
+                direction: 'leftToRight'
+            }), 2);
+
+            test.done();
+        },
+
+        'You can return the cumplimentary value to the divider': function(test) {
+            test.equal(mathUtils.mod({
+                value: '036532',
+                factors: [2, 3, 4, 5, 6, 7],
+                divider: 11,
+                cumplimentaryToDivider: true
+            }), 7);
+
+            test.done();
+        },
+
+        'You can reduce summation terms': function(test) {
+            test.equal(mathUtils.mod({
+                value: '016745145',
+                factors: [2, 1],
+                divider: 10,
+                direction: 'rightToLeft',
+                cumplimentaryToDivider: true,
+                reduceSummationTerms: true
+            }), 9);
+
+            test.equal(mathUtils.mod({
+                value: '01674514515721897666',
+                factors: [2, 1],
+                divider: 10,
+                direction: 'rightToLeft',
+                cumplimentaryToDivider: true,
+                reduceSummationTerms: true
+            }), 6);
+
             test.done();
         }
     },
