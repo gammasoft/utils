@@ -380,11 +380,10 @@ module.exports = {
     },
 
     'pick': {
-
         'if whitelist is undefined then returns an empty object': function(test){
 
             var object = {
-                name: 'Father',
+                name: 'Foo',
                 job: 'Developer',
                 age: 40
             };
@@ -394,23 +393,21 @@ module.exports = {
             test.done();
         },
 
-        'properly pick whitelisted properties': function(test){
-
+        'properly pick whitelisted properties': function(test) {
             var object = {
-                name: 'Father',
+                name: 'Foo',
                 job: 'Developer',
                 age: 40
             };
 
-            test.deepEqual(objectUtils.pick(object, ['name', 'job']), {name: 'Father', job: 'Developer'});
+            test.deepEqual(objectUtils.pick(object, ['name', 'job']), {name: 'Foo', job: 'Developer'});
 
             test.done();
         },
 
-        'if whitelist is a empty array then returns the original object': function(test){
-
+        'if whitelist is a empty array then returns the original object': function(test) {
             var object = {
-                name: 'Father',
+                name: 'Foo',
                 job: 'Developer',
                 age: 40
             };
@@ -421,18 +418,17 @@ module.exports = {
         },
 
         'properly pick whitelisted properties from objects inside an array': function(test) {
-
             var array = [{
-                name: 'Inobrega',
+                name: 'Foo',
                 job: 'Developer',
                 age: 40
             },{
-                name: 'Gammasoft',
+                name: 'Bar',
                 job: 'Designer',
                 age: 37
             }];
 
-            test.deepEqual(objectUtils.pick(array, ['name']), [{name: 'Inobrega'}, {name: 'Gammasoft'}]);
+            test.deepEqual(objectUtils.pick(array, ['name']), [{name: 'Foo'}, {name: 'Bar'}]);
 
             test.done();
         }
