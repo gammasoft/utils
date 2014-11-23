@@ -11,6 +11,20 @@ module.exports = {
         //It's return value is already in base64
     },
 
+    'toBase64': {
+        'Encodes properly': function(test) {
+            cryptoUtils.toBase64('Gammasoft', 'R2FtbWFzb2Z0');
+            test.done();
+        },
+    },
+
+    'fromBase64': {
+        'Descodes properly': function(test) {
+            cryptoUtils.toBase64('R2FtbWFzb2Z0', 'R2FtbWFzb2Z0');
+            test.done();
+        },
+    },
+
     'sha1': {
         'Check that sha1 is properly calculated': function(test){
             test.ok(cryptoUtils.sha1('gammautils'), '87d70d555f99168adcb987e0ce6a29f4aa7de885');
