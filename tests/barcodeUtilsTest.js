@@ -31,6 +31,9 @@ module.exports = {
             var barcode3 = barcodeUtils.code128.encode('52060433009911002506550120000007800267301615');
             test.equal(barcode3, 'ÒT&$A Ì+ 9&W!4  \'p"c>0/-Ó');
 
+            var barcode4 = barcodeUtils.code128.encode('53150219950366000150550010000000051198698992');
+            test.equal(barcode4, 'ÒU/"3È#b !RW *   %+Ëey|ÏÓ');
+
             test.done();
         },
     },
