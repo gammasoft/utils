@@ -185,6 +185,34 @@ with(stringUtils) {
                 });
 
                 test.done();
+            },
+
+            'Throws an error if toString is called in strictSize mode when size is different of the one specified': function(test) {
+                var line = new Line(500);
+
+                line.add.value('Will throw an error because size is not 500');
+
+                test.throws(function() {
+                    line.toString('', false, {
+                        strictSize: true
+                    });
+                });
+
+                test.done();
+            },
+
+            'Does not throw an error when toString is called in strictSize mode and has the right value': function(test) {
+                var line = new Line(9);
+
+                line.add.value('Gammasoft');
+
+                test.doesNotThrow(function() {
+                    line.toString('', false, {
+                        strictSize: true
+                    });
+                });
+
+                test.done();
             }
         },
 

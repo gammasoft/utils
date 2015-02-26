@@ -1,6 +1,6 @@
 {
   "name": "gammautils",
-  "version": "0.0.66",
+  "version": "0.0.67",
   "description": "Lots of utilities for Node.js",
   "main": "index.js",
   "directories": {
@@ -50,6 +50,13 @@
   },
   "contributors": [
     {
+      "name": "Danilo Sampaio",
+      "email": "danilo.sampaio@gmail.com",
+      "url": "https://github.com/danilosampaio",
+      "contributions": 2,
+      "hireable": false
+    },
+    {
       "name": "Ilson Nóbrega",
       "email": "ilson@inobrega.com.br",
       "url": "https://github.com/inobrega",
@@ -57,17 +64,10 @@
       "hireable": true
     },
     {
-      "name": "Danilo Sampaio",
-      "email": "",
-      "url": "https://github.com/danilosampaio",
-      "contributions": 2,
-      "hireable": false
-    },
-    {
       "name": "Renato Gama",
       "email": "renatoargh@gmail.com",
       "url": "https://github.com/renatoargh",
-      "contributions": 144,
+      "contributions": 146,
       "hireable": false
     }
   ]
