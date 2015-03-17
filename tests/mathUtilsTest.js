@@ -505,7 +505,49 @@ module.exports = {
             }), 6);
 
             test.done();
-        }
+        },
+
+        'Additional tests 1': function(test) {
+            var digit = mathUtils.mod({
+                value:   [0, 0, 5, 7, 1, 2, 3, 4, 5, 1, 1, 0, 1, 2, 3, 4, 5, 6, 7, 8].join(''),
+                factors: [2, 1],
+                divider: 10,
+                direction: 'rightToLeft',
+                reduceSummationTerms: true,
+                cumplimentaryToDivider: true
+            });
+
+            test.equal(digit, 8);
+            test.done();
+        },
+
+        'Additional tests 2': function(test) {
+            var digit = mathUtils.mod({
+                value: '06549868910900000001',
+                factors: [2, 1],
+                divider: 10,
+                direction: 'rightToLeft',
+                reduceSummationTerms: true,
+                cumplimentaryToDivider: true
+            });
+
+            test.equal(digit, 3);
+            test.done();
+        },
+
+        'Additional tests 3': function(test) {
+            var digit = mathUtils.mod({
+                value: '06549868910900000002',
+                factors: [2, 1],
+                divider: 10,
+                direction: 'rightToLeft',
+                reduceSummationTerms: true,
+                cumplimentaryToDivider: true
+            });
+
+            test.equal(digit, 1);
+            test.done();
+        },
     },
 
     'convolve': {
