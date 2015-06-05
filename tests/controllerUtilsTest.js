@@ -240,7 +240,44 @@ module.exports = {
             });
             test.ok(mock.nextWasCalled);
             test.done();
-        }
+        },
+
+        'Verify that passing maxAge sets Access-Control-Max-Age': function(test) {
+            var mock = new Mock();
+            var allowCORS = controllerUtils.allowCORS({
+                allowHeaders: 'foo',
+                allowMethods: 'bar',
+                allowOrigin: '42',
+                exposeHeaders: 'alalao',
+                maxAge: 123
+            });
+
+            allowCORS(mock.req, mock.res, mock.next);
+
+            test.equal(mock.res.headerWasCalledWith.length, 5);
+            test.deepEqual(mock.res.headerWasCalledWith[0], {
+                header: 'Access-Control-Allow-Origin',
+                value: '42'
+            });
+            test.deepEqual(mock.res.headerWasCalledWith[1], {
+                header: 'Access-Control-Allow-Methods',
+                value: 'bar'
+            });
+            test.deepEqual(mock.res.headerWasCalledWith[2], {
+                header: 'Access-Control-Allow-Headers',
+                value: 'foo'
+            });
+            test.deepEqual(mock.res.headerWasCalledWith[3], {
+                header: 'Access-Control-Expose-Headers',
+                value: 'alalao'
+            });
+            test.deepEqual(mock.res.headerWasCalledWith[4], {
+                header: 'Access-Control-Max-Age',
+                value: 123
+            });
+            test.ok(mock.nextWasCalled);
+            test.done();
+        },
 
     }
 };
