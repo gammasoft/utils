@@ -540,6 +540,98 @@ with(stringUtils) {
                 test.equal(sd['Codigo Numerico'], '000000548');
                 test.equal(sd.DV, '1');
                 test.done();
+            },
+
+            'Can pass strictSize option to prevent parsing of strings with dofferent length': function(test) {
+                var sd = {
+                    'Valor Fixo': 3,
+                    'Codigo da Uf': 2,
+                    'AAMM da Emissao': '4',
+                    'CNPJ do Emitente': 14,
+                    'Modelo': 2,
+                    'Serie': '3',
+                    'Numero da NFe': 9,
+                    'Codigo Numerico': '9',
+                    'DV': 1
+                };
+
+                test.throws(function() {
+                    parseSequence('I must have 47 characters, otherwise I fail!', sd, {
+                        strictSize: 47
+                    });
+                });
+
+                test.done();
+            },
+
+            'Can pass definition object instead of only offset number': function(test) {
+                var sd = {
+                    'someNumber': 3,
+                    'someString': {
+                        offset: '2'
+                    },
+                };
+
+                parseSequence('123AB', sd, {
+                    strictSize: 5
+                });
+
+                test.equal(sd['someNumber'], '123');
+                test.equal(sd['someString'], 'AB');
+                test.done();
+            },
+
+            'Can ignore a property': function(test) {
+                var sd = {
+                    'someNumber': 3,
+                    'someString': {
+                        offset: '2',
+                        ignore: true
+                    },
+                    'value': 2,
+                };
+
+                var results = parseSequence('123AB45', sd, {
+                    strictSize: 7
+                });
+
+                test.equal(results['someNumber'], '123');
+                test.equal(typeof results['someString'], 'undefined');
+                test.equal(results['value'], '45');
+                test.done();
+            },
+
+            'Can perform convertions': function(test) {
+                var sd = {
+                    'someNumber': {
+                        offset: 3,
+                        convertTo: 'number'
+                    },
+                    'someString': {
+                        offset: '2',
+                        convertTo: 'string'
+                    },
+                    'someDate': {
+                        offset: '24',
+                        convertTo: 'date'
+                    },
+                    'custom': {
+                        offset: 12,
+                        convertTo: function(value) {
+                            return 'custom conversion works'
+                        }
+                    }
+                };
+
+                parseSequence('123AB2015-07-02T16:30:39.552Zdoesntmatter', sd, {
+                    strictSize: 41
+                });
+
+                test.strictEqual(sd['someNumber'], 123);
+                test.strictEqual(sd['someString'], 'AB');
+                test.strictEqual(sd['someDate'].valueOf(), 1435854639552);
+                test.strictEqual(sd['custom'], 'custom conversion works');
+                test.done();
             }
         },
 
