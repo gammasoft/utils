@@ -6,6 +6,57 @@ var util = require('util'),
 module.exports = {
     '__name': { '': function(test) { test.done(); } },
     '__description': { '': function(test) { test.done(); } },
+
+    'every': {
+        'Returns true if every elemnt in the given array is truthy': function(test) {
+            var array = [
+                true,
+                'gammasoft',
+                new Date(),
+                1
+            ];
+
+            test.equal(arrayUtils.every(array), true);
+            test.done();
+        },
+
+        'Returns false if at least one element is not truthy 1': function(test) {
+            var array = [
+                true,
+                'gammasoft',
+                new Date(),
+                0
+            ];
+
+            test.equal(arrayUtils.every(array), false);
+            test.done();
+        },
+
+        'Returns false if at least one element is not truthy 2': function(test) {
+            var array = [
+                true,
+                'gammasoft',
+                new Date(),
+                false
+            ];
+
+            test.equal(arrayUtils.every(array), false);
+            test.done();
+        },
+
+        'Returns false if at least one element is not truthy 3': function(test) {
+            var array = [
+                true,
+                'gammasoft',
+                new Date(),
+                ''
+            ];
+
+            test.equal(arrayUtils.every(array), false);
+            test.done();
+        }
+    },
+
     'sort': {
         'default sorting is ascending': function(test) {
             var array = [2, 3, 5, 1, 6];
