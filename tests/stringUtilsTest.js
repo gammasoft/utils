@@ -7,6 +7,34 @@ with(stringUtils) {
         '__name': { '': function(test) { test.done(); } },
         '__description': { '': function(test) { test.done(); } },
 
+        'removeNewLines': {
+            'Remove new lines properly': function(test) {
+                var text = 'text\nfull\nof\nnew\nlines!';
+                test.equal(stringUtils.removeNewLines(text), 'text full of new lines!');
+                test.done();
+            },
+
+            'Can replace new lines with another string other than whitespace': function(test) {
+                var text = 'text\nfull\nof\nnew\nlines!';
+                test.equal(stringUtils.removeNewLines(text, ' - '), 'text - full - of - new - lines!');
+                test.done();
+            },
+        },
+
+        'removeExtraSpaces': {
+            'Remove extra spaces properly': function(test) {
+                var text = ' this    is      a   test!   ';
+                test.equal(stringUtils.removeExtraSpaces(text), 'this is a test!');
+                test.done();
+            },
+
+            'Can remove new lines and tabs too': function(test) {
+                var text = ' this    is   \t   a   test!   \n        another    line    here  ';
+                test.equal(stringUtils.removeExtraSpaces(text), 'this is a test! another line here');
+                test.done();
+            }
+        },
+
         'insert': {
             'Use this function to insert a string at a given index of another string': function(test) {
                 var original = 'GMMSFT';
