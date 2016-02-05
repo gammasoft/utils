@@ -535,6 +535,12 @@ with(stringUtils) {
                 test.done();
             },
 
+            'Can pass numeric strings instead of number': function(test) {
+                test.equal(formatFileSize('173'), '173.00b');
+                test.equal(formatFileSize('1024'), '1.00Kb');
+                test.done();
+            },
+
             'You can provide your custom decimal separator': function(test) {
                 test.equal(formatFileSize(1024, 'b', 2, ','), '1,00Kb');
                 test.equal(formatFileSize(2912, 'Gb', 5, ','), '2,84375Tb');
