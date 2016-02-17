@@ -241,6 +241,57 @@ with(stringUtils) {
                 });
 
                 test.done();
+            },
+
+            'Can specifiy cursor position': function(test) {
+                var line = new Line(10);
+
+
+                test.doesNotThrow(function() {
+                    line.add.value('ASD').at(0);
+                    line.add.value('FGH').at(3);
+                });
+
+                test.done();
+            },
+
+            'Will throw exception if explicit index mismatch': function(test) {
+                var line = new Line(10);
+
+                test.throws(function() {
+                    line.add.value(42).at(0);
+                    line.add.value('FGH').at(4);
+                });
+
+                test.done();
+            },
+
+            'Can use explicit index with custom parser': function(test) {
+                var line = new Line(10, {
+                    number: function(value) {
+                        return 'NUMBER: ' + value;
+                    }
+                });
+
+                test.doesNotThrow(function() {
+                    line.add.number(42).at(0);
+                });
+
+                test.done();
+            },
+
+            'Will throw exception when using explicit index and custom parsers': function(test) {
+                var line = new Line(10, {
+                    number: function(value) {
+                        return 'NUMBER: ' + value;
+                    }
+                });
+
+                test.throws(function() {
+                    line.add.number(42).at(1);
+                });
+
+                test.done();
             }
         },
 
