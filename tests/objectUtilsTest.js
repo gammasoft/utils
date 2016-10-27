@@ -5,9 +5,19 @@ var objectUtils = require('../lib/objectUtils');
 module.exports = {
     '__name': { '': function(test) { test.done(); } },
     '__description': { '': function(test) { test.done(); } },
+    'noop': {
+      'Is a funcation and returns `undefined` no matter what is passed in': function (test) {
+        var noop = objectUtils.noop
+
+        test.equal(noop(1), undefined)
+        test.equal(noop('whatever'), undefined)
+        test.equal(noop(/qwe/g), undefined)
+        test.equal(typeof noop, 'function')
+        test.done()
+      }
+    },
     'unflatten': {
         'Works properly': function(test) {
-
             var flat = {
                 'user.name': 'renato',
                 'user.age': 27,
