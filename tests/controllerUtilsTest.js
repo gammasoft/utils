@@ -309,9 +309,9 @@ module.exports = {
                 test.done();
             });
 
-            function isAllowedOrigin (host, cb) {
+            function isAllowedOrigin (headers, cb) {
               setImmediate(function () {
-                if (host === 'localhost:8001') {
+                if (headers.host === 'localhost:8001') {
                   return cb(null, 'localhost:8001')
                 }
 
@@ -330,9 +330,9 @@ module.exports = {
                 test.done();
             });
 
-            function isAllowedOrigin (host, cb) {
+            function isAllowedOrigin (headers, cb) {
               setImmediate(function () {
-                if (host === 'localhost:8001') {
+                if (headers.host === 'localhost:8001') {
                   return cb(null, 'localhost:8001')
                 }
 
