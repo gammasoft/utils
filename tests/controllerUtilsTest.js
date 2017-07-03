@@ -2,12 +2,13 @@
 
 var controllerUtils = require('../lib/controllerUtils');
 
-function Mock() {
-    this.req = { headers: {} };
+function Mock(headers, onNext) {
+    this.req = { headers: headers || {} };
 
     this.res = {
         headerWasCalledWith: [],
         header: function(header, value) {
+            console.log('>>>', header, value)
             this.res.headerWasCalledWith.push({
                 header: header,
                 value: value
@@ -16,8 +17,9 @@ function Mock() {
     };
 
     this.nextWasCalled = false;
-    this.next = function() {
+    this.next = function(err) {
         this.nextWasCalled = true;
+        onNext && onNext(err);
     }.bind(this);
 }
 
@@ -279,5 +281,67 @@ module.exports = {
             test.done();
         },
 
+        'Can pass an asynchronous function to determine allowed origins': function (test) {
+            var mock = new Mock({ host: 'localhost:8001' }, function () {
+                test.equal(mock.res.headerWasCalledWith.length, 4);
+
+                test.deepEqual(mock.res.headerWasCalledWith[0], {
+                    header: 'Access-Control-Allow-Origin',
+                    value: 'localhost:8001'
+                });
+
+                test.deepEqual(mock.res.headerWasCalledWith[1], {
+                    header: 'Access-Control-Allow-Methods',
+                    value: 'GET,PUT,POST,DELETE,HEAD,OPTIONS'
+                });
+
+                test.deepEqual(mock.res.headerWasCalledWith[2], {
+                    header: 'Access-Control-Allow-Headers',
+                    value: 'Content-Type, Authorization, Content-Length, X-Requested-With'
+                });
+
+                test.deepEqual(mock.res.headerWasCalledWith[3], {
+                    header: 'Access-Control-Expose-Headers',
+                    value: ''
+                });
+
+                test.ok(mock.nextWasCalled);
+                test.done();
+            });
+
+            function isAllowedOrigin (host, cb) {
+              setImmediate(function () {
+                if (host === 'localhost:8001') {
+                  return cb(null, 'localhost:8001')
+                }
+
+                return cb(null, 'naoAutorizado')
+              })
+            }
+
+            var allowCORS = controllerUtils.allowCORS(undefined, isAllowedOrigin);
+            allowCORS(mock.req, mock.res, mock.next);
+        },
+
+        'If error is passed to from `isAllowedOrigin` then error is passed to next': function (test) {
+            var mock = new Mock({ host: 'www.this-is-a-test.com' }, function (err) {
+                test.ok(mock.nextWasCalled);
+                test.equal(err.message, 'Não autorizado');
+                test.done();
+            });
+
+            function isAllowedOrigin (host, cb) {
+              setImmediate(function () {
+                if (host === 'localhost:8001') {
+                  return cb(null, 'localhost:8001')
+                }
+
+                return cb(new Error('Não autorizado'))
+              })
+            }
+
+            var allowCORS = controllerUtils.allowCORS(undefined, isAllowedOrigin);
+            allowCORS(mock.req, mock.res, mock.next);
+        }
     }
 };
